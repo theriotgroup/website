@@ -5,89 +5,108 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>CrossFit - Lyle J Theriot</title>
     <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
         body {
-            font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Helvetica, Arial, sans-serif;
-            line-height: 1.6;
-            max-width: 800px;
-            margin: 0 auto;
-            padding: 2rem 1rem;
+            font-family: system-ui, -apple-system, sans-serif;
+            background-color: #fafafa;
             color: #333;
+            line-height: 1.6;
         }
-        
-        h1 {
-            font-size: 2rem;
-            margin-bottom: 0.5rem;
-            font-weight: 300;
-        }
-        
-        h2 {
-            font-size: 1.5rem;
-            margin-top: 2rem;
-            margin-bottom: 1rem;
-            font-weight: 300;
-        }
-        
+
         .back-link {
-            margin-bottom: 2rem;
+            position: fixed;
+            top: 1rem;
+            left: 1rem;
+            z-index: 100;
+            background: rgba(255, 255, 255, 0.9);
+            backdrop-filter: blur(8px);
+            border-radius: 6px;
+            padding: 0.5rem 1rem;
         }
-        
+
         .back-link a {
-            color: #0066cc;
-            text-decoration: none;
-        }
-        
-        .back-link a:hover {
-            text-decoration: underline;
-        }
-        
-        .content {
-            margin-bottom: 3rem;
-        }
-        
-        .media-container {
-            margin: 2rem 0;
-        }
-        
-        .image {
-            max-width: 100%;
-            height: auto;
-            border-radius: 4px;
-            box-shadow: 0 2px 8px rgba(0,0,0,0.1);
-        }
-        
-        .caption {
-            font-size: 0.9rem;
             color: #666;
-            margin-top: 0.5rem;
-            font-style: italic;
+            text-decoration: none;
+            font-size: 0.9rem;
         }
-        
-        .timeline {
-            border-left: 2px solid #eee;
-            padding-left: 1.5rem;
-            margin: 2rem 0;
-        }
-        
-        .timeline-item {
-            margin-bottom: 2rem;
-            position: relative;
-        }
-        
-        .timeline-item::before {
-            content: '';
-            position: absolute;
-            left: -1.65rem;
-            top: 0.5rem;
-            width: 8px;
-            height: 8px;
-            background: #0066cc;
-            border-radius: 50%;
-        }
-        
-        .timeline-date {
-            font-weight: 500;
+
+        .back-link a:hover {
             color: #0066cc;
-            margin-bottom: 0.5rem;
+        }
+
+        h1 {
+            text-align: center;
+            margin: 4rem 0 1rem 0;
+            color: #333;
+            font-weight: 300;
+            font-size: 2.5rem;
+        }
+
+        .subtitle {
+            text-align: center;
+            margin: 0 auto 3rem auto;
+            color: #666;
+            max-width: 600px;
+            padding: 0 2rem;
+        }
+
+        .media-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+            gap: 1rem;
+            padding: 0 1rem 2rem 1rem;
+            max-width: 1400px;
+            margin: 0 auto;
+        }
+
+        .media-item {
+            background: white;
+            border-radius: 8px;
+            overflow: hidden;
+            box-shadow: 0 2px 8px rgba(0, 0, 0, 0.05);
+            transition: transform 0.2s ease, box-shadow 0.2s ease;
+        }
+
+        .media-item:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 4px 16px rgba(0, 0, 0, 0.1);
+        }
+
+        .media-item img,
+        .media-item video {
+            width: 100%;
+            height: auto;
+            display: block;
+        }
+
+        .media-item video {
+            background: #000;
+        }
+
+        @media (max-width: 768px) {
+            .media-grid {
+                grid-template-columns: repeat(auto-fit, minmax(240px, 1fr));
+                gap: 0.75rem;
+                padding: 0 0.75rem 2rem 0.75rem;
+            }
+
+            h1 {
+                font-size: 2rem;
+                margin: 3rem 0 1rem 0;
+            }
+        }
+
+        @media (max-width: 480px) {
+            .media-grid {
+                grid-template-columns: 1fr;
+                gap: 0.5rem;
+                padding: 0 0.5rem 2rem 0.5rem;
+            }
         }
     </style>
 </head>
@@ -100,313 +119,277 @@
 
 <h1>CrossFit</h1>
 
-<div class="content">
+<div class="subtitle">
     <p>Crescent City CrossFit - Building a fitness community in New Orleans.</p>
+</div>
+
+<div class="media-grid">
+    <div class="media-item">
+        <img src="images/crossfit/team-photo-early.jpg" alt="Early CrossFit Team" loading="lazy">
+    </div>
     
-    <h2>From Construction to Community</h2>
+    <div class="media-item">
+        <img src="images/crossfit/owners-portrait.jpg" alt="CrossFit Owners" loading="lazy">
+    </div>
     
-    <div class="timeline">
-        <div class="timeline-item">
-            <div class="timeline-date">Planning & Team Formation</div>
-            <div class="media-container">
-                <img src="images/crossfit/team-photo-early.jpg" alt="Early CrossFit Team" class="image" loading="lazy">
-                <div class="caption">Early team planning phase: forming the core group to launch Crescent City CrossFit</div>
-            </div>
-            <div class="media-container">
-                <img src="images/crossfit/owners-portrait.jpg" alt="CrossFit Owners" class="image" loading="lazy">
-                <div class="caption">Core leadership team: building the foundation for community fitness</div>
-            </div>
-        </div>
-        
-        <div class="timeline-item">
-            <div class="timeline-date">Gym Construction & Buildout</div>
-            <div class="media-container">
-                <img src="images/crossfit/construction-framing.jpg" alt="Gym Construction Framing" class="image" loading="lazy">
-                <div class="caption">Construction phase: framing out the gym space with team reviewing progress</div>
-            </div>
-            <div class="media-container">
-                <img src="images/crossfit/construction-interior-view.jpg" alt="Interior Construction View" class="image" loading="lazy">
-                <div class="caption">Interior buildout: creating the signature red wall design and open workout space</div>
-            </div>
-            <div class="media-container">
-                <img src="images/crossfit/flooring-installation.jpg" alt="Flooring Installation" class="image" loading="lazy">
-                <div class="caption">Flooring installation: preparing the foundation for high-intensity workouts</div>
-            </div>
-            <div class="media-container">
-                <img src="images/crossfit/exterior-sign-install.jpg" alt="Exterior Sign Installation" class="image" loading="lazy">
-                <div class="caption">Exterior branding: installing the Crescent City CrossFit signage</div>
-            </div>
-        </div>
-        
-        <div class="timeline-item">
-            <div class="timeline-date">Equipment Setup & Launch Preparation</div>
-            <div class="media-container">
-                <img src="images/crossfit/equipment-setup.jpg" alt="Equipment Setup" class="image" loading="lazy">
-                <div class="caption">Equipment installation: setting up pull-up rigs, rings, and functional fitness equipment</div>
-            </div>
-        </div>
-        
-        <div class="timeline-item">
-            <div class="timeline-date">Community Building & Operations</div>
-            <div class="media-container">
-                <img src="images/crossfit/early-members-group.jpg" alt="Early Members Group" class="image" loading="lazy">
-                <div class="caption">Early member community: building the initial group of dedicated athletes</div>
-            </div>
-            <div class="media-container">
-                <img src="images/crossfit/full-gym-community.jpg" alt="Full Gym Community" class="image" loading="lazy">
-                <div class="caption">Growing community: expanded membership with diverse group of fitness enthusiasts</div>
-            </div>
-            <div class="media-container">
-                <img src="images/crossfit/community-group-training.jpg" alt="Community Group Training" class="image" loading="lazy">
-                <div class="caption">Group training sessions: members working together in supportive environment</div>
-            </div>
-            <div class="media-container">
-                <img src="images/crossfit/outdoor-workout.jpg" alt="Outdoor Workout" class="image" loading="lazy">
-                <div class="caption">Community events: outdoor group workouts bringing fitness beyond the gym walls</div>
-            </div>
-            <div class="media-container">
-                <video controls preload="metadata">
-                    <source src="images/crossfit/member-training-video.mp4" type="video/mp4">
-                    Your browser does not support the video tag.
-                </video>
-                <div class="caption">Training progression: member development through consistent coaching and support</div>
-            </div>
-        </div>
-        
-        <div class="timeline-item">
-            <div class="timeline-date">Professional Training & Coaching</div>
-            <div class="media-container">
-                <img src="images/crossfit/mobility-training.jpg" alt="Mobility Training Session" class="image" loading="lazy">
-                <div class="caption">Mobility and recovery training: members working on flexibility and movement quality</div>
-            </div>
-            <div class="media-container">
-                <img src="images/crossfit/coaching-form-correction.jpg" alt="Personal Coaching" class="image" loading="lazy">
-                <div class="caption">Individual attention: coaches providing personalized form correction and technique guidance</div>
-            </div>
-            <div class="media-container">
-                <img src="images/crossfit/overhead-lifting.jpg" alt="Overhead Lifting Training" class="image" loading="lazy">
-                <div class="caption">Olympic lifting: members training snatch and clean & jerk movements</div>
-            </div>
-            <div class="media-container">
-                <img src="images/crossfit/overhead-squat-coaching.jpg" alt="Overhead Squat Coaching" class="image" loading="lazy">
-                <div class="caption">Technical coaching: overhead squat form and positioning instruction</div>
-            </div>
-            <div class="media-container">
-                <img src="images/crossfit/owners-observing.jpg" alt="Owners Observing Training" class="image" loading="lazy">
-                <div class="caption">Leadership oversight: owners monitoring training quality and member progress</div>
-            </div>
-            <div class="media-container">
-                <img src="images/crossfit/professional-coaching-moment.jpg" alt="Professional Coaching Moment" class="image" loading="lazy">
-                <div class="caption">Individual coaching: personalized instruction ensuring proper form and technique</div>
-            </div>
-            <div class="media-container">
-                <video controls preload="metadata">
-                    <source src="images/crossfit/professional-training-video.mp4" type="video/mp4">
-                    Your browser does not support the video tag.
-                </video>
-                <div class="caption">Professional training: high-level coaching and technique development</div>
-            </div>
-        </div>
-        
-        <div class="timeline-item">
-            <div class="timeline-date">Community Growth & Events</div>
-            <div class="media-container">
-                <img src="images/crossfit/community-group-exterior.jpg" alt="Community Group Outside Gym" class="image" loading="lazy">
-                <div class="caption">Expanded membership: larger community group gathering outside the gym facility</div>
-            </div>
-            <div class="media-container">
-                <img src="images/crossfit/outdoor-rowing-training.jpg" alt="Outdoor Rowing Training" class="image" loading="lazy">
-                <div class="caption">Outdoor training variety: rowing workouts extending fitness beyond traditional gym walls</div>
-            </div>
-            <div class="media-container">
-                <img src="images/crossfit/park-community-event.jpg" alt="Park Community Event" class="image" loading="lazy">
-                <div class="caption">Community outreach: large group fitness event in local park setting</div>
-            </div>
-            <div class="media-container">
-                <img src="images/crossfit/large-community-gathering.jpg" alt="Large Community Gathering" class="image" loading="lazy">
-                <div class="caption">Peak community engagement: major gym event with extensive member participation</div>
-            </div>
-            <div class="media-container">
-                <img src="images/crossfit/outdoor-team-workout.jpg" alt="Outdoor Team Workout" class="image" loading="lazy">
-                <div class="caption">Team building events: creative outdoor workouts incorporating functional movement challenges</div>
-            </div>
-        </div>
-        
-        <div class="timeline-item">
-            <div class="timeline-date">Competition Programs & Success</div>
-            <div class="media-container">
-                <img src="images/crossfit/competition-winners-group.jpg" alt="Competition Winners Group" class="image" loading="lazy">
-                <div class="caption">Competition team success: group of members celebrating competitive achievements</div>
-            </div>
-            <div class="media-container">
-                <img src="images/crossfit/competition-individual-winner.jpg" alt="Individual Competition Winner" class="image" loading="lazy">
-                <div class="caption">Individual excellence: member achieving competitive success at regional events</div>
-            </div>
-            <div class="media-container">
-                <img src="images/crossfit/competition-champion-award.jpg" alt="Competition Champion Award" class="image" loading="lazy">
-                <div class="caption">Championship recognition: member receiving wooden trophy for competitive achievement</div>
-            </div>
-            <div class="media-container">
-                <video controls preload="metadata">
-                    <source src="images/crossfit/competition-highlights-video.mp4" type="video/mp4">
-                    Your browser does not support the video tag.
-                </video>
-                <div class="caption">Competition highlights: competitive training and event participation</div>
-            </div>
-        </div>
-        
-        <div class="timeline-item">
-            <div class="timeline-date">Youth Programs & Community Outreach</div>
-            <div class="media-container">
-                <img src="images/crossfit/youth-program-kids-training.jpg" alt="Youth Program Kids Training" class="image" loading="lazy">
-                <div class="caption">Youth development: kids CrossFit program focusing on fun and fundamental movement skills</div>
-            </div>
-            <div class="media-container">
-                <img src="images/crossfit/youth-program-training.jpg" alt="Youth Program Training Session" class="image" loading="lazy">
-                <div class="caption">Structured youth coaching: age-appropriate training with professional instruction</div>
-            </div>
-            <div class="media-container">
-                <img src="images/crossfit/youth-kids-training-session.jpg" alt="Youth Kids Training Session" class="image" loading="lazy">
-                <div class="caption">Kids program: young athletes learning CrossFit fundamentals in structured environment</div>
-            </div>
-            <div class="media-container">
-                <video controls preload="metadata">
-                    <source src="images/crossfit/youth-program-video.mp4" type="video/mp4">
-                    Your browser does not support the video tag.
-                </video>
-                <div class="caption">Youth program in action: kids developing fitness skills in supportive environment</div>
-            </div>
-            <div class="media-container">
-                <img src="images/crossfit/french-quarter-public-demo.jpg" alt="French Quarter Public Demo" class="image" loading="lazy">
-                <div class="caption">Public outreach: CrossFit demonstration in New Orleans French Quarter</div>
-            </div>
-            <div class="media-container">
-                <img src="images/crossfit/french-quarter-demonstration.jpg" alt="French Quarter Demonstration" class="image" loading="lazy">
-                <div class="caption">Downtown New Orleans: public CrossFit demonstration attracting community interest</div>
-            </div>
-            <div class="media-container">
-                <img src="images/crossfit/outdoor-public-demo.jpg" alt="Outdoor Public Demonstration" class="image" loading="lazy">
-                <div class="caption">Community engagement: public fitness demonstrations extending gym reach</div>
-            </div>
-        </div>
-        
-        <div class="timeline-item">
-            <div class="timeline-date">Transformation Stories & Success</div>
-            <div class="media-container">
-                <img src="images/crossfit/transformation-before-after.jpg" alt="Transformation Before After" class="image" loading="lazy">
-                <div class="caption">Dramatic transformation: member success story showing significant physical and fitness improvement</div>
-            </div>
-            <div class="media-container">
-                <img src="images/crossfit/transformation-success-story.jpg" alt="Transformation Success Story" class="image" loading="lazy">
-                <div class="caption">Success documentation: member transformation showcasing CrossFit methodology effectiveness</div>
-            </div>
-            <div class="media-container">
-                <video controls preload="metadata">
-                    <source src="images/crossfit/transformation-success-video.mp4" type="video/mp4">
-                    Your browser does not support the video tag.
-                </video>
-                <div class="caption">Transformation journey: member success story demonstrating life-changing results</div>
-            </div>
-            <div class="media-container">
-                <img src="images/crossfit/success-story-transformation.jpg" alt="Success Story Transformation" class="image" loading="lazy">
-                <div class="caption">Proven results: additional member transformation highlighting program effectiveness</div>
-            </div>
-        </div>
-        
-        <div class="timeline-item">
-            <div class="timeline-date">Brand Development & Professional Events</div>
-            <div class="media-container">
-                <img src="images/crossfit/professional-branded-photo.jpg" alt="Professional Branded Photo" class="image" loading="lazy">
-                <div class="caption">Professional branding: high-quality marketing photography showcasing gym culture</div>
-            </div>
-            <div class="media-container">
-                <img src="images/crossfit/branded-competition-event.jpg" alt="Branded Competition Event" class="image" loading="lazy">
-                <div class="caption">Branded events: professional competition hosting with Crescent City CrossFit branding</div>
-            </div>
-            <div class="media-container">
-                <img src="images/crossfit/mannings-games-branding.jpg" alt="Mannings Games Branding" class="image" loading="lazy">
-                <div class="caption">Manning's Games: signature competition event with custom branding and professional organization</div>
-            </div>
-            <div class="media-container">
-                <img src="images/crossfit/new-orleans-skyline-group.jpg" alt="New Orleans Skyline Group" class="image" loading="lazy">
-                <div class="caption">City connection: group photo with New Orleans skyline emphasizing local community ties</div>
-            </div>
-            <div class="media-container">
-                <img src="images/crossfit/professional-action-shot.jpg" alt="Professional Action Shot" class="image" loading="lazy">
-                <div class="caption">Professional photography: high-quality action shots showcasing gym atmosphere</div>
-            </div>
-            <div class="media-container">
-                <img src="images/crossfit/member-achievement-photo.jpg" alt="Member Achievement Photo" class="image" loading="lazy">
-                <div class="caption">Member achievements: celebrating individual success and accomplishments</div>
-            </div>
-        </div>
-        
-        <div class="timeline-item">
-            <div class="timeline-date">Gym Culture & Community Spirit</div>
-            <div class="media-container">
-                <img src="images/crossfit/gym-culture-thisshitworks.jpg" alt="Gym Culture This Shit Works" class="image" loading="lazy">
-                <div class="caption">Gym culture: "THIS SHIT WORKS" mentality expressing confidence in CrossFit methodology</div>
-            </div>
-            <div class="media-container">
-                <img src="images/crossfit/tactical-military-workout.jpg" alt="Tactical Military Workout" class="image" loading="lazy">
-                <div class="caption">Tactical training: military-style workouts reflecting diverse programming and community interests</div>
-            </div>
-            <div class="media-container">
-                <img src="images/crossfit/tactical-training-session.jpg" alt="Tactical Training Session" class="image" loading="lazy">
-                <div class="caption">Specialized programming: tactical fitness training for diverse member interests</div>
-            </div>
-            <div class="media-container">
-                <img src="images/crossfit/community-social-gathering.jpg" alt="Community Social Gathering" class="image" loading="lazy">
-                <div class="caption">Social community: members gathering for non-workout social events and relationship building</div>
-            </div>
-            <div class="media-container">
-                <img src="images/crossfit/community-social-event.jpg" alt="Community Social Event" class="image" loading="lazy">
-                <div class="caption">Community bonding: organized social activities strengthening member relationships beyond fitness</div>
-            </div>
-            <div class="media-container">
-                <img src="images/crossfit/community-spirit-event.jpg" alt="Community Spirit Event" class="image" loading="lazy">
-                <div class="caption">Community spirit: celebrating the bonds formed through shared fitness challenges</div>
-            </div>
-            <div class="media-container">
-                <img src="images/crossfit/gym-community-gathering.jpg" alt="Gym Community Gathering" class="image" loading="lazy">
-                <div class="caption">Community gathering: members coming together for celebration and connection</div>
-            </div>
-            <div class="media-container">
-                <video controls preload="metadata">
-                    <source src="images/crossfit/community-workout-video.mp4" type="video/mp4">
-                    Your browser does not support the video tag.
-                </video>
-                <div class="caption">Community in action: group workout showing team atmosphere and mutual support</div>
-            </div>
-            <div class="media-container">
-                <img src="images/crossfit/final-community-celebration.jpg" alt="Final Community Celebration" class="image" loading="lazy">
-                <div class="caption">Legacy celebration: major community gathering representing the successful gym culture built over years</div>
-            </div>
-            <div class="media-container">
-                <video controls preload="metadata">
-                    <source src="images/crossfit/community-event-video.mp4" type="video/mp4">
-                    Your browser does not support the video tag.
-                </video>
-                <div class="caption">Community events: celebrating the bonds and culture developed through shared fitness journey</div>
-            </div>
-            <div class="media-container">
-                <video controls preload="metadata">
-                    <source src="images/crossfit/gym-culture-video.mp4" type="video/mp4">
-                    Your browser does not support the video tag.
-                </video>
-                <div class="caption">Gym culture: the energy and community spirit that defined Crescent City CrossFit</div>
-            </div>
-            <div class="media-container">
-                <video controls preload="metadata">
-                    <source src="images/crossfit/final-community-video.mp4" type="video/mp4">
-                    Your browser does not support the video tag.
-                </video>
-                <div class="caption">Community legacy: final celebration of the thriving fitness community and culture established</div>
-            </div>
-        </div>
+    <div class="media-item">
+        <img src="images/crossfit/construction-framing.jpg" alt="Gym Construction" loading="lazy">
+    </div>
+    
+    <div class="media-item">
+        <img src="images/crossfit/construction-interior-view.jpg" alt="Interior Construction" loading="lazy">
+    </div>
+    
+    <div class="media-item">
+        <img src="images/crossfit/flooring-installation.jpg" alt="Flooring Installation" loading="lazy">
+    </div>
+    
+    <div class="media-item">
+        <img src="images/crossfit/exterior-sign-install.jpg" alt="Exterior Sign" loading="lazy">
+    </div>
+    
+    <div class="media-item">
+        <img src="images/crossfit/equipment-setup.jpg" alt="Equipment Setup" loading="lazy">
+    </div>
+    
+    <div class="media-item">
+        <img src="images/crossfit/early-members-group.jpg" alt="Early Members" loading="lazy">
+    </div>
+    
+    <div class="media-item">
+        <img src="images/crossfit/full-gym-community.jpg" alt="Full Gym Community" loading="lazy">
+    </div>
+    
+    <div class="media-item">
+        <img src="images/crossfit/community-group-training.jpg" alt="Group Training" loading="lazy">
+    </div>
+    
+    <div class="media-item">
+        <video controls preload="metadata">
+            <source src="images/crossfit/member-training-video.mp4" type="video/mp4">
+        </video>
+    </div>
+    
+    <div class="media-item">
+        <img src="images/crossfit/outdoor-workout.jpg" alt="Outdoor Workout" loading="lazy">
+    </div>
+    
+    <div class="media-item">
+        <img src="images/crossfit/mobility-training.jpg" alt="Mobility Training" loading="lazy">
+    </div>
+    
+    <div class="media-item">
+        <img src="images/crossfit/coaching-form-correction.jpg" alt="Coaching" loading="lazy">
+    </div>
+    
+    <div class="media-item">
+        <img src="images/crossfit/overhead-lifting.jpg" alt="Overhead Lifting" loading="lazy">
+    </div>
+    
+    <div class="media-item">
+        <img src="images/crossfit/overhead-squat-coaching.jpg" alt="Squat Coaching" loading="lazy">
+    </div>
+    
+    <div class="media-item">
+        <img src="images/crossfit/owners-observing.jpg" alt="Owners Observing" loading="lazy">
+    </div>
+    
+    <div class="media-item">
+        <img src="images/crossfit/professional-coaching-moment.jpg" alt="Professional Coaching" loading="lazy">
+    </div>
+    
+    <div class="media-item">
+        <video controls preload="metadata">
+            <source src="images/crossfit/professional-training-video.mp4" type="video/mp4">
+        </video>
+    </div>
+    
+    <div class="media-item">
+        <img src="images/crossfit/community-group-exterior.jpg" alt="Community Group" loading="lazy">
+    </div>
+    
+    <div class="media-item">
+        <img src="images/crossfit/outdoor-rowing-training.jpg" alt="Rowing Training" loading="lazy">
+    </div>
+    
+    <div class="media-item">
+        <img src="images/crossfit/park-community-event.jpg" alt="Park Event" loading="lazy">
+    </div>
+    
+    <div class="media-item">
+        <img src="images/crossfit/large-community-gathering.jpg" alt="Community Gathering" loading="lazy">
+    </div>
+    
+    <div class="media-item">
+        <img src="images/crossfit/outdoor-team-workout.jpg" alt="Team Workout" loading="lazy">
+    </div>
+    
+    <div class="media-item">
+        <img src="images/crossfit/competition-winners-group.jpg" alt="Competition Winners" loading="lazy">
+    </div>
+    
+    <div class="media-item">
+        <img src="images/crossfit/competition-individual-winner.jpg" alt="Individual Winner" loading="lazy">
+    </div>
+    
+    <div class="media-item">
+        <img src="images/crossfit/competition-champion-award.jpg" alt="Champion Award" loading="lazy">
+    </div>
+    
+    <div class="media-item">
+        <video controls preload="metadata">
+            <source src="images/crossfit/competition-highlights-video.mp4" type="video/mp4">
+        </video>
+    </div>
+    
+    <div class="media-item">
+        <img src="images/crossfit/competition-team-photo.jpg" alt="Competition Team" loading="lazy">
+    </div>
+    
+    <div class="media-item">
+        <video controls preload="metadata">
+            <source src="images/crossfit/competition-event-video.mp4" type="video/mp4">
+        </video>
+    </div>
+    
+    <div class="media-item">
+        <img src="images/crossfit/youth-program-kids-training.jpg" alt="Youth Training" loading="lazy">
+    </div>
+    
+    <div class="media-item">
+        <img src="images/crossfit/youth-program-training.jpg" alt="Youth Program" loading="lazy">
+    </div>
+    
+    <div class="media-item">
+        <img src="images/crossfit/youth-kids-training-session.jpg" alt="Kids Training" loading="lazy">
+    </div>
+    
+    <div class="media-item">
+        <video controls preload="metadata">
+            <source src="images/crossfit/youth-program-video.mp4" type="video/mp4">
+        </video>
+    </div>
+    
+    <div class="media-item">
+        <img src="images/crossfit/french-quarter-public-demo.jpg" alt="French Quarter Demo" loading="lazy">
+    </div>
+    
+    <div class="media-item">
+        <img src="images/crossfit/french-quarter-demonstration.jpg" alt="Downtown Demo" loading="lazy">
+    </div>
+    
+    <div class="media-item">
+        <img src="images/crossfit/outdoor-public-demo.jpg" alt="Public Demo" loading="lazy">
+    </div>
+    
+    <div class="media-item">
+        <img src="images/crossfit/transformation-before-after.jpg" alt="Transformation" loading="lazy">
+    </div>
+    
+    <div class="media-item">
+        <img src="images/crossfit/transformation-success-story.jpg" alt="Success Story" loading="lazy">
+    </div>
+    
+    <div class="media-item">
+        <video controls preload="metadata">
+            <source src="images/crossfit/transformation-success-video.mp4" type="video/mp4">
+        </video>
+    </div>
+    
+    <div class="media-item">
+        <img src="images/crossfit/success-story-transformation.jpg" alt="Success Results" loading="lazy">
+    </div>
+    
+    <div class="media-item">
+        <img src="images/crossfit/transformation-progress.jpg" alt="Progress Photo" loading="lazy">
+    </div>
+    
+    <div class="media-item">
+        <img src="images/crossfit/professional-branded-photo.jpg" alt="Professional Photo" loading="lazy">
+    </div>
+    
+    <div class="media-item">
+        <img src="images/crossfit/branded-competition-event.jpg" alt="Branded Event" loading="lazy">
+    </div>
+    
+    <div class="media-item">
+        <img src="images/crossfit/mannings-games-branding.jpg" alt="Manning's Games" loading="lazy">
+    </div>
+    
+    <div class="media-item">
+        <img src="images/crossfit/new-orleans-skyline-group.jpg" alt="New Orleans Group" loading="lazy">
+    </div>
+    
+    <div class="media-item">
+        <img src="images/crossfit/professional-action-shot.jpg" alt="Action Shot" loading="lazy">
+    </div>
+    
+    <div class="media-item">
+        <img src="images/crossfit/member-achievement-photo.jpg" alt="Member Achievement" loading="lazy">
+    </div>
+    
+    <div class="media-item">
+        <img src="images/crossfit/gym-culture-thisshitworks.jpg" alt="Gym Culture" loading="lazy">
+    </div>
+    
+    <div class="media-item">
+        <img src="images/crossfit/tactical-military-workout.jpg" alt="Tactical Training" loading="lazy">
+    </div>
+    
+    <div class="media-item">
+        <img src="images/crossfit/tactical-training-session.jpg" alt="Tactical Session" loading="lazy">
+    </div>
+    
+    <div class="media-item">
+        <video controls preload="metadata">
+            <source src="images/crossfit/tactical-training-video.mp4" type="video/mp4">
+        </video>
+    </div>
+    
+    <div class="media-item">
+        <img src="images/crossfit/community-social-gathering.jpg" alt="Social Gathering" loading="lazy">
+    </div>
+    
+    <div class="media-item">
+        <img src="images/crossfit/community-social-event.jpg" alt="Social Event" loading="lazy">
+    </div>
+    
+    <div class="media-item">
+        <img src="images/crossfit/community-spirit-event.jpg" alt="Community Spirit" loading="lazy">
+    </div>
+    
+    <div class="media-item">
+        <img src="images/crossfit/gym-community-gathering.jpg" alt="Gym Gathering" loading="lazy">
+    </div>
+    
+    <div class="media-item">
+        <video controls preload="metadata">
+            <source src="images/crossfit/community-workout-video.mp4" type="video/mp4">
+        </video>
+    </div>
+    
+    <div class="media-item">
+        <video controls preload="metadata">
+            <source src="images/crossfit/community-event-video.mp4" type="video/mp4">
+        </video>
+    </div>
+    
+    <div class="media-item">
+        <img src="images/crossfit/final-community-celebration.jpg" alt="Final Celebration" loading="lazy">
+    </div>
+    
+    <div class="media-item">
+        <video controls preload="metadata">
+            <source src="images/crossfit/gym-culture-video.mp4" type="video/mp4">
+        </video>
+    </div>
+    
+    <div class="media-item">
+        <video controls preload="metadata">
+            <source src="images/crossfit/final-community-video.mp4" type="video/mp4">
+        </video>
     </div>
 </div>
 
 </body>
-
 </html>
