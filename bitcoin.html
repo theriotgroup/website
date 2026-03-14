@@ -3,114 +3,110 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Bitcoin - Lyle J Theriot</title>
+    <title>Bitcoin Mining - Lyle J Theriot</title>
     <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
         body {
-            font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Helvetica, Arial, sans-serif;
-            line-height: 1.6;
-            max-width: 800px;
-            margin: 0 auto;
-            padding: 2rem 1rem;
+            font-family: system-ui, -apple-system, sans-serif;
+            background-color: #fafafa;
             color: #333;
+            line-height: 1.6;
         }
-        
-        video {
-            max-width: 100%;
-            height: auto;
-            border-radius: 4px;
-            box-shadow: 0 2px 8px rgba(0,0,0,0.1);
-        }
-        
-        h1 {
-            font-size: 2rem;
-            margin-bottom: 1rem;
-            font-weight: 300;
-        }
-        
-        h2 {
-            font-size: 1.5rem;
-            margin-top: 2rem;
-            margin-bottom: 1rem;
-            font-weight: 300;
-        }
-        
+
         .back-link {
-            margin-bottom: 2rem;
+            position: fixed;
+            top: 1rem;
+            left: 1rem;
+            z-index: 100;
+            background: rgba(255, 255, 255, 0.9);
+            backdrop-filter: blur(8px);
+            border-radius: 6px;
+            padding: 0.5rem 1rem;
         }
-        
+
         .back-link a {
-            color: #0066cc;
-            text-decoration: none;
-        }
-        
-        .back-link a:hover {
-            text-decoration: underline;
-        }
-        
-        .content {
-            margin-bottom: 3rem;
-        }
-        
-        .media-container {
-            margin: 2rem 0;
-        }
-        
-        .image {
-            max-width: 100%;
-            height: auto;
-            border-radius: 4px;
-            box-shadow: 0 2px 8px rgba(0,0,0,0.1);
-        }
-        
-        .video-container {
-            position: relative;
-            width: 100%;
-            padding-bottom: 56.25%; /* 16:9 aspect ratio */
-            margin: 2rem 0;
-        }
-        
-        .video-container iframe {
-            position: absolute;
-            top: 0;
-            left: 0;
-            width: 100%;
-            height: 100%;
-            border-radius: 4px;
-        }
-        
-        .caption {
-            font-size: 0.9rem;
             color: #666;
-            margin-top: 0.5rem;
-            font-style: italic;
+            text-decoration: none;
+            font-size: 0.9rem;
         }
-        
-        .timeline {
-            border-left: 2px solid #eee;
-            padding-left: 1.5rem;
-            margin: 2rem 0;
+
+        .back-link a:hover {
+            color: #f7931a;
         }
-        
-        .timeline-item {
-            margin-bottom: 2rem;
-            position: relative;
+
+        h1 {
+            text-align: center;
+            margin: 4rem 0 1rem 0;
+            color: #333;
+            font-weight: 300;
+            font-size: 2.5rem;
         }
-        
-        .timeline-item::before {
-            content: '';
-            position: absolute;
-            left: -1.65rem;
-            top: 0.5rem;
-            width: 8px;
-            height: 8px;
-            background: #0066cc;
-            border-radius: 50%;
+
+        .subtitle {
+            text-align: center;
+            margin: 0 auto 3rem auto;
+            color: #666;
+            max-width: 600px;
+            padding: 0 2rem;
         }
-        
-        .timeline-date {
-            font-weight: 500;
-            color: #0066cc;
-            margin-bottom: 0.5rem;
+
+        .media-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+            gap: 1rem;
+            padding: 0 1rem 2rem 1rem;
+            max-width: 1400px;
+            margin: 0 auto;
+        }
+
+        .media-item {
+            background: white;
+            border-radius: 8px;
+            overflow: hidden;
+            box-shadow: 0 2px 8px rgba(0, 0, 0, 0.05);
+            transition: transform 0.2s ease, box-shadow 0.2s ease;
+        }
+
+        .media-item:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 4px 16px rgba(0, 0, 0, 0.1);
+        }
+
+        .media-item img,
+        .media-item video {
+            width: 100%;
+            height: auto;
+            display: block;
+        }
+
+        .media-item video {
+            background: #000;
+        }
+
+        @media (max-width: 768px) {
+            .media-grid {
+                grid-template-columns: repeat(auto-fit, minmax(240px, 1fr));
+                gap: 0.75rem;
+                padding: 0 0.75rem 2rem 0.75rem;
+            }
+
+            h1 {
+                font-size: 2rem;
+                margin: 3rem 0 1rem 0;
+            }
+        }
+
+        @media (max-width: 480px) {
+            .media-grid {
+                grid-template-columns: 1fr;
+                gap: 0.5rem;
+                padding: 0 0.5rem 2rem 0.5rem;
+            }
         }
     </style>
 </head>
@@ -121,187 +117,145 @@
     <a href="index.html">← Lyle J Theriot</a>
 </div>
 
-<h1>Bitcoin</h1>
+<h1>Bitcoin Mining</h1>
 
-<div class="content">
-    <p>Large-scale Bitcoin mining infrastructure built in Texas.</p>
+<div class="subtitle">
+    <p>Building cryptocurrency mining infrastructure from the ground up.</p>
+</div>
+
+<div class="media-grid">
+    <div class="media-item">
+        <img src="images/bitcoin/rd-prototype-2018.jpg" alt="R&D Prototype" loading="lazy">
+    </div>
     
-    <h2>The Journey: From R&D to Gigawatt Scale</h2>
+    <div class="media-item">
+        <img src="images/bitcoin/rd-refined-prototype.jpg" alt="Refined Prototype" loading="lazy">
+    </div>
     
-    <div class="timeline">
-        <div class="timeline-item">
-            <div class="timeline-date">2018-2019: R&D Development</div>
-            <div class="media-container">
-                <img src="images/bitcoin/rd-prototype-2018.jpg" alt="Bitcoin Mining R&D Prototype 2018" class="image" loading="lazy">
-                <div class="caption">Early R&D space - initial prototyping of electrical infrastructure and mining frame designs</div>
-            </div>
-            <div class="media-container">
-                <img src="images/bitcoin/rd-refined-prototype.jpg" alt="Refined Bitcoin Mining Prototype" class="image" loading="lazy">
-                <div class="caption">Hot aisle containment system: foam board with cut squares and computer fans - practical cooling using readily available materials</div>
-            </div>
-            <div class="media-container">
-                <img src="images/bitcoin/gmo-client-visit.jpg" alt="GMO Internet CEO Visit" class="image" loading="lazy">
-                <div class="caption">First major client: GMO Internet CEO and team visit to evaluate mining infrastructure</div>
-            </div>
-            <p>R&D phase developing practical solutions: hot aisle containment using foam board and computer fans, adapting data center concepts with readily available materials. Modular power distribution systems. GMO Internet became first enterprise client.</p>
-        </div>
-        
-        <div class="timeline-item">
-            <div class="timeline-date">Louisiana 5MW Facility: Infrastructure Development</div>
-            <div class="media-container">
-                <img src="images/bitcoin/metal-strut-system.jpg" alt="Metal Strut Mining Infrastructure System" class="image" loading="lazy">
-                <div class="caption">Metal strut system using 20' factory runs with 12" shelf supports - no cutting required</div>
-            </div>
-            <div class="media-container">
-                <img src="images/bitcoin/strut-system-deployed.jpg" alt="Industrial Scale Metal Strut Deployment" class="image" loading="lazy">
-                <div class="caption">Louisiana 5MW facility: initial deployment of standardized strut infrastructure</div>
-            </div>
-            <div class="media-container">
-                <video controls preload="metadata">
-                    <source src="images/bitcoin/strut-system-construction.mp4" type="video/mp4">
-                    Your browser does not support the video tag.
-                </video>
-                <div class="caption">Metal strut system construction and deployment process</div>
-            </div>
-            <div class="media-container">
-                <img src="images/bitcoin/strut-tower-structure.jpg" alt="Massive Vertical Strut Tower Structure" class="image" loading="lazy">
-                <div class="caption">Louisiana facility: vertical tower structures built from standardized strut system</div>
-            </div>
-            <p>Developed modular infrastructure system at Louisiana 5MW facility using 20' strut runs with 12" shelf supports. Enabled rapid deployment with unskilled labor before scaling to Texas gigawatt sites.</p>
-        </div>
-        
-        <div class="timeline-item">
-            <div class="timeline-date">Rockdale Phase 1: Parallel Construction</div>
-            <div class="media-container">
-                <img src="images/bitcoin/texas-foundation-construction.jpg" alt="Texas Facility Foundation and Racking Construction" class="image" loading="lazy">
-                <div class="caption">Texas facility: massive concrete foundation with strut racking installation in progress, crane operations ongoing</div>
-            </div>
-            <div class="media-container">
-                <video controls preload="metadata">
-                    <source src="images/bitcoin/texas-parallel-construction.mp4" type="video/mp4">
-                    Your browser does not support the video tag.
-                </video>
-                <div class="caption">Installing strut racking while building construction continued - parallel deployment approach for speed</div>
-            </div>
-            <div class="media-container">
-                <img src="images/bitcoin/texas-data-hall-interior.jpg" alt="Texas Data Hall Interior with Strut Racking" class="image" loading="lazy">
-                <div class="caption">Interior view: mining infrastructure deployed at Texas scale, construction workers for size reference</div>
-            </div>
-            <div class="media-container">
-                <img src="images/bitcoin/texas-1000ft-hall.jpg" alt="1000 Foot Long Texas Data Hall" class="image" loading="lazy">
-                <div class="caption">1,000-foot-long data hall filled with mining infrastructure</div>
-            </div>
-            <div class="media-container">
-                <img src="images/bitcoin/texas-machine-installation.jpg" alt="Installing Mining Machines in Texas Facility" class="image" loading="lazy">
-                <div class="caption">Final deployment phase: installing thousands of mining machines into racking system</div>
-            </div>
-            <div class="media-container">
-                <img src="images/bitcoin/texas-sealed-operational.jpg" alt="Texas Facility Sealed and Operational" class="image" loading="lazy">
-                <div class="caption">Completed facility: building sealed, thousands of miners operational</div>
-            </div>
-            <div class="media-container">
-                <video controls preload="metadata">
-                    <source src="images/bitcoin/texas-operational-overview.mp4" type="video/mp4">
-                    Your browser does not support the video tag.
-                </video>
-                <div class="caption">Texas facility in operation: overview of completed mining infrastructure at scale</div>
-            </div>
-            <p>Rockdale facility launch with accelerated construction approach: leveled site, poured foundation, installed racking systems, and laid power infrastructure simultaneously while building was being erected.</p>
-        </div>
-        
-        <div class="timeline-item">
-            <div class="timeline-date">Rockdale Phase 2: Next Generation Air-Cooled System</div>
-            <div class="media-container">
-                <video controls preload="metadata">
-                    <source src="images/bitcoin/modular-air-cooled-system.mp4" type="video/mp4">
-                    Your browser does not support the video tag.
-                </video>
-                <div class="caption">Air-cooled modular racking with integrated power distribution, electrical protection, and networking - fabricated off-site for rapid deployment</div>
-            </div>
-            <div class="media-container">
-                <img src="images/bitcoin/air-cooled-racking-installation.jpg" alt="Air-Cooled Modular Racking Installation" class="image" loading="lazy">
-                <div class="caption">Modular air-cooled racking installation: enclosed units with integrated systems, scissor lift for deployment</div>
-            </div>
-            <div class="media-container">
-                <img src="images/bitcoin/air-cooled-interior-detail.jpg" alt="Air-Cooled Racking Interior Detail" class="image" loading="lazy">
-                <div class="caption">Interior detail: integrated electrical distribution panel, clean wiring, and mining equipment shelving built into each module</div>
-            </div>
-            <div class="media-container">
-                <video controls preload="metadata">
-                    <source src="images/bitcoin/final-air-cooled-operational.mp4" type="video/mp4">
-                    Your browser does not support the video tag.
-                </video>
-                <div class="caption">Final air-cooled system in operation before transitioning to liquid immersion cooling technology</div>
-            </div>
-            <p>Advanced infrastructure iteration at Rockdale integrating all components into modular sections. Off-site fabrication enabled complete units to be delivered and installed as finished assemblies. This system served as the final air-cooled approach before transitioning to liquid immersion cooling.</p>
-        </div>
-        
-        <div class="timeline-item">
-            <div class="timeline-date">Rockdale Phase 3: Liquid Immersion Cooling</div>
-            <div class="media-container">
-                <img src="images/bitcoin/immersion-foundation-infrastructure.jpg" alt="Immersion Building Foundation Infrastructure" class="image" loading="lazy">
-                <div class="caption">Foundation infrastructure installation: extensive conduit and piping systems embedded for long-term flexibility and future hardware retrofitting</div>
-            </div>
-            <div class="media-container">
-                <video controls preload="metadata">
-                    <source src="images/bitcoin/immersion-foundation-install.mp4" type="video/mp4">
-                    Your browser does not support the video tag.
-                </video>
-                <div class="caption">Foundation installation process: embedding conduit and piping systems for 200MW liquid immersion infrastructure</div>
-            </div>
-            <div class="media-container">
-                <video controls preload="metadata">
-                    <source src="images/bitcoin/immersion-infrastructure-install.mp4" type="video/mp4">
-                    Your browser does not support the video tag.
-                </video>
-                <div class="caption">Infrastructure installation: systematic embedding of cooling and power distribution systems in building foundation</div>
-            </div>
-            <div class="media-container">
-                <img src="images/bitcoin/immersion-building-construction.jpg" alt="200MW Immersion Building During Construction" class="image" loading="lazy">
-                <div class="caption">Massive immersion building during construction: systematic foundation infrastructure visible across warehouse-scale facility</div>
-            </div>
-            <div class="media-container">
-                <img src="images/bitcoin/immersion-tank-testing.jpg" alt="Liquid Immersion Tank Testing" class="image" loading="lazy">
-                <div class="caption">Immersion tank testing: Bitcoin miners fully submerged in cooling liquid for thermal management</div>
-            </div>
-            <div class="media-container">
-                <video controls preload="metadata">
-                    <source src="images/bitcoin/immersion-miner-operation.mp4" type="video/mp4">
-                    Your browser does not support the video tag.
-                </video>
-                <div class="caption">Operational demonstration: Bitcoin miner running while fully submerged in cooling liquid</div>
-            </div>
-            <div class="media-container">
-                <img src="images/bitcoin/immersion-facility-interior.jpg" alt="200MW Liquid Immersion Facility Interior" class="image" loading="lazy">
-                <div class="caption">Completed 200MW liquid immersion facility: organized rows of immersion tanks housing the world's largest liquid-cooled computer deployment</div>
-            </div>
-            <p>Foundation-embedded infrastructure designed for long-term flexibility and hardware retrofitting. Scaled from industry's previous largest deployment of 5MW directly to 200MW - the world's largest liquid immersed computer deployment at the time.</p>
-        </div>
-        
-        <div class="timeline-item">
-            <div class="timeline-date">Rockdale Facility Overview</div>
-            <div class="media-container">
-                <img src="images/bitcoin/rockdale-aerial-overview.jpg" alt="Rockdale Bitcoin Mining Facility" class="image" loading="lazy">
-                <div class="caption">Rockdale, Texas - 750 Megawatt Bitcoin mining facility</div>
-            </div>
-            <p>750MW Bitcoin mining facility with multiple data halls for industrial-scale operations.</p>
-        </div>
-        
-        <div class="timeline-item">
-            <div class="timeline-date">Corsicana Scale-Up</div>
-            <div class="media-container">
-                <img src="images/bitcoin/corsicana-detailed-overview.jpg" alt="Corsicana Bitcoin Mining Facility" class="image" loading="lazy">
-                <div class="caption">Corsicana, Texas - 1 Gigawatt Bitcoin mining facility with detailed electrical infrastructure</div>
-            </div>
-            <div class="media-container">
-                <img src="images/bitcoin/corsicana-immersion-facility.jpg" alt="Corsicana Liquid Immersion Facility Interior" class="image" loading="lazy">
-                <div class="caption">Corsicana liquid immersion deployment: systematic rows of immersion tanks at 1 Gigawatt scale</div>
-            </div>
-            <p>1 Gigawatt facility with power plant-level electrical infrastructure and large-scale liquid immersion cooling deployment.</p>
-        </div>
+    <div class="media-item">
+        <img src="images/bitcoin/gmo-client-visit.jpg" alt="GMO Client Visit" loading="lazy">
+    </div>
+    
+    <div class="media-item">
+        <img src="images/bitcoin/facility-layout-diagram.jpg" alt="Facility Layout" loading="lazy">
+    </div>
+    
+    <div class="media-item">
+        <img src="images/bitcoin/texas-foundation-construction.jpg" alt="Foundation Construction" loading="lazy">
+    </div>
+    
+    <div class="media-item">
+        <video controls preload="metadata">
+            <source src="images/bitcoin/texas-parallel-construction.mp4" type="video/mp4">
+        </video>
+    </div>
+    
+    <div class="media-item">
+        <img src="images/bitcoin/texas-1000ft-hall.jpg" alt="1000ft Data Hall" loading="lazy">
+    </div>
+    
+    <div class="media-item">
+        <img src="images/bitcoin/texas-data-hall-interior.jpg" alt="Data Hall Interior" loading="lazy">
+    </div>
+    
+    <div class="media-item">
+        <img src="images/bitcoin/metal-strut-system.jpg" alt="Metal Strut System" loading="lazy">
+    </div>
+    
+    <div class="media-item">
+        <img src="images/bitcoin/strut-tower-structure.jpg" alt="Strut Tower Structure" loading="lazy">
+    </div>
+    
+    <div class="media-item">
+        <video controls preload="metadata">
+            <source src="images/bitcoin/strut-system-construction.mp4" type="video/mp4">
+        </video>
+    </div>
+    
+    <div class="media-item">
+        <img src="images/bitcoin/strut-system-deployed.jpg" alt="Strut System Deployed" loading="lazy">
+    </div>
+    
+    <div class="media-item">
+        <img src="images/bitcoin/air-cooled-racking-installation.jpg" alt="Air Cooled Racking" loading="lazy">
+    </div>
+    
+    <div class="media-item">
+        <img src="images/bitcoin/air-cooled-interior-detail.jpg" alt="Air Cooled Interior" loading="lazy">
+    </div>
+    
+    <div class="media-item">
+        <video controls preload="metadata">
+            <source src="images/bitcoin/modular-air-cooled-system.mp4" type="video/mp4">
+        </video>
+    </div>
+    
+    <div class="media-item">
+        <img src="images/bitcoin/texas-machine-installation.jpg" alt="Machine Installation" loading="lazy">
+    </div>
+    
+    <div class="media-item">
+        <video controls preload="metadata">
+            <source src="images/bitcoin/final-air-cooled-operational.mp4" type="video/mp4">
+        </video>
+    </div>
+    
+    <div class="media-item">
+        <img src="images/bitcoin/texas-sealed-operational.jpg" alt="Sealed Operational" loading="lazy">
+    </div>
+    
+    <div class="media-item">
+        <video controls preload="metadata">
+            <source src="images/bitcoin/texas-operational-overview.mp4" type="video/mp4">
+        </video>
+    </div>
+    
+    <div class="media-item">
+        <img src="images/bitcoin/immersion-building-construction.jpg" alt="Immersion Building" loading="lazy">
+    </div>
+    
+    <div class="media-item">
+        <img src="images/bitcoin/immersion-foundation-infrastructure.jpg" alt="Immersion Foundation" loading="lazy">
+    </div>
+    
+    <div class="media-item">
+        <video controls preload="metadata">
+            <source src="images/bitcoin/immersion-foundation-install.mp4" type="video/mp4">
+        </video>
+    </div>
+    
+    <div class="media-item">
+        <video controls preload="metadata">
+            <source src="images/bitcoin/immersion-infrastructure-install.mp4" type="video/mp4">
+        </video>
+    </div>
+    
+    <div class="media-item">
+        <img src="images/bitcoin/immersion-tank-testing.jpg" alt="Immersion Tank Testing" loading="lazy">
+    </div>
+    
+    <div class="media-item">
+        <img src="images/bitcoin/corsicana-immersion-facility.jpg" alt="Corsicana Immersion Facility" loading="lazy">
+    </div>
+    
+    <div class="media-item">
+        <img src="images/bitcoin/immersion-facility-interior.jpg" alt="Immersion Facility Interior" loading="lazy">
+    </div>
+    
+    <div class="media-item">
+        <video controls preload="metadata">
+            <source src="images/bitcoin/immersion-miner-operation.mp4" type="video/mp4">
+        </video>
+    </div>
+    
+    <div class="media-item">
+        <img src="images/bitcoin/corsicana-detailed-overview.jpg" alt="Corsicana Overview" loading="lazy">
+    </div>
+    
+    <div class="media-item">
+        <img src="images/bitcoin/rockdale-aerial-overview.jpg" alt="Rockdale Aerial" loading="lazy">
     </div>
 </div>
 
 </body>
-
 </html>
