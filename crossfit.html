@@ -55,14 +55,7 @@
             padding: 0 2rem;
         }
 
-        .media-grid {
-            display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
-            gap: 1rem;
-            padding: 0 1rem 2rem 1rem;
-            max-width: 1400px;
-            margin: 0 auto;
-        }
+
 
         .media-item {
             background: white;
@@ -89,23 +82,9 @@
         }
 
         @media (max-width: 768px) {
-            .media-grid {
-                grid-template-columns: repeat(auto-fit, minmax(240px, 1fr));
-                gap: 0.75rem;
-                padding: 0 0.75rem 2rem 0.75rem;
-            }
-
             h1 {
                 font-size: 2rem;
                 margin: 3rem 0 1rem 0;
-            }
-        }
-
-        @media (max-width: 480px) {
-            .media-grid {
-                grid-template-columns: 1fr;
-                gap: 0.5rem;
-                padding: 0 0.5rem 2rem 0.5rem;
             }
         }
     </style>
@@ -123,7 +102,40 @@
     <p>Crescent City CrossFit - Building a fitness community in New Orleans.</p>
 </div>
 
-<div class="media-grid">
+<div class="main-container">
+    <div class="sidebar">
+        <h3>Foundations</h3>
+        <p>Original methodology by Greg Glassman</p>
+        
+        <div class="sidebar-section">
+            <h4>Core Philosophy</h4>
+            <ul>
+                <li><a href="https://web.archive.org/web/20070213225334/http://www.crossfit.com/cf-download/Crossfit_manual.pdf" target="_blank">What is Fitness?</a></li>
+                <li><a href="https://web.archive.org/web/20110616024032/http://journal.crossfit.com/" target="_blank">CrossFit Journal</a></li>
+                <li><a href="https://web.archive.org/web/20110616024032/http://www.crossfit.com/" target="_blank">CrossFit.com (2011)</a></li>
+            </ul>
+        </div>
+        
+        <div class="sidebar-section">
+            <h4>Training</h4>
+            <ul>
+                <li><a href="https://web.archive.org/web/20110616024032/http://www.crossfit.com/cf-info/faq.html" target="_blank">CrossFit FAQ</a></li>
+                <li><a href="https://web.archive.org/web/20110616024032/http://www.crossfit.com/cf-info/start-diet.html" target="_blank">Zone Diet</a></li>
+                <li><a href="https://web.archive.org/web/20110616024032/http://www.crossfit.com/cf-info/excercise.html" target="_blank">Exercise Demos</a></li>
+            </ul>
+        </div>
+        
+        <div class="sidebar-section">
+            <h4>Community</h4>
+            <ul>
+                <li><a href="https://web.archive.org/web/20110616024032/http://www.crossfit.com/cf-affiliates/affiliation.shtml" target="_blank">Affiliation Model</a></li>
+                <li><a href="https://web.archive.org/web/20110616024032/http://www.crossfit.com/cf-info/certs.shtml" target="_blank">Certification</a></li>
+                <li><a href="https://web.archive.org/web/20110616024032/http://www.crossfit.com/cf-info/start-how.html" target="_blank">Getting Started</a></li>
+            </ul>
+        </div>
+    </div>
+
+    <div class="media-grid">
     <div class="media-item">
         <img src="images/crossfit/team-photo-early.jpg" alt="Early CrossFit Team" loading="lazy">
     </div>
@@ -504,112 +516,117 @@
         </video>
     </div>
 </div>
-
-<div class="foundations-section">
-    <h2>Foundations</h2>
-    <p>The original CrossFit methodology as developed by Greg Glassman and documented in the early CrossFit Journal.</p>
-    
-    <div class="links-grid">
-        <div class="link-group">
-            <h3>Core Philosophy</h3>
-            <ul>
-                <li><a href="https://web.archive.org/web/20070213225334/http://www.crossfit.com/cf-download/Crossfit_manual.pdf" target="_blank">What is Fitness?</a> - The foundational definition</li>
-                <li><a href="https://web.archive.org/web/20110616024032/http://journal.crossfit.com/" target="_blank">CrossFit Journal (2011)</a> - Original Journal archive</li>
-                <li><a href="https://web.archive.org/web/20110616024032/http://www.crossfit.com/" target="_blank">CrossFit.com (2011)</a> - Glassman era website</li>
-                <li><a href="https://web.archive.org/web/20050204065017/http://www.crossfit.com/cf-info/what-crossfit.html" target="_blank">What is CrossFit?</a> - Original methodology</li>
-            </ul>
-        </div>
-        
-        <div class="link-group">
-            <h3>Training Principles</h3>
-            <ul>
-                <li><a href="https://web.archive.org/web/20110616024032/http://www.crossfit.com/cf-info/faq.html" target="_blank">CrossFit FAQ</a> - Fundamental questions answered</li>
-                <li><a href="https://web.archive.org/web/20110616024032/http://www.crossfit.com/cf-info/start-diet.html" target="_blank">Zone Diet Prescription</a> - Original nutrition guidelines</li>
-                <li><a href="https://web.archive.org/web/20070213225334/http://www.crossfit.com/cf-download/Crossfit_manual.pdf" target="_blank">CrossFit Manual</a> - Early training guide</li>
-                <li><a href="https://web.archive.org/web/20110616024032/http://www.crossfit.com/cf-info/excercise.html" target="_blank">Exercise Demos</a> - Movement standards</li>
-            </ul>
-        </div>
-        
-        <div class="link-group">
-            <h3>Community Model</h3>
-            <ul>
-                <li><a href="https://web.archive.org/web/20110616024032/http://www.crossfit.com/cf-affiliates/affiliation.shtml" target="_blank">Affiliation Model</a> - Original business approach</li>
-                <li><a href="https://web.archive.org/web/20110616024032/http://www.crossfit.com/cf-info/messages.shtml" target="_blank">Message Board</a> - Early community forum</li>
-                <li><a href="https://web.archive.org/web/20110616024032/http://www.crossfit.com/cf-info/certs.shtml" target="_blank">Trainer Certification</a> - Original Level 1 course</li>
-                <li><a href="https://web.archive.org/web/20110616024032/http://www.crossfit.com/cf-info/start-how.html" target="_blank">Getting Started</a> - Glassman's guidance</li>
-            </ul>
-        </div>
-    </div>
 </div>
 
 <style>
-.foundations-section {
+.main-container {
     max-width: 1400px;
-    margin: 4rem auto 2rem auto;
+    margin: 0 auto;
+    display: grid;
+    grid-template-columns: 240px 1fr;
+    gap: 2rem;
     padding: 0 1rem;
 }
 
-.foundations-section h2 {
-    color: #333;
-    font-weight: 300;
-    font-size: 2rem;
-    margin-bottom: 1rem;
-    text-align: center;
+.sidebar {
+    background: white;
+    border-radius: 8px;
+    padding: 1.5rem;
+    box-shadow: 0 2px 8px rgba(0, 0, 0, 0.05);
+    height: fit-content;
+    position: sticky;
+    top: 2rem;
 }
 
-.foundations-section > p {
-    text-align: center;
-    color: #666;
-    margin-bottom: 3rem;
-    max-width: 600px;
-    margin-left: auto;
-    margin-right: auto;
-}
-
-.links-grid {
-    display: grid;
-    grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
-    gap: 2rem;
-}
-
-.link-group h3 {
+.sidebar h3 {
     color: #333;
     font-weight: 400;
-    margin-bottom: 1rem;
-    font-size: 1.1rem;
+    font-size: 1.2rem;
+    margin-bottom: 0.5rem;
 }
 
-.link-group ul {
-    list-style: none;
-    padding: 0;
+.sidebar > p {
+    color: #666;
+    font-size: 0.9rem;
+    margin-bottom: 1.5rem;
+    line-height: 1.4;
 }
 
-.link-group li {
+.sidebar-section {
+    margin-bottom: 1.5rem;
+}
+
+.sidebar-section:last-child {
+    margin-bottom: 0;
+}
+
+.sidebar-section h4 {
+    color: #333;
+    font-weight: 400;
+    font-size: 0.95rem;
     margin-bottom: 0.75rem;
 }
 
-.link-group a {
-    color: #0066cc;
-    text-decoration: none;
-    line-height: 1.5;
+.sidebar-section ul {
+    list-style: none;
+    padding: 0;
+    margin: 0;
 }
 
-.link-group a:hover {
+.sidebar-section li {
+    margin-bottom: 0.5rem;
+}
+
+.sidebar-section a {
+    color: #0066cc;
+    text-decoration: none;
+    font-size: 0.9rem;
+    line-height: 1.4;
+}
+
+.sidebar-section a:hover {
     text-decoration: underline;
 }
 
-@media (max-width: 768px) {
-    .foundations-section {
-        margin: 3rem auto 2rem auto;
-    }
-    
-    .foundations-section h2 {
-        font-size: 1.5rem;
-    }
-    
-    .links-grid {
-        grid-template-columns: 1fr;
+.media-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+    gap: 1rem;
+    padding-bottom: 2rem;
+}
+
+@media (max-width: 1024px) {
+    .main-container {
+        grid-template-columns: 200px 1fr;
         gap: 1.5rem;
+    }
+    
+    .sidebar {
+        padding: 1rem;
+    }
+}
+
+@media (max-width: 768px) {
+    .main-container {
+        grid-template-columns: 1fr;
+        gap: 1rem;
+    }
+    
+    .sidebar {
+        position: static;
+        margin-bottom: 2rem;
+    }
+    
+    .media-grid {
+        grid-template-columns: repeat(auto-fit, minmax(240px, 1fr));
+        gap: 0.75rem;
+    }
+}
+
+@media (max-width: 480px) {
+    .media-grid {
+        grid-template-columns: 1fr;
+        gap: 0.5rem;
     }
 }
 </style>
