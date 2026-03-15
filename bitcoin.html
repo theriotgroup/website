@@ -55,14 +55,7 @@
             padding: 0 2rem;
         }
 
-        .media-grid {
-            display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
-            gap: 1rem;
-            padding: 0 1rem 2rem 1rem;
-            max-width: 1400px;
-            margin: 0 auto;
-        }
+
 
         .media-item {
             background: white;
@@ -88,26 +81,7 @@
             background: #000;
         }
 
-        @media (max-width: 768px) {
-            .media-grid {
-                grid-template-columns: repeat(auto-fit, minmax(240px, 1fr));
-                gap: 0.75rem;
-                padding: 0 0.75rem 2rem 0.75rem;
-            }
 
-            h1 {
-                font-size: 2rem;
-                margin: 3rem 0 1rem 0;
-            }
-        }
-
-        @media (max-width: 480px) {
-            .media-grid {
-                grid-template-columns: 1fr;
-                gap: 0.5rem;
-                padding: 0 0.5rem 2rem 0.5rem;
-            }
-        }
     </style>
 </head>
 
@@ -123,7 +97,43 @@
     <p>Building cryptocurrency mining infrastructure from the ground up.</p>
 </div>
 
-<div class="media-grid">
+<div class="main-container">
+    <div class="sidebar">
+        <h3>Origins</h3>
+        <p>Pre-2016 Bitcoin history and foundational materials</p>
+        
+        <div class="sidebar-section">
+            <h4>Satoshi Era</h4>
+            <ul>
+                <li><a href="https://bitcoin.org/bitcoin.pdf" target="_blank">Bitcoin Whitepaper</a></li>
+                <li><a href="https://satoshi.nakamotoinstitute.org/emails/" target="_blank">Satoshi's Emails</a></li>
+                <li><a href="https://bitcointalk.org/index.php?topic=195.msg1617#msg1617" target="_blank">Satoshi's Last Post</a></li>
+                <li><a href="https://web.archive.org/web/20090131041251/http://www.bitcoin.org/" target="_blank">Original Bitcoin.org</a></li>
+            </ul>
+        </div>
+        
+        <div class="sidebar-section">
+            <h4>Early History</h4>
+            <ul>
+                <li><a href="https://web.archive.org/web/20120801000000*/bitcoinmagazine.com" target="_blank">Bitcoin Magazine (2012)</a></li>
+                <li><a href="https://bitcointalk.org/index.php?board=1.0" target="_blank">BitcoinTalk Forum</a></li>
+                <li><a href="https://web.archive.org/web/20110703132748/http://faucet.bitcoin.in/" target="_blank">Bitcoin Faucet (2011)</a></li>
+                <li><a href="https://blockstream.info/block/000000000019d6689c085ae165831e934ff763ae46a2a6c172b3f1b60a8ce26f" target="_blank">Genesis Block</a></li>
+            </ul>
+        </div>
+        
+        <div class="sidebar-section">
+            <h4>Kurt Wuckert Jr.</h4>
+            <ul>
+                <li><a href="https://www.youtube.com/@kurtwuckertjr" target="_blank">Kurt's Channel</a></li>
+                <li><a href="https://www.youtube.com/watch?v=XfcvX0P1b5g" target="_blank">Bitcoin History Series</a></li>
+                <li><a href="https://www.youtube.com/watch?v=0ETcLj5jBy4" target="_blank">Early Bitcoin Days</a></li>
+                <li><a href="https://coingeek.com/author/kurt-wuckert-jr/" target="_blank">CoinGeek Articles</a></li>
+            </ul>
+        </div>
+    </div>
+
+    <div class="media-grid">
     <div class="media-item">
         <img src="images/bitcoin/rd-prototype-2018.jpg" alt="R&D Prototype" loading="lazy">
     </div>
@@ -256,6 +266,125 @@
         <img src="images/bitcoin/rockdale-aerial-overview.jpg" alt="Rockdale Aerial" loading="lazy">
     </div>
 </div>
+</div>
+
+<style>
+.main-container {
+    max-width: 1400px;
+    margin: 0 auto;
+    display: grid;
+    grid-template-columns: 240px 1fr;
+    gap: 2rem;
+    padding: 0 1rem;
+}
+
+.sidebar {
+    background: white;
+    border-radius: 8px;
+    padding: 1.5rem;
+    box-shadow: 0 2px 8px rgba(0, 0, 0, 0.05);
+    height: fit-content;
+    position: sticky;
+    top: 2rem;
+}
+
+.sidebar h3 {
+    color: #333;
+    font-weight: 400;
+    font-size: 1.2rem;
+    margin-bottom: 0.5rem;
+}
+
+.sidebar > p {
+    color: #666;
+    font-size: 0.9rem;
+    margin-bottom: 1.5rem;
+    line-height: 1.4;
+}
+
+.sidebar-section {
+    margin-bottom: 1.5rem;
+}
+
+.sidebar-section:last-child {
+    margin-bottom: 0;
+}
+
+.sidebar-section h4 {
+    color: #333;
+    font-weight: 400;
+    font-size: 0.95rem;
+    margin-bottom: 0.75rem;
+}
+
+.sidebar-section ul {
+    list-style: none;
+    padding: 0;
+    margin: 0;
+}
+
+.sidebar-section li {
+    margin-bottom: 0.5rem;
+}
+
+.sidebar-section a {
+    color: #f7931a;
+    text-decoration: none;
+    font-size: 0.9rem;
+    line-height: 1.4;
+}
+
+.sidebar-section a:hover {
+    text-decoration: underline;
+}
+
+.media-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+    gap: 1rem;
+    padding-bottom: 2rem;
+}
+
+@media (max-width: 1024px) {
+    .main-container {
+        grid-template-columns: 200px 1fr;
+        gap: 1.5rem;
+    }
+    
+    .sidebar {
+        padding: 1rem;
+    }
+}
+
+@media (max-width: 768px) {
+    .main-container {
+        grid-template-columns: 1fr;
+        gap: 1rem;
+    }
+    
+    .sidebar {
+        position: static;
+        margin-bottom: 2rem;
+    }
+    
+    .media-grid {
+        grid-template-columns: repeat(auto-fit, minmax(240px, 1fr));
+        gap: 0.75rem;
+    }
+    
+    h1 {
+        font-size: 2rem;
+        margin: 3rem 0 1rem 0;
+    }
+}
+
+@media (max-width: 480px) {
+    .media-grid {
+        grid-template-columns: 1fr;
+        gap: 0.5rem;
+    }
+}
+</style>
 
 </body>
 </html>
