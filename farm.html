@@ -145,7 +145,8 @@
         }
 
         .media-item img,
-        .media-item video {
+        .media-item video,
+        .media-item iframe {
             width: 100%;
             height: auto;
             display: block;
@@ -153,6 +154,11 @@
 
         .media-item video {
             background: #000;
+        }
+
+        .media-item iframe {
+            aspect-ratio: 16/9;
+            height: auto;
         }
 
         @media (max-width: 1024px) {
@@ -249,18 +255,21 @@
             </ul>
         </div>
         
-        <div class="sidebar-section">
-            <h4>Videos</h4>
-            <ul>
-                <li><a href="https://youtu.be/km5a2qxJ-kE?si=acjNtM1-co9ZittP" target="_blank">YouTube Video 1</a></li>
-                <li><a href="https://youtu.be/XyDuYMI6PLg?si=iV5t-AJEoRpZz8ex" target="_blank">YouTube Video 2</a></li>
-                <li><a href="https://youtu.be/HUqm0HlaamY?si=RU0hBDOj7C7N9-QO" target="_blank">YouTube Video 3</a></li>
-            </ul>
-        </div>
+
     </div>
 
     <div class="media-grid">
-        <!-- Media content will be populated as farm content is processed -->
+        <div class="media-item">
+            <iframe src="https://www.youtube.com/embed/km5a2qxJ-kE" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
+        </div>
+        
+        <div class="media-item">
+            <iframe src="https://www.youtube.com/embed/XyDuYMI6PLg" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
+        </div>
+        
+        <div class="media-item">
+            <iframe src="https://www.youtube.com/embed/HUqm0HlaamY" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
+        </div>
     </div>
 </div>
 
