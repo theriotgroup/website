@@ -5,36 +5,194 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Farm - Lyle J Theriot</title>
     <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
         body {
-            font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Helvetica, Arial, sans-serif;
-            line-height: 1.6;
-            max-width: 800px;
-            margin: 0 auto;
-            padding: 2rem 1rem;
+            font-family: system-ui, -apple-system, sans-serif;
+            background-color: #fafafa;
             color: #333;
+            line-height: 1.6;
         }
-        
-        h1 {
-            font-size: 2rem;
-            margin-bottom: 1rem;
-            font-weight: 300;
-        }
-        
+
         .back-link {
-            margin-bottom: 2rem;
+            position: fixed;
+            top: 1rem;
+            left: 1rem;
+            z-index: 100;
+            background: rgba(255, 255, 255, 0.9);
+            backdrop-filter: blur(8px);
+            border-radius: 6px;
+            padding: 0.5rem 1rem;
         }
-        
+
         .back-link a {
-            color: #0066cc;
+            color: #666;
             text-decoration: none;
+            font-size: 0.9rem;
         }
-        
+
         .back-link a:hover {
+            color: #4a7c59;
+        }
+
+        h1 {
+            text-align: center;
+            margin: 4rem 0 1rem 0;
+            color: #333;
+            font-weight: 300;
+            font-size: 2.5rem;
+        }
+
+        .subtitle {
+            text-align: center;
+            margin: 0 auto 3rem auto;
+            color: #666;
+            max-width: 600px;
+            padding: 0 2rem;
+        }
+
+        .main-container {
+            max-width: 1400px;
+            margin: 0 auto;
+            display: grid;
+            grid-template-columns: 240px 1fr;
+            gap: 2rem;
+            padding: 0 1rem;
+        }
+
+        .sidebar {
+            background: white;
+            border-radius: 8px;
+            padding: 1.5rem;
+            box-shadow: 0 2px 8px rgba(0, 0, 0, 0.05);
+            height: fit-content;
+            position: sticky;
+            top: 2rem;
+        }
+
+        .sidebar h3 {
+            color: #333;
+            font-weight: 400;
+            font-size: 1.2rem;
+            margin-bottom: 0.5rem;
+        }
+
+        .sidebar > p {
+            color: #666;
+            font-size: 0.9rem;
+            margin-bottom: 1.5rem;
+            line-height: 1.4;
+        }
+
+        .sidebar-section {
+            margin-bottom: 1.5rem;
+        }
+
+        .sidebar-section:last-child {
+            margin-bottom: 0;
+        }
+
+        .sidebar-section h4 {
+            color: #333;
+            font-weight: 400;
+            font-size: 0.95rem;
+            margin-bottom: 0.75rem;
+        }
+
+        .sidebar-section ul {
+            list-style: none;
+            padding: 0;
+            margin: 0;
+        }
+
+        .sidebar-section li {
+            margin-bottom: 0.5rem;
+        }
+
+        .sidebar-section a {
+            color: #4a7c59;
+            text-decoration: none;
+            font-size: 0.9rem;
+            line-height: 1.4;
+        }
+
+        .sidebar-section a:hover {
             text-decoration: underline;
         }
-        
-        .content {
-            margin-bottom: 3rem;
+
+        .media-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+            gap: 1rem;
+            padding-bottom: 2rem;
+        }
+
+        .media-item {
+            background: white;
+            border-radius: 8px;
+            overflow: hidden;
+            box-shadow: 0 2px 8px rgba(0, 0, 0, 0.05);
+            transition: transform 0.2s ease, box-shadow 0.2s ease;
+        }
+
+        .media-item:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 4px 16px rgba(0, 0, 0, 0.1);
+        }
+
+        .media-item img,
+        .media-item video {
+            width: 100%;
+            height: auto;
+            display: block;
+        }
+
+        .media-item video {
+            background: #000;
+        }
+
+        @media (max-width: 1024px) {
+            .main-container {
+                grid-template-columns: 200px 1fr;
+                gap: 1.5rem;
+            }
+            
+            .sidebar {
+                padding: 1rem;
+            }
+        }
+
+        @media (max-width: 768px) {
+            .main-container {
+                grid-template-columns: 1fr;
+                gap: 1rem;
+            }
+            
+            .sidebar {
+                position: static;
+                margin-bottom: 2rem;
+            }
+            
+            .media-grid {
+                grid-template-columns: repeat(auto-fit, minmax(240px, 1fr));
+                gap: 0.75rem;
+            }
+            
+            h1 {
+                font-size: 2rem;
+                margin: 3rem 0 1rem 0;
+            }
+        }
+
+        @media (max-width: 480px) {
+            .media-grid {
+                grid-template-columns: 1fr;
+                gap: 0.5rem;
+            }
         }
     </style>
 </head>
@@ -47,10 +205,48 @@
 
 <h1>Farm</h1>
 
-<div class="content">
-    <p>Agricultural operations and farm updates coming soon.</p>
+<div class="subtitle">
+    <p>Theriot Farm - Sustainable agriculture and permaculture practices.</p>
+</div>
+
+<div class="main-container">
+    <div class="sidebar">
+        <h3>Foundations</h3>
+        <p>Bill Mollison's permaculture principles</p>
+        
+        <div class="sidebar-section">
+            <h4>Core Permaculture</h4>
+            <ul>
+                <li><a href="https://www.amazon.com/Permaculture-Designers-Manual-Bill-Mollison/dp/0908228015" target="_blank">Permaculture: A Designers' Manual</a></li>
+                <li><a href="https://permacultureprinciples.com/principles/" target="_blank">Permaculture Principles</a></li>
+                <li><a href="https://www.permies.com/w/bill-mollison" target="_blank">Bill Mollison Archive</a></li>
+                <li><a href="https://www.youtube.com/watch?v=hftgWcD-1Nw" target="_blank">Introduction to Permaculture</a></li>
+            </ul>
+        </div>
+        
+        <div class="sidebar-section">
+            <h4>Design Methods</h4>
+            <ul>
+                <li><a href="https://permaculturenews.org/2008/07/15/zone-and-sector-analysis/" target="_blank">Zone and Sector Analysis</a></li>
+                <li><a href="https://www.permaculture.org.uk/knowledge-base/pattern-understanding" target="_blank">Pattern Understanding</a></li>
+                <li><a href="https://permaculturenews.org/2016/08/31/permaculture-ethics/" target="_blank">Permaculture Ethics</a></li>
+            </ul>
+        </div>
+        
+        <div class="sidebar-section">
+            <h4>Sustainable Systems</h4>
+            <ul>
+                <li><a href="https://permaculturenews.org/2015/10/23/food-forests/" target="_blank">Food Forests</a></li>
+                <li><a href="https://www.permaculture.org.uk/knowledge-base/water-harvesting" target="_blank">Water Harvesting</a></li>
+                <li><a href="https://permaculturenews.org/2011/05/02/natural-building/" target="_blank">Natural Building</a></li>
+            </ul>
+        </div>
+    </div>
+
+    <div class="media-grid">
+        <!-- Media content will be populated as farm content is processed -->
+    </div>
 </div>
 
 </body>
-
 </html>
