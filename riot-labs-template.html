@@ -1,0 +1,237 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Riot Labs - Weekly Agent Report Template</title>
+    <style>
+        body {
+            font-family: "Courier New", monospace;
+            background: #f5f5f0;
+            margin: 0;
+            padding: 20px;
+        }
+        .document {
+            background: white;
+            width: 8.5in;
+            min-height: 11in;
+            margin: 0 auto;
+            padding: 1in;
+            box-shadow: 0 4px 8px rgba(0,0,0,0.1);
+            position: relative;
+        }
+        .classification {
+            text-align: center;
+            font-weight: bold;
+            font-size: 14px;
+            letter-spacing: 2px;
+            border: 2px solid black;
+            padding: 5px;
+            margin-bottom: 20px;
+        }
+        .letterhead {
+            text-align: center;
+            margin-bottom: 30px;
+        }
+        .letterhead h1 {
+            font-size: 24px;
+            font-weight: bold;
+            margin: 0;
+            letter-spacing: 4px;
+        }
+        .letterhead h2 {
+            font-size: 14px;
+            margin: 5px 0;
+            letter-spacing: 2px;
+        }
+        .form-row {
+            display: flex;
+            margin-bottom: 15px;
+            align-items: baseline;
+        }
+        .form-label {
+            width: 200px;
+            font-weight: bold;
+        }
+        .form-value {
+            flex: 1;
+            border-bottom: 1px solid black;
+            padding-bottom: 2px;
+            min-height: 20px;
+        }
+        .section {
+            margin: 30px 0;
+        }
+        .section h3 {
+            font-size: 16px;
+            font-weight: bold;
+            text-decoration: underline;
+            margin-bottom: 15px;
+        }
+        .question {
+            margin: 20px 0;
+        }
+        .question-label {
+            font-weight: bold;
+            margin-bottom: 10px;
+        }
+        .answer-area {
+            border: 1px solid black;
+            min-height: 80px;
+            padding: 10px;
+            background: #fafafa;
+        }
+        .signature-area {
+            display: flex;
+            justify-content: space-between;
+            margin-top: 50px;
+        }
+        .signature-box {
+            text-align: center;
+            width: 200px;
+        }
+        .signature-line {
+            border-bottom: 1px solid black;
+            height: 40px;
+            margin-bottom: 5px;
+        }
+        .stamp {
+            position: absolute;
+            right: 100px;
+            top: 150px;
+            transform: rotate(-15deg);
+            border: 3px solid red;
+            color: red;
+            padding: 10px;
+            font-weight: bold;
+            font-size: 14px;
+        }
+        .redacted {
+            background: black;
+            color: black;
+            padding: 2px 20px;
+        }
+        .hole-punch {
+            position: absolute;
+            left: 30px;
+            width: 10px;
+            height: 10px;
+            background: white;
+            border: 1px solid #ccc;
+            border-radius: 50%;
+            box-shadow: inset 0 2px 4px rgba(0,0,0,0.3);
+        }
+        .hole-punch.punch1 { top: 200px; }
+        .hole-punch.punch2 { top: 350px; }
+        .hole-punch.punch3 { top: 500px; }
+    </style>
+</head>
+<body>
+    <div class="document">
+        <!-- Hole punches -->
+        <div class="hole-punch punch1"></div>
+        <div class="hole-punch punch2"></div>
+        <div class="hole-punch punch3"></div>
+        
+        <!-- Classification Header -->
+        <div class="classification">
+            INTERNAL USE ONLY - AUTHORIZED PERSONNEL
+        </div>
+        
+        <!-- Letterhead -->
+        <div class="letterhead">
+            <h1>RIOT LABS</h1>
+            <h2>LOUISIANA FIELD OFFICE</h2>
+            <p>Weekly Agent Status Report - Form RL-2024-W</p>
+        </div>
+        
+        <!-- Stamp -->
+        <div class="stamp">
+            RECEIVED<br>
+            MAR 28 2024
+        </div>
+        
+        <!-- Agent Information -->
+        <div class="section">
+            <div class="form-row">
+                <div class="form-label">AGENT ID:</div>
+                <div class="form-value">23-ALPHA</div>
+            </div>
+            <div class="form-row">
+                <div class="form-label">DIVISION:</div>
+                <div class="form-value">DRONE INSTITUTE - R&D</div>
+            </div>
+            <div class="form-row">
+                <div class="form-label">REPORTING PERIOD:</div>
+                <div class="form-value">WEEK 12, 2024 (MAR 18-24)</div>
+            </div>
+            <div class="form-row">
+                <div class="form-label">CLEARANCE LEVEL:</div>
+                <div class="form-value"><span class="redacted">████████</span></div>
+            </div>
+        </div>
+        
+        <!-- Standard Questions -->
+        <div class="section">
+            <h3>WEEKLY STATUS ASSESSMENT</h3>
+            
+            <div class="question">
+                <div class="question-label">1. PRIMARY OBJECTIVES COMPLETED THIS REPORTING PERIOD:</div>
+                <div class="answer-area">
+                    Completed integration testing for Project Echo-7 sensor array. 
+                    Advanced thermal imaging protocols show 23% improvement over baseline metrics.
+                    Collaboration with Agent 15-Beta on network infrastructure optimization.
+                </div>
+            </div>
+            
+            <div class="question">
+                <div class="question-label">2. OBSTACLES OR DELAYS ENCOUNTERED:</div>
+                <div class="answer-area">
+                    Supply chain delays for specialized components. Estimated 72-hour delay.
+                    Weather conditions limited field testing opportunities.
+                </div>
+            </div>
+            
+            <div class="question">
+                <div class="question-label">3. NEXT PERIOD PRIORITIES:</div>
+                <div class="answer-area">
+                    Initiate Phase 2 field trials pending component delivery.
+                    Coordinate with Louisiana Field Office logistics team for <span class="redacted">████</span> deployment.
+                </div>
+            </div>
+            
+            <div class="question">
+                <div class="question-label">4. RESOURCE REQUIREMENTS:</div>
+                <div class="answer-area">
+                    Additional computing resources for data processing workloads.
+                    Access to secured testing facility for sensitive protocols.
+                </div>
+            </div>
+        </div>
+        
+        <!-- Attachments -->
+        <div class="section">
+            <h3>ATTACHMENTS & REFERENCES</h3>
+            <p>☐ Technical Specifications - Document RL-2024-156</p>
+            <p>☑ Field Test Results - Video Evidence File 23A-0324</p>
+            <p>☐ Budget Analysis - <span class="redacted">█████████</span></p>
+        </div>
+        
+        <!-- Signatures -->
+        <div class="signature-area">
+            <div class="signature-box">
+                <div class="signature-line"></div>
+                <small>AGENT SIGNATURE</small>
+            </div>
+            <div class="signature-box">
+                <div class="signature-line"></div>
+                <small>SUPERVISOR APPROVAL</small>
+            </div>
+            <div class="signature-box">
+                <div class="signature-line"></div>
+                <small>DATE</small>
+            </div>
+        </div>
+    </div>
+</body>
+</html>
