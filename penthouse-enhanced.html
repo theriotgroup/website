@@ -599,11 +599,15 @@
             background: #333;
             color: #fff;
             border: none;
-            padding: 6px 10px;
+            padding: 8px 12px;
             border-radius: 4px;
-            font-size: 10px;
+            font-size: 11px;
             cursor: pointer;
             transition: background 0.2s;
+            min-height: 32px;  /* Better touch target for mobile */
+            display: flex;
+            align-items: center;
+            justify-content: center;
         }
         
         .intel-action:hover {
@@ -674,6 +678,18 @@
             
             .composer-field input {
                 width: 100%;
+            }
+            
+            .intel-actions {
+                flex-direction: column;
+                gap: 12px;
+            }
+            
+            .intel-action {
+                width: 100%;
+                padding: 12px;
+                font-size: 14px;
+                min-height: 44px;  /* iOS recommended touch target */
             }
         }
     </style>
@@ -1088,9 +1104,9 @@
                     <div class="intel-subject">${email.subject}</div>
                     <div class="intel-context">${context}</div>
                     <div class="intel-actions">
-                        <button class="intel-action primary" onclick="openInGmail('${emailId}')">Open in Gmail</button>
-                        <button class="intel-action" onclick="markHandled('${emailId}')">Mark Handled</button>
-                        <button class="intel-action" onclick="snoozeEmail('${emailId}', '4hr')">Snooze 4hr</button>
+                        <button class="intel-action primary" onclick="openInGmail('${emailId}')">📧 Open in Gmail</button>
+                        <button class="intel-action" onclick="markHandled('${emailId}')">✅ Mark Handled</button>
+                        <button class="intel-action" onclick="snoozeEmail('${emailId}', '4hr')">😴 Snooze 4hr</button>
                     </div>
                 </div>
             `;
@@ -1180,12 +1196,60 @@
         
         // Email intelligence triage functions
         function openInGmail(emailId) {
-            // Open Gmail in new tab (would ideally search for the specific email)
-            const gmailUrl = 'https://mail.google.com/mail/u/0/#inbox';
-            window.open(gmailUrl, '_blank');
+            // Detect platform
+            const isIOS = /iPad|iPhone|iPod/.test(navigator.userAgent);
+            const isAndroid = /Android/.test(navigator.userAgent);
+            const isMobile = isIOS || isAndroid;
             
-            // Show feedback that action was taken
-            showIntelligenceNotification(`📧 Opening Gmail to view email`, 'info');
+            const webGmailUrl = 'https://mail.google.com/mail/u/0/#inbox';
+            
+            if (isMobile) {
+                // Mobile: Create smart app links with fallback
+                let appUrl;
+                
+                if (isIOS) {
+                    // iOS Gmail app URL scheme
+                    appUrl = 'googlegmail://';
+                } else if (isAndroid) {
+                    // Android: Use intent URL for better app detection  
+                    appUrl = 'intent://mail.google.com/mail/#Intent;scheme=https;package=com.google.android.gm;S.browser_fallback_url=' + 
+                             encodeURIComponent(webGmailUrl) + ';end';
+                }
+                
+                if (appUrl) {
+                    // Try app first, with automatic browser fallback on Android
+                    if (isAndroid) {
+                        // Android intent automatically handles fallback
+                        window.location = appUrl;
+                        showIntelligenceNotification(`🤖 Opening Gmail (Android app or browser)`, 'info');
+                    } else {
+                        // iOS: Manual fallback detection
+                        showIntelligenceNotification(`🍎 Trying Gmail app (iOS)...`, 'info');
+                        
+                        // Track if we're still on page after attempting app open
+                        const startTime = Date.now();
+                        window.location = appUrl;
+                        
+                        // Check after delay if we're still on the page (app didn't open)
+                        setTimeout(() => {
+                            const timeElapsed = Date.now() - startTime;
+                            // If less than 1 second elapsed and we're still here, app likely not installed
+                            if (timeElapsed < 1000) {
+                                window.open(webGmailUrl, '_blank');
+                                showIntelligenceNotification(`📧 Gmail app not found - opening in Safari`, 'info');
+                            }
+                        }, 1500);
+                    }
+                } else {
+                    // Fallback for other mobile browsers
+                    window.open(webGmailUrl, '_blank');
+                    showIntelligenceNotification(`📧 Opening Gmail in browser`, 'info');
+                }
+            } else {
+                // Desktop: open web Gmail
+                window.open(webGmailUrl, '_blank');
+                showIntelligenceNotification(`📧 Opening Gmail in new tab`, 'info');
+            }
         }
         
         function markHandled(emailId) {
