@@ -1,0 +1,904 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Riot Labs - Enhanced Operations Center</title>
+    <style>
+        body {
+            font-family: 'Helvetica Neue', Arial, sans-serif;
+            background: #0a0a0a;
+            color: #e0e0e0;
+            margin: 0;
+            padding: 20px;
+            line-height: 1.4;
+            overflow-x: hidden;
+        }
+        
+        .header {
+            text-align: center;
+            border-bottom: 2px solid #333;
+            padding-bottom: 20px;
+            margin-bottom: 30px;
+        }
+        
+        .header h1 {
+            font-size: 32px;
+            font-weight: 300;
+            letter-spacing: 4px;
+            margin: 0;
+            color: #fff;
+        }
+        
+        .header .subtitle {
+            font-size: 14px;
+            color: #888;
+            letter-spacing: 2px;
+            margin-top: 10px;
+        }
+        
+        .classification {
+            background: #1a1a1a;
+            border: 1px solid #333;
+            padding: 8px;
+            text-align: center;
+            font-size: 11px;
+            letter-spacing: 3px;
+            color: #ff6b6b;
+            margin-bottom: 30px;
+            font-weight: bold;
+        }
+        
+        .operations-floor {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 30px;
+            margin-bottom: 40px;
+            min-height: 500px;
+        }
+        
+        .agent-workstation {
+            background: #1a1a1a;
+            border: 1px solid #333;
+            border-radius: 8px;
+            padding: 20px;
+            position: relative;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            overflow: hidden;
+        }
+        
+        .agent-workstation:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 8px 25px rgba(0,0,0,0.3);
+            border-color: #555;
+        }
+        
+        .agent-workstation.mailman {
+            border-left: 4px solid #4a90e2;
+        }
+        
+        .agent-workstation.castra {
+            border-left: 4px solid #d63031;
+        }
+        
+        .workstation-header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-bottom: 20px;
+        }
+        
+        .agent-avatar {
+            font-size: 32px;
+            margin-right: 15px;
+        }
+        
+        .agent-info {
+            flex: 1;
+        }
+        
+        .agent-name {
+            font-size: 20px;
+            font-weight: 600;
+            color: #fff;
+            margin-bottom: 5px;
+        }
+        
+        .agent-role {
+            font-size: 12px;
+            color: #888;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+        }
+        
+        .agent-status {
+            padding: 4px 12px;
+            border-radius: 4px;
+            font-size: 11px;
+            font-weight: bold;
+            text-transform: uppercase;
+        }
+        
+        .status-active {
+            background: #27ae60;
+            color: white;
+        }
+        
+        .status-operational {
+            background: #3498db;
+            color: white;
+        }
+        
+        .status-alert {
+            background: #e74c3c;
+            color: white;
+        }
+        
+        .workstation-screen {
+            background: #0f0f0f;
+            border: 2px solid #333;
+            border-radius: 4px;
+            padding: 15px;
+            margin-bottom: 15px;
+            font-family: 'Courier New', monospace;
+            font-size: 12px;
+            min-height: 150px;
+        }
+        
+        .screen-line {
+            margin-bottom: 5px;
+            color: #00ff00;
+        }
+        
+        .screen-prompt {
+            color: #ffff00;
+        }
+        
+        .screen-error {
+            color: #ff6666;
+        }
+        
+        .activity-indicator {
+            position: absolute;
+            top: 10px;
+            right: 10px;
+            width: 10px;
+            height: 10px;
+            border-radius: 50%;
+            background: #27ae60;
+        }
+        
+        .activity-indicator.busy {
+            background: #f39c12;
+            animation: pulse 1.5s infinite;
+        }
+        
+        @keyframes pulse {
+            0% { opacity: 1; }
+            50% { opacity: 0.3; }
+            100% { opacity: 1; }
+        }
+        
+        .workstation-metrics {
+            display: grid;
+            grid-template-columns: 1fr 1fr 1fr;
+            gap: 10px;
+        }
+        
+        .metric {
+            text-align: center;
+            padding: 8px;
+            background: #0f0f0f;
+            border-radius: 4px;
+        }
+        
+        .metric-value {
+            font-size: 16px;
+            font-weight: bold;
+            color: #fff;
+        }
+        
+        .metric-label {
+            font-size: 10px;
+            color: #888;
+            text-transform: uppercase;
+        }
+        
+        /* Modal Styles */
+        .modal {
+            display: none;
+            position: fixed;
+            z-index: 1000;
+            left: 0;
+            top: 0;
+            width: 100%;
+            height: 100%;
+            background-color: rgba(0,0,0,0.8);
+            backdrop-filter: blur(5px);
+        }
+        
+        .modal-content {
+            background: #1a1a1a;
+            margin: 5% auto;
+            padding: 0;
+            border: 1px solid #333;
+            border-radius: 8px;
+            width: 90%;
+            max-width: 1000px;
+            max-height: 80vh;
+            overflow: hidden;
+            display: flex;
+            flex-direction: column;
+        }
+        
+        .modal-header {
+            background: #0f0f0f;
+            padding: 20px;
+            border-bottom: 1px solid #333;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+        
+        .modal-title {
+            font-size: 20px;
+            font-weight: 600;
+            color: #fff;
+        }
+        
+        .close {
+            color: #888;
+            font-size: 28px;
+            font-weight: bold;
+            cursor: pointer;
+            line-height: 1;
+        }
+        
+        .close:hover {
+            color: #fff;
+        }
+        
+        .modal-body {
+            padding: 20px;
+            overflow-y: auto;
+            flex: 1;
+        }
+        
+        /* Email Interface */
+        .email-list {
+            display: grid;
+            gap: 15px;
+        }
+        
+        .email-item {
+            background: #0f0f0f;
+            border: 1px solid #333;
+            border-radius: 6px;
+            padding: 15px;
+            cursor: pointer;
+            transition: background-color 0.2s ease;
+        }
+        
+        .email-item:hover {
+            background: #252525;
+            border-color: #555;
+        }
+        
+        .email-item.urgent {
+            border-left: 4px solid #e74c3c;
+        }
+        
+        .email-item.business {
+            border-left: 4px solid #4a90e2;
+        }
+        
+        .email-header {
+            display: flex;
+            justify-content: space-between;
+            align-items: flex-start;
+            margin-bottom: 10px;
+        }
+        
+        .email-sender {
+            font-weight: 600;
+            color: #fff;
+            font-size: 14px;
+        }
+        
+        .email-time {
+            font-size: 12px;
+            color: #888;
+        }
+        
+        .email-subject {
+            font-size: 14px;
+            color: #ccc;
+            margin-bottom: 8px;
+        }
+        
+        .email-preview {
+            font-size: 12px;
+            color: #888;
+            line-height: 1.4;
+            max-height: 60px;
+            overflow: hidden;
+        }
+        
+        .email-actions {
+            margin-top: 10px;
+            display: flex;
+            gap: 10px;
+        }
+        
+        .email-action {
+            background: #333;
+            color: #fff;
+            border: none;
+            padding: 6px 12px;
+            border-radius: 4px;
+            font-size: 11px;
+            cursor: pointer;
+            transition: background-color 0.2s ease;
+        }
+        
+        .email-action:hover {
+            background: #555;
+        }
+        
+        .email-action.primary {
+            background: #4a90e2;
+        }
+        
+        .email-action.primary:hover {
+            background: #357abd;
+        }
+        
+        /* Security Interface */
+        .security-grid {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 20px;
+        }
+        
+        .security-panel {
+            background: #0f0f0f;
+            border: 1px solid #333;
+            border-radius: 6px;
+            padding: 15px;
+        }
+        
+        .security-panel h4 {
+            margin: 0 0 15px 0;
+            color: #fff;
+            font-size: 14px;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+        }
+        
+        .threat-item {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: 8px 0;
+            border-bottom: 1px solid #222;
+        }
+        
+        .threat-item:last-child {
+            border-bottom: none;
+        }
+        
+        .threat-level {
+            padding: 2px 8px;
+            border-radius: 3px;
+            font-size: 10px;
+            font-weight: bold;
+            text-transform: uppercase;
+        }
+        
+        .threat-level.critical {
+            background: #e74c3c;
+            color: white;
+        }
+        
+        .threat-level.high {
+            background: #f39c12;
+            color: white;
+        }
+        
+        .threat-level.medium {
+            background: #3498db;
+            color: white;
+        }
+        
+        .threat-level.low {
+            background: #95a5a6;
+            color: white;
+        }
+        
+        .system-status-bar {
+            background: #1a1a1a;
+            border: 1px solid #333;
+            padding: 15px;
+            border-radius: 8px;
+            margin-bottom: 30px;
+            display: flex;
+            justify-content: space-around;
+            align-items: center;
+        }
+        
+        .status-item {
+            text-align: center;
+        }
+        
+        .status-value {
+            font-size: 18px;
+            font-weight: bold;
+            color: #fff;
+        }
+        
+        .status-label {
+            font-size: 11px;
+            color: #888;
+            text-transform: uppercase;
+        }
+        
+        .refresh-indicator {
+            position: fixed;
+            top: 20px;
+            right: 20px;
+            background: #333;
+            color: #fff;
+            padding: 8px 15px;
+            border-radius: 4px;
+            font-size: 11px;
+            opacity: 0.8;
+        }
+        
+        .refresh-indicator.updating {
+            background: #3498db;
+        }
+        
+        @media (max-width: 768px) {
+            .operations-floor {
+                grid-template-columns: 1fr;
+            }
+            
+            .modal-content {
+                width: 95%;
+                margin: 2% auto;
+            }
+            
+            .security-grid {
+                grid-template-columns: 1fr;
+            }
+        }
+    </style>
+</head>
+<body>
+    <div class="classification">
+        RESTRICTED ACCESS - AUTHORIZED PERSONNEL ONLY - RIOT LABS INTERNAL
+    </div>
+    
+    <div class="header">
+        <h1>RIOT LABS</h1>
+        <div class="subtitle">ENHANCED OPERATIONS CENTER - AGENT WORKSTATIONS</div>
+    </div>
+    
+    <div class="refresh-indicator" id="refreshIndicator">
+        Last updated: <span id="lastUpdate">--:--</span>
+    </div>
+    
+    <div class="system-status-bar">
+        <div class="status-item">
+            <div class="status-value" id="systemStatus">LOADING...</div>
+            <div class="status-label">System Status</div>
+        </div>
+        <div class="status-item">
+            <div class="status-value" id="securityClearance">CHECKING...</div>
+            <div class="status-label">Security Clearance</div>
+        </div>
+        <div class="status-item">
+            <div class="status-value" id="activeAgents">--</div>
+            <div class="status-label">Active Agents</div>
+        </div>
+        <div class="status-item">
+            <div class="status-value" id="pendingApprovals">--</div>
+            <div class="status-label">Pending Actions</div>
+        </div>
+    </div>
+    
+    <div class="operations-floor">
+        <!-- Mailman Workstation -->
+        <div class="agent-workstation mailman" onclick="openAgentModal('mailman')">
+            <div class="activity-indicator" id="mailmanActivity"></div>
+            
+            <div class="workstation-header">
+                <div style="display: flex; align-items: center;">
+                    <div class="agent-avatar">📧</div>
+                    <div class="agent-info">
+                        <div class="agent-name">MAILMAN</div>
+                        <div class="agent-role">Communications Intelligence</div>
+                    </div>
+                </div>
+                <div class="agent-status status-active" id="mailmanStatus">ACTIVE</div>
+            </div>
+            
+            <div class="workstation-screen">
+                <div class="screen-line screen-prompt">mailman@riotlabs:~$</div>
+                <div class="screen-line">Monitoring lyle@theriotgroup.org</div>
+                <div class="screen-line">Last scan: <span id="mailmanLastScan">--:--</span></div>
+                <div class="screen-line">Emails processed: <span id="mailmanCount">--</span></div>
+                <div class="screen-line">Urgent alerts: <span id="mailmanUrgent">0</span></div>
+                <div class="screen-line">&nbsp;</div>
+                <div class="screen-line screen-prompt">Click workstation for detailed view...</div>
+            </div>
+            
+            <div class="workstation-metrics">
+                <div class="metric">
+                    <div class="metric-value" id="mailmanEmails">--</div>
+                    <div class="metric-label">24h Total</div>
+                </div>
+                <div class="metric">
+                    <div class="metric-value" id="mailmanBusiness">--</div>
+                    <div class="metric-label">Business</div>
+                </div>
+                <div class="metric">
+                    <div class="metric-value" id="mailmanSuspicious">--</div>
+                    <div class="metric-label">Suspicious</div>
+                </div>
+            </div>
+        </div>
+        
+        <!-- Castra Praetoria Workstation -->
+        <div class="agent-workstation castra" onclick="openAgentModal('castra')">
+            <div class="activity-indicator" id="castraActivity"></div>
+            
+            <div class="workstation-header">
+                <div style="display: flex; align-items: center;">
+                    <div class="agent-avatar">🛡️</div>
+                    <div class="agent-info">
+                        <div class="agent-name">CASTRA PRAETORIA</div>
+                        <div class="agent-role">Security Guardian</div>
+                    </div>
+                </div>
+                <div class="agent-status status-operational" id="castraStatus">OPERATIONAL</div>
+            </div>
+            
+            <div class="workstation-screen">
+                <div class="screen-line screen-prompt">castra@riotlabs:~$</div>
+                <div class="screen-line">Semper Vigilans - Always Watching</div>
+                <div class="screen-line">Last security scan: <span id="castraLastScan">--:--</span></div>
+                <div class="screen-line">Threat level: <span id="castraThreatLevel">NOMINAL</span></div>
+                <div class="screen-line">Critical alerts: <span id="castraCritical">0</span></div>
+                <div class="screen-line">&nbsp;</div>
+                <div class="screen-line screen-prompt">Click workstation for detailed analysis...</div>
+            </div>
+            
+            <div class="workstation-metrics">
+                <div class="metric">
+                    <div class="metric-value" id="castraFindings">--</div>
+                    <div class="metric-label">Findings</div>
+                </div>
+                <div class="metric">
+                    <div class="metric-value" id="castraHigh">--</div>
+                    <div class="metric-label">High Priority</div>
+                </div>
+                <div class="metric">
+                    <div class="metric-value" id="castraClear">--</div>
+                    <div class="metric-label">Clearance</div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Mailman Modal -->
+    <div id="mailmanModal" class="modal">
+        <div class="modal-content">
+            <div class="modal-header">
+                <div class="modal-title">📧 MAILMAN - Email Intelligence Workstation</div>
+                <span class="close" onclick="closeModal('mailmanModal')">&times;</span>
+            </div>
+            <div class="modal-body">
+                <div class="email-list" id="emailList">
+                    <div class="email-item business">
+                        <div class="email-header">
+                            <div class="email-sender">Loading email data...</div>
+                            <div class="email-time">--:--</div>
+                        </div>
+                        <div class="email-subject">Fetching latest intelligence...</div>
+                        <div class="email-preview">Please wait while Mailman retrieves email data...</div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    
+    <!-- Castra Praetoria Modal -->
+    <div id="castraModal" class="modal">
+        <div class="modal-content">
+            <div class="modal-header">
+                <div class="modal-title">🛡️ CASTRA PRAETORIA - Security Analysis Center</div>
+                <span class="close" onclick="closeModal('castraModal')">&times;</span>
+            </div>
+            <div class="modal-body">
+                <div class="security-grid">
+                    <div class="security-panel">
+                        <h4>Active Threats</h4>
+                        <div id="activeThreats">
+                            <div class="threat-item">
+                                <span>Loading security data...</span>
+                                <span class="threat-level low">SCANNING</span>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="security-panel">
+                        <h4>System Health</h4>
+                        <div id="systemHealth">
+                            <div class="threat-item">
+                                <span>Fetching system status...</span>
+                                <span class="threat-level medium">CHECKING</span>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="security-panel">
+                        <h4>Network Security</h4>
+                        <div id="networkSecurity">
+                            <div class="threat-item">
+                                <span>Monitoring network...</span>
+                                <span class="threat-level low">NOMINAL</span>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="security-panel">
+                        <h4>Recent Scans</h4>
+                        <div id="recentScans">
+                            <div class="threat-item">
+                                <span>Loading scan history...</span>
+                                <span class="threat-level low">PENDING</span>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <script>
+        let updateInterval;
+        let agentData = {};
+        
+        async function fetchAgentStatus() {
+            const refreshIndicator = document.getElementById('refreshIndicator');
+            refreshIndicator.classList.add('updating');
+            
+            try {
+                const [mailmanData, castraData, systemData, mailmanEnhanced, castraEnhanced] = await Promise.all([
+                    fetch('riot-labs/status/mailman.json').then(r => r.ok ? r.json() : null),
+                    fetch('riot-labs/status/castra.json').then(r => r.ok ? r.json() : null),
+                    fetch('riot-labs/status/system.json').then(r => r.ok ? r.json() : null),
+                    fetch('riot-labs/status/mailman-enhanced.json').then(r => r.ok ? r.json() : null),
+                    fetch('riot-labs/status/castra-enhanced.json').then(r => r.ok ? r.json() : null)
+                ]);
+                
+                agentData = { 
+                    mailman: mailmanEnhanced || mailmanData, 
+                    castra: castraEnhanced || castraData, 
+                    system: systemData 
+                };
+                updateWorkstations(agentData.mailman, agentData.castra, systemData);
+                
+            } catch (error) {
+                console.error('Error fetching agent status:', error);
+            }
+            
+            refreshIndicator.classList.remove('updating');
+            document.getElementById('lastUpdate').textContent = new Date().toLocaleTimeString();
+        }
+        
+        function updateWorkstations(mailmanData, castraData, systemData) {
+            // Update system status bar
+            if (systemData) {
+                document.getElementById('systemStatus').textContent = systemData.overall_status || 'UNKNOWN';
+                document.getElementById('securityClearance').textContent = systemData.security_clearance || 'UNKNOWN';
+                document.getElementById('activeAgents').textContent = systemData.active_agents || '--';
+                document.getElementById('pendingApprovals').textContent = systemData.pending_approvals || '--';
+            }
+            
+            // Update Mailman workstation
+            if (mailmanData) {
+                document.getElementById('mailmanLastScan').textContent = 
+                    mailmanData.last_scan ? mailmanData.last_scan.split(' ')[1] : '--:--';
+                document.getElementById('mailmanCount').textContent = mailmanData.emails_24h || '--';
+                document.getElementById('mailmanUrgent').textContent = mailmanData.urgent_count || '0';
+                document.getElementById('mailmanEmails').textContent = mailmanData.emails_24h || '--';
+                document.getElementById('mailmanBusiness').textContent = mailmanData.business_emails || '--';
+                document.getElementById('mailmanSuspicious').textContent = mailmanData.suspicious_count || '0';
+                
+                // Update activity indicator
+                const mailmanActivity = document.getElementById('mailmanActivity');
+                mailmanActivity.className = mailmanData.emails_24h > 0 ? 'activity-indicator busy' : 'activity-indicator';
+            }
+            
+            // Update Castra Praetoria workstation
+            if (castraData) {
+                document.getElementById('castraLastScan').textContent = 
+                    castraData.last_scan ? castraData.last_scan.split(' ')[1] : '--:--';
+                document.getElementById('castraThreatLevel').textContent = 
+                    castraData.critical_threats > 0 ? 'ELEVATED' : 'NOMINAL';
+                document.getElementById('castraCritical').textContent = castraData.critical_threats || '0';
+                document.getElementById('castraFindings').textContent = castraData.total_findings || '--';
+                document.getElementById('castraHigh').textContent = castraData.high_threats || '--';
+                document.getElementById('castraClear').textContent = castraData.security_clearance || '--';
+                
+                // Update activity indicator and status
+                const castraActivity = document.getElementById('castraActivity');
+                const castraStatus = document.getElementById('castraStatus');
+                
+                if (castraData.critical_threats > 0) {
+                    castraActivity.className = 'activity-indicator busy';
+                    castraStatus.textContent = 'ALERT';
+                    castraStatus.className = 'agent-status status-alert';
+                } else {
+                    castraActivity.className = 'activity-indicator';
+                    castraStatus.textContent = 'OPERATIONAL';
+                    castraStatus.className = 'agent-status status-operational';
+                }
+            }
+        }
+        
+        function openAgentModal(agentType) {
+            if (agentType === 'mailman') {
+                document.getElementById('mailmanModal').style.display = 'block';
+                loadMailmanDetails();
+            } else if (agentType === 'castra') {
+                document.getElementById('castraModal').style.display = 'block';
+                loadCastraDetails();
+            }
+        }
+        
+        function closeModal(modalId) {
+            document.getElementById(modalId).style.display = 'none';
+        }
+        
+        function loadMailmanDetails() {
+            const emailList = document.getElementById('emailList');
+            const mailmanData = agentData.mailman;
+            
+            if (!mailmanData || !mailmanData.detailed_emails) {
+                emailList.innerHTML = `
+                    <div class="email-item">
+                        <div class="email-header">
+                            <div class="email-sender">No detailed email data available</div>
+                            <div class="email-time">--:--</div>
+                        </div>
+                        <div class="email-subject">Run 'riot mailman brief' to generate detailed email intelligence</div>
+                        <div class="email-preview">Enhanced email details will appear here after Mailman processes your inbox.</div>
+                    </div>
+                `;
+                return;
+            }
+            
+            const emails = mailmanData.detailed_emails;
+            
+            if (emails.length === 0) {
+                emailList.innerHTML = `
+                    <div class="email-item">
+                        <div class="email-header">
+                            <div class="email-sender">No emails processed</div>
+                            <div class="email-time">--:--</div>
+                        </div>
+                        <div class="email-subject">Inbox appears empty</div>
+                        <div class="email-preview">Mailman has not detected any emails in the last monitoring period.</div>
+                    </div>
+                `;
+                return;
+            }
+            
+            emailList.innerHTML = emails.map(email => `
+                <div class="email-item ${email.category}">
+                    <div class="email-header">
+                        <div class="email-sender">${email.sender}</div>
+                        <div class="email-time">${email.time}</div>
+                    </div>
+                    <div class="email-subject">${email.subject} ${email.has_attachments ? '📎' : ''}</div>
+                    <div class="email-preview">${email.preview}</div>
+                    <div class="email-actions">
+                        <button class="email-action primary" onclick="draftReply('${email.sender.replace(/'/g, "\\'")}', '${email.subject.replace(/'/g, "\\'")}')">Draft Reply</button>
+                        <button class="email-action" onclick="markImportant('${email.subject.replace(/'/g, "\\'")}')">Mark Important</button>
+                        <button class="email-action" onclick="viewFull('${email.subject.replace(/'/g, "\\'")}')">View Full</button>
+                    </div>
+                </div>
+            `).join('');
+        }
+        
+        function loadCastraDetails() {
+            const activeThreats = document.getElementById('activeThreats');
+            const systemHealth = document.getElementById('systemHealth');
+            const networkSecurity = document.getElementById('networkSecurity');
+            const recentScans = document.getElementById('recentScans');
+            
+            const castraData = agentData.castra;
+            
+            if (!castraData || !castraData.security_details) {
+                const noDataItem = '<div class="threat-item"><span>No security data available</span><span class="threat-level low">PENDING</span></div>';
+                activeThreats.innerHTML = noDataItem;
+                systemHealth.innerHTML = noDataItem;
+                networkSecurity.innerHTML = noDataItem;
+                recentScans.innerHTML = noDataItem;
+                return;
+            }
+            
+            const securityDetails = castraData.security_details;
+            
+            // Active Threats
+            const threats = securityDetails.threats || [];
+            activeThreats.innerHTML = threats.length > 0 ? threats.map(threat => `
+                <div class="threat-item">
+                    <span title="${threat.details}">${threat.type.replace('_', ' ')}</span>
+                    <span class="threat-level ${threat.severity.toLowerCase()}">${threat.severity}</span>
+                </div>
+            `).join('') : '<div class="threat-item"><span>No active threats detected</span><span class="threat-level low">CLEAR</span></div>';
+            
+            // System Health
+            const systemItems = securityDetails.system_health || [];
+            systemHealth.innerHTML = systemItems.length > 0 ? systemItems.map(item => `
+                <div class="threat-item">
+                    <span title="${item.details}">${item.type.replace('_', ' ')}</span>
+                    <span class="threat-level ${item.severity.toLowerCase()}">${item.severity}</span>
+                </div>
+            `).join('') : '<div class="threat-item"><span>System monitoring active</span><span class="threat-level low">HEALTHY</span></div>';
+            
+            // Network Security
+            const networkItems = securityDetails.network || [];
+            networkSecurity.innerHTML = networkItems.length > 0 ? networkItems.map(item => `
+                <div class="threat-item">
+                    <span title="${item.details}">${item.type.replace('_', ' ')}</span>
+                    <span class="threat-level ${item.severity.toLowerCase()}">${item.severity}</span>
+                </div>
+            `).join('') : '<div class="threat-item"><span>Network monitoring active</span><span class="threat-level low">SECURE</span></div>';
+            
+            // Recent Scans
+            const scans = securityDetails.scans || [];
+            recentScans.innerHTML = scans.length > 0 ? scans.map(scan => `
+                <div class="threat-item">
+                    <span>${scan.type} ${scan.timestamp}</span>
+                    <span class="threat-level low">${scan.status}</span>
+                </div>
+            `).join('') : '<div class="threat-item"><span>No recent scans</span><span class="threat-level low">PENDING</span></div>';
+        }
+        
+        function draftReply(sender, subject) {
+            alert(`Drafting reply to: ${sender}\nRe: ${subject}\n\nThis would open the email composer interface.`);
+        }
+        
+        function markImportant(subject) {
+            alert(`Marked as important: ${subject}`);
+        }
+        
+        function viewFull(subject) {
+            alert(`Opening full view: ${subject}`);
+        }
+        
+        // Close modal when clicking outside
+        window.onclick = function(event) {
+            if (event.target.classList.contains('modal')) {
+                event.target.style.display = 'none';
+            }
+        }
+        
+        // Initialize dashboard
+        document.addEventListener('DOMContentLoaded', function() {
+            fetchAgentStatus();
+            updateInterval = setInterval(fetchAgentStatus, 30000); // Update every 30 seconds
+        });
+        
+        // Clean up on page unload
+        window.addEventListener('beforeunload', function() {
+            if (updateInterval) {
+                clearInterval(updateInterval);
+            }
+        });
+    </script>
+</body>
+</html>

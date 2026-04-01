@@ -1,0 +1,67 @@
+{
+  "agent": "castra-praetoria",
+  "status": "OPERATIONAL",
+  "last_scan": "2026-04-01 15:27",
+  "critical_threats": 0,
+  "high_threats": 0,
+  "medium_findings": 2,
+  "low_findings": 3,
+  "total_findings": 5,
+  "security_clearance": "GRANTED",
+  "security_details": {
+    "threats": [
+      {
+        "type": "PYTHON_PACKAGE",
+        "severity": "LOW",
+        "details": "Monitor urllib3 for security updates",
+        "timestamp": "15:27"
+      },
+      {
+        "type": "PYTHON_PACKAGE",
+        "severity": "LOW",
+        "details": "Monitor requests for security updates",
+        "timestamp": "15:27"
+      },
+      {
+        "type": "PYTHON_PACKAGE",
+        "severity": "LOW",
+        "details": "Monitor cryptography for security updates",
+        "timestamp": "15:27"
+      },
+      {
+        "type": "BACKUP_STATUS",
+        "severity": "INFO",
+        "details": "Time Machine appears active",
+        "timestamp": "15:27"
+      }
+    ],
+    "system_health": [
+      {
+        "type": "OUTDATED_PACKAGES",
+        "severity": "MEDIUM",
+        "details": "28 brew packages need updates",
+        "timestamp": "15:27"
+      },
+      {
+        "type": "UNCOMMITTED_CHANGES",
+        "severity": "MEDIUM",
+        "details": "8 uncommitted files in workspace",
+        "timestamp": "15:27"
+      }
+    ],
+    "network": [],
+    "scans": [
+      {
+        "type": "Security Scan",
+        "status": "COMPLETE",
+        "timestamp": "2026-04-01 15:27"
+      },
+      {
+        "type": "Vulnerability Check",
+        "status": "COMPLETE",
+        "timestamp": "2026-04-01 15:27"
+      }
+    ]
+  },
+  "last_updated": "2026-04-01T15:27:32.761855"
+}

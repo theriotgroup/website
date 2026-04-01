@@ -1,0 +1,48 @@
+{
+  "agent": "mailman",
+  "status": "ACTIVE",
+  "last_scan": "2026-04-01 15:27",
+  "emails_24h": 17,
+  "urgent_count": 0,
+  "business_emails": 3,
+  "suspicious_count": 0,
+  "detailed_emails": [
+    {
+      "sender": "Nan Shang <nan.shang@droneinstitute.ai>",
+      "subject": "Re: Update",
+      "category": "business",
+      "time": "15:27",
+      "preview": "Business communication from Nan...",
+      "priority": "normal",
+      "has_attachments": false
+    },
+    {
+      "sender": "Chris Sharplin <chris.sharplin@droneinstitute.ai>",
+      "subject": "Re: Update",
+      "category": "business",
+      "time": "15:27",
+      "preview": "Business communication from Chris...",
+      "priority": "normal",
+      "has_attachments": false
+    },
+    {
+      "sender": "Josh Barker <josh.barker@droneinstitute.ai>",
+      "subject": "FW: DRAFT Agenda for Lafayette at Drone Institute",
+      "category": "business",
+      "time": "15:27",
+      "preview": "Business communication from Josh...",
+      "priority": "normal",
+      "has_attachments": false
+    }
+  ],
+  "categories": {
+    "URGENT": 0,
+    "BUSINESS": 3,
+    "PORTFOLIO": 0,
+    "VENDOR": 0,
+    "UNKNOWN": 12,
+    "AUTOMATED": 2,
+    "SUSPICIOUS": 0
+  },
+  "last_updated": "2026-04-01T15:27:22.451386"
+}
