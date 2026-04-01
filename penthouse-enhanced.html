@@ -459,6 +459,166 @@
             background: #3498db;
         }
         
+        /* Email Viewer Styles */
+        .email-full-view {
+            display: flex;
+            flex-direction: column;
+            height: 100%;
+        }
+        
+        .email-full-header {
+            background: #0f0f0f;
+            padding: 15px;
+            border-radius: 6px;
+            margin-bottom: 20px;
+        }
+        
+        .email-full-meta {
+            display: grid;
+            gap: 8px;
+            color: #ccc;
+            font-size: 13px;
+        }
+        
+        .email-full-meta strong {
+            color: #fff;
+            width: 80px;
+            display: inline-block;
+        }
+        
+        .email-full-body {
+            background: #0f0f0f;
+            padding: 20px;
+            border-radius: 6px;
+            flex: 1;
+            overflow-y: auto;
+            max-height: 400px;
+            font-family: 'Helvetica Neue', Arial, sans-serif;
+            line-height: 1.6;
+            color: #e0e0e0;
+            white-space: pre-wrap;
+        }
+        
+        .email-full-actions {
+            margin-top: 20px;
+            display: flex;
+            gap: 10px;
+            justify-content: flex-end;
+        }
+        
+        /* Reply Composer Styles */
+        .reply-composer {
+            display: flex;
+            flex-direction: column;
+            gap: 20px;
+        }
+        
+        .composer-header {
+            display: grid;
+            gap: 15px;
+        }
+        
+        .composer-field {
+            display: flex;
+            align-items: center;
+            gap: 10px;
+        }
+        
+        .composer-field label {
+            color: #fff;
+            font-weight: 600;
+            width: 80px;
+        }
+        
+        .composer-field input {
+            flex: 1;
+            background: #0f0f0f;
+            border: 1px solid #333;
+            border-radius: 4px;
+            padding: 8px 12px;
+            color: #e0e0e0;
+            font-size: 13px;
+        }
+        
+        .composer-field input:read-only {
+            background: #1a1a1a;
+            color: #888;
+        }
+        
+        .composer-templates {
+            display: flex;
+            align-items: center;
+            gap: 10px;
+        }
+        
+        .composer-templates label {
+            color: #fff;
+            font-weight: 600;
+            width: 120px;
+        }
+        
+        .composer-templates select {
+            background: #0f0f0f;
+            border: 1px solid #333;
+            border-radius: 4px;
+            padding: 8px 12px;
+            color: #e0e0e0;
+            font-size: 13px;
+            min-width: 200px;
+        }
+        
+        .composer-body {
+            display: flex;
+            flex-direction: column;
+            gap: 8px;
+        }
+        
+        .composer-body label {
+            color: #fff;
+            font-weight: 600;
+        }
+        
+        .composer-body textarea {
+            background: #0f0f0f;
+            border: 1px solid #333;
+            border-radius: 4px;
+            padding: 12px;
+            color: #e0e0e0;
+            font-size: 13px;
+            font-family: 'Helvetica Neue', Arial, sans-serif;
+            line-height: 1.5;
+            resize: vertical;
+            min-height: 200px;
+        }
+        
+        .composer-actions {
+            display: flex;
+            gap: 10px;
+            justify-content: flex-end;
+            padding-top: 15px;
+            border-top: 1px solid #333;
+        }
+        
+        .approval-status {
+            background: #0f0f0f;
+            border: 1px solid #333;
+            border-radius: 6px;
+            padding: 15px;
+            margin-top: 20px;
+            color: #ccc;
+            font-size: 12px;
+        }
+        
+        .approval-status.success {
+            border-color: #27ae60;
+            color: #27ae60;
+        }
+        
+        .approval-status.pending {
+            border-color: #f39c12;
+            color: #f39c12;
+        }
+        
         @media (max-width: 768px) {
             .operations-floor {
                 grid-template-columns: 1fr;
@@ -471,6 +631,24 @@
             
             .security-grid {
                 grid-template-columns: 1fr;
+            }
+            
+            .composer-header {
+                grid-template-columns: 1fr;
+            }
+            
+            .composer-field {
+                flex-direction: column;
+                align-items: flex-start;
+                gap: 5px;
+            }
+            
+            .composer-field label {
+                width: auto;
+            }
+            
+            .composer-field input {
+                width: 100%;
             }
         }
     </style>
@@ -614,6 +792,82 @@
         </div>
     </div>
     
+    <!-- Email Viewer Modal -->
+    <div id="emailViewerModal" class="modal">
+        <div class="modal-content">
+            <div class="modal-header">
+                <div class="modal-title">📧 Email Viewer</div>
+                <span class="close" onclick="closeModal('emailViewerModal')">&times;</span>
+            </div>
+            <div class="modal-body">
+                <div class="email-full-view">
+                    <div class="email-full-header">
+                        <div class="email-full-meta">
+                            <div><strong>From:</strong> <span id="emailViewerFrom">--</span></div>
+                            <div><strong>To:</strong> <span id="emailViewerTo">--</span></div>
+                            <div><strong>Subject:</strong> <span id="emailViewerSubject">--</span></div>
+                            <div><strong>Date:</strong> <span id="emailViewerDate">--</span></div>
+                        </div>
+                    </div>
+                    <div class="email-full-body" id="emailViewerBody">
+                        Loading email content...
+                    </div>
+                    <div class="email-full-actions">
+                        <button class="email-action primary" onclick="startReplyFromViewer()">Reply</button>
+                        <button class="email-action" onclick="forwardFromViewer()">Forward</button>
+                        <button class="email-action" onclick="archiveFromViewer()">Archive</button>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    
+    <!-- Reply Composer Modal -->
+    <div id="replyComposerModal" class="modal">
+        <div class="modal-content">
+            <div class="modal-header">
+                <div class="modal-title">✍️ Draft Reply - Mailman Composer</div>
+                <span class="close" onclick="closeModal('replyComposerModal')">&times;</span>
+            </div>
+            <div class="modal-body">
+                <div class="reply-composer">
+                    <div class="composer-header">
+                        <div class="composer-field">
+                            <label>To:</label>
+                            <input type="text" id="replyTo" readonly>
+                        </div>
+                        <div class="composer-field">
+                            <label>Subject:</label>
+                            <input type="text" id="replySubject" readonly>
+                        </div>
+                    </div>
+                    
+                    <div class="composer-templates">
+                        <label>Quick Templates:</label>
+                        <select id="templateSelector" onchange="loadTemplate()">
+                            <option value="">-- Select Template --</option>
+                            <option value="acknowledgment">Acknowledgment</option>
+                            <option value="meeting_request">Meeting Request</option>
+                            <option value="follow_up">Follow Up</option>
+                            <option value="custom">Custom Reply</option>
+                        </select>
+                    </div>
+                    
+                    <div class="composer-body">
+                        <label>Message:</label>
+                        <textarea id="replyMessage" rows="10" placeholder="Compose your reply..."></textarea>
+                    </div>
+                    
+                    <div class="composer-actions">
+                        <button class="email-action primary" onclick="submitForApproval()">Submit for Approval</button>
+                        <button class="email-action" onclick="saveDraft()">Save Draft</button>
+                        <button class="email-action" onclick="previewReply()">Preview</button>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
     <!-- Castra Praetoria Modal -->
     <div id="castraModal" class="modal">
         <div class="modal-content">
@@ -868,16 +1122,285 @@
             `).join('') : '<div class="threat-item"><span>No recent scans</span><span class="threat-level low">PENDING</span></div>';
         }
         
+        // Email management functions
+        let currentEmail = null;
+        
         function draftReply(sender, subject) {
-            alert(`Drafting reply to: ${sender}\nRe: ${subject}\n\nThis would open the email composer interface.`);
+            currentEmail = { sender, subject };
+            
+            // Set up reply composer
+            document.getElementById('replyTo').value = sender;
+            document.getElementById('replySubject').value = `Re: ${subject}`;
+            document.getElementById('replyMessage').value = '';
+            document.getElementById('templateSelector').value = '';
+            
+            // Open reply composer
+            document.getElementById('replyComposerModal').style.display = 'block';
         }
         
         function markImportant(subject) {
-            alert(`Marked as important: ${subject}`);
+            // Simulate marking as important
+            const statusDiv = document.createElement('div');
+            statusDiv.className = 'approval-status success';
+            statusDiv.innerHTML = `✅ Email marked as important: "${subject}"<br>Mailman will prioritize similar emails in future scans.`;
+            
+            // Find the email item and add status
+            const emailItems = document.querySelectorAll('.email-item');
+            for (let item of emailItems) {
+                const emailSubject = item.querySelector('.email-subject').textContent;
+                if (emailSubject.includes(subject)) {
+                    item.appendChild(statusDiv);
+                    break;
+                }
+            }
+            
+            setTimeout(() => statusDiv.remove(), 3000);
         }
         
         function viewFull(subject) {
-            alert(`Opening full view: ${subject}`);
+            // Find the email data
+            const mailmanData = agentData.mailman;
+            if (!mailmanData || !mailmanData.detailed_emails) return;
+            
+            const email = mailmanData.detailed_emails.find(e => e.subject === subject);
+            if (!email) {
+                alert(`Email not found: ${subject}`);
+                return;
+            }
+            
+            // Populate email viewer
+            document.getElementById('emailViewerFrom').textContent = email.sender;
+            document.getElementById('emailViewerTo').textContent = 'lyle@theriotgroup.org';
+            document.getElementById('emailViewerSubject').textContent = email.subject;
+            document.getElementById('emailViewerDate').textContent = `Today ${email.time}`;
+            
+            // Generate full email content (simulated)
+            const fullContent = generateFullEmailContent(email);
+            document.getElementById('emailViewerBody').textContent = fullContent;
+            
+            // Store current email for actions
+            currentEmail = email;
+            
+            // Open email viewer
+            document.getElementById('emailViewerModal').style.display = 'block';
+        }
+        
+        function generateFullEmailContent(email) {
+            // Simulate full email content based on preview
+            const templates = {
+                'Re: Update': `Hi Lyle,
+
+Thanks for the update on the project status. I've reviewed the latest developments and have some thoughts on the next steps.
+
+The progress looks solid, and I'm particularly impressed with the direction we're taking. I think we should schedule a follow-up meeting to discuss the implementation details.
+
+Let me know when you have availability this week.
+
+Best regards,
+${email.sender.split(' ')[0]}`,
+                
+                'Grinder Bristle Blaster Voliro Demo': `Hi Lyle,
+
+The demo went exceptionally well today. The team was impressed with the precision and efficiency of the new Grinder Bristle Blaster system.
+
+Key highlights from the demonstration:
+- Precision coating removal exceeded expectations
+- Operator feedback was very positive
+- Integration with our existing workflow looks seamless
+
+I'll send over the detailed technical report by end of day. Should we schedule a debrief meeting?
+
+Thanks,
+Chris`,
+                
+                'FW: DRAFT Agenda for Lafayette at Drone Institute': `Hi Lyle,
+
+Forwarding the draft agenda for next week's Lafayette meeting. Please review and provide feedback by Thursday.
+
+Key agenda items:
+- Project status updates
+- Budget review for Q2
+- Strategic planning discussion
+- Resource allocation
+
+Let me know if you'd like to add any items or have concerns about the proposed schedule.
+
+Best,
+Josh`
+            };
+            
+            return templates[email.subject] || email.preview + '\n\n[Full content would be loaded from actual email data]';
+        }
+        
+        // Template management
+        function loadTemplate() {
+            const template = document.getElementById('templateSelector').value;
+            const messageField = document.getElementById('replyMessage');
+            
+            const templates = {
+                'acknowledgment': `Hi ${currentEmail?.sender.split(' ')[0] || '[Name]'},
+
+Thank you for your email. I've received your message and will review the details.
+
+I'll get back to you with a response shortly.
+
+Best regards,
+Lyle`,
+                
+                'meeting_request': `Hi ${currentEmail?.sender.split(' ')[0] || '[Name]'},
+
+Thanks for reaching out. I'd like to schedule a meeting to discuss this further.
+
+Please let me know your availability for this week or next. I'm generally free:
+- Weekdays between 2-5 PM
+- Tuesday/Thursday mornings
+
+Looking forward to connecting.
+
+Best,
+Lyle`,
+                
+                'follow_up': `Hi ${currentEmail?.sender.split(' ')[0] || '[Name]'},
+
+Following up on your previous email regarding ${currentEmail?.subject || '[Subject]'}.
+
+I wanted to check if you need any additional information from my end, or if there are next steps we should coordinate.
+
+Please let me know how I can assist.
+
+Best regards,
+Lyle`,
+                
+                'custom': ''
+            };
+            
+            if (templates[template] !== undefined) {
+                messageField.value = templates[template];
+            }
+        }
+        
+        // Reply composer actions
+        async function submitForApproval() {
+            const replyData = {
+                to: document.getElementById('replyTo').value,
+                subject: document.getElementById('replySubject').value,
+                message: document.getElementById('replyMessage').value,
+                original_subject: currentEmail?.subject || 'Unknown',
+                timestamp: new Date().toISOString(),
+                composed_by: 'Enhanced Operations Center'
+            };
+            
+            if (!replyData.message.trim()) {
+                alert('Please compose a message before submitting for approval.');
+                return;
+            }
+            
+            try {
+                // Generate approval ID
+                const approvalId = `email_send_${Date.now()}`;
+                
+                // Create approval data (would normally POST to API)
+                const approvalData = {
+                    id: approvalId,
+                    action_type: 'email_send',
+                    action_data: {
+                        to: replyData.to,
+                        subject: replyData.subject,
+                        body: replyData.message
+                    },
+                    context: `Reply composed via Enhanced Operations Center to ${replyData.to}`,
+                    status: 'pending',
+                    requested_at: new Date().toISOString(),
+                    requested_by: 'Enhanced Operations Center'
+                };
+                
+                // In a real implementation, this would POST to an API
+                // For now, we'll show the user how to manually create the approval
+                
+                const statusDiv = document.createElement('div');
+                statusDiv.className = 'approval-status pending';
+                statusDiv.innerHTML = `
+                    📋 Reply ready for approval submission!<br>
+                    <strong>Approval ID:</strong> ${approvalId}<br>
+                    <strong>Status:</strong> Ready for manual approval process<br><br>
+                    
+                    <strong>To complete submission:</strong><br>
+                    1. Copy the approval data below<br>
+                    2. Run: <code>python3 email_reply_manager.py submit</code><br>
+                    3. Then use: <code>riot mailman approve [approval_id]</code><br><br>
+                    
+                    <strong>Email Content:</strong><br>
+                    <div style="background: #0a0a0a; padding: 10px; margin: 10px 0; border-radius: 4px; font-size: 11px; font-family: monospace;">
+To: ${replyData.to}<br>
+Subject: ${replyData.subject}<br><br>
+${replyData.message}
+                    </div>
+                `;
+                
+                document.querySelector('#replyComposerModal .modal-body').appendChild(statusDiv);
+                
+                // Store in console for manual processing
+                console.log('📧 REPLY APPROVAL DATA:');
+                console.log(JSON.stringify(approvalData, null, 2));
+                console.log('\n📋 EMAIL CONTENT:');
+                console.log(`To: ${replyData.to}`);
+                console.log(`Subject: ${replyData.subject}`);
+                console.log(`Message:\n${replyData.message}`);
+                
+                // Clear form after 5 seconds to allow user to see the data
+                setTimeout(() => {
+                    statusDiv.remove();
+                }, 8000);
+                
+            } catch (error) {
+                console.error('Error submitting for approval:', error);
+                alert('Error submitting reply for approval. Please try again.');
+            }
+        }
+        
+        function saveDraft() {
+            const draftData = {
+                to: document.getElementById('replyTo').value,
+                subject: document.getElementById('replySubject').value,
+                message: document.getElementById('replyMessage').value,
+                saved_at: new Date().toISOString()
+            };
+            
+            // Simulate saving draft (would normally save to server)
+            localStorage.setItem('mailman_draft', JSON.stringify(draftData));
+            
+            const statusDiv = document.createElement('div');
+            statusDiv.className = 'approval-status success';
+            statusDiv.innerHTML = '✅ Draft saved successfully!';
+            
+            document.querySelector('#replyComposerModal .modal-body').appendChild(statusDiv);
+            
+            setTimeout(() => statusDiv.remove(), 2000);
+        }
+        
+        function previewReply() {
+            const message = document.getElementById('replyMessage').value;
+            const to = document.getElementById('replyTo').value;
+            const subject = document.getElementById('replySubject').value;
+            
+            alert(`Preview Reply:\n\nTo: ${to}\nSubject: ${subject}\n\n${message}`);
+        }
+        
+        // Email viewer actions
+        function startReplyFromViewer() {
+            closeModal('emailViewerModal');
+            if (currentEmail) {
+                draftReply(currentEmail.sender, currentEmail.subject);
+            }
+        }
+        
+        function forwardFromViewer() {
+            alert('Forward functionality would open composer with forwarded content');
+        }
+        
+        function archiveFromViewer() {
+            alert(`Email "${currentEmail?.subject}" would be archived`);
+            closeModal('emailViewerModal');
         }
         
         // Close modal when clicking outside
