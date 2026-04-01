@@ -1,0 +1,472 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Riot Labs - Operations Center</title>
+    <style>
+        body {
+            font-family: 'Helvetica Neue', Arial, sans-serif;
+            background: #0a0a0a;
+            color: #e0e0e0;
+            margin: 0;
+            padding: 20px;
+            line-height: 1.4;
+        }
+        
+        .header {
+            text-align: center;
+            border-bottom: 2px solid #333;
+            padding-bottom: 20px;
+            margin-bottom: 30px;
+        }
+        
+        .header h1 {
+            font-size: 32px;
+            font-weight: 300;
+            letter-spacing: 4px;
+            margin: 0;
+            color: #fff;
+        }
+        
+        .header .subtitle {
+            font-size: 14px;
+            color: #888;
+            letter-spacing: 2px;
+            margin-top: 10px;
+        }
+        
+        .classification {
+            background: #1a1a1a;
+            border: 1px solid #333;
+            padding: 8px;
+            text-align: center;
+            font-size: 11px;
+            letter-spacing: 3px;
+            color: #ff6b6b;
+            margin-bottom: 30px;
+            font-weight: bold;
+        }
+        
+        .agent-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(350px, 1fr));
+            gap: 20px;
+            margin-bottom: 40px;
+        }
+        
+        .agent-card {
+            background: #1a1a1a;
+            border: 1px solid #333;
+            border-radius: 8px;
+            padding: 20px;
+            position: relative;
+        }
+        
+        .agent-card.mailman {
+            border-left: 4px solid #4a90e2;
+        }
+        
+        .agent-card.castra {
+            border-left: 4px solid #d63031;
+        }
+        
+        .agent-card.closedriot {
+            border-left: 4px solid #00b894;
+        }
+        
+        .agent-header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-bottom: 15px;
+        }
+        
+        .agent-name {
+            font-size: 18px;
+            font-weight: 600;
+            color: #fff;
+        }
+        
+        .agent-status {
+            padding: 4px 12px;
+            border-radius: 4px;
+            font-size: 11px;
+            font-weight: bold;
+            text-transform: uppercase;
+        }
+        
+        .status-operational {
+            background: #27ae60;
+            color: white;
+        }
+        
+        .status-active {
+            background: #3498db;
+            color: white;
+        }
+        
+        .status-alert {
+            background: #e74c3c;
+            color: white;
+        }
+        
+        .agent-metrics {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 10px;
+            margin-bottom: 15px;
+        }
+        
+        .metric {
+            text-align: center;
+            padding: 8px;
+            background: #0f0f0f;
+            border-radius: 4px;
+        }
+        
+        .metric-value {
+            font-size: 20px;
+            font-weight: bold;
+            color: #fff;
+        }
+        
+        .metric-label {
+            font-size: 11px;
+            color: #888;
+            text-transform: uppercase;
+        }
+        
+        .agent-last-activity {
+            font-size: 12px;
+            color: #666;
+            border-top: 1px solid #333;
+            padding-top: 10px;
+        }
+        
+        .activity-feed {
+            background: #1a1a1a;
+            border: 1px solid #333;
+            border-radius: 8px;
+            padding: 20px;
+            margin-bottom: 30px;
+        }
+        
+        .feed-header {
+            font-size: 16px;
+            font-weight: 600;
+            color: #fff;
+            margin-bottom: 15px;
+            padding-bottom: 10px;
+            border-bottom: 1px solid #333;
+        }
+        
+        .activity-item {
+            display: flex;
+            align-items: center;
+            padding: 8px 0;
+            border-bottom: 1px solid #222;
+        }
+        
+        .activity-time {
+            font-size: 11px;
+            color: #888;
+            width: 60px;
+            margin-right: 15px;
+        }
+        
+        .activity-text {
+            font-size: 13px;
+            color: #ccc;
+        }
+        
+        .system-status {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+            gap: 15px;
+            margin-bottom: 30px;
+        }
+        
+        .status-tile {
+            background: #1a1a1a;
+            border: 1px solid #333;
+            padding: 15px;
+            border-radius: 8px;
+            text-align: center;
+        }
+        
+        .status-title {
+            font-size: 12px;
+            color: #888;
+            text-transform: uppercase;
+            margin-bottom: 8px;
+        }
+        
+        .status-value {
+            font-size: 18px;
+            font-weight: bold;
+            color: #fff;
+        }
+        
+        .refresh-indicator {
+            position: fixed;
+            top: 20px;
+            right: 20px;
+            background: #333;
+            color: #fff;
+            padding: 8px 15px;
+            border-radius: 4px;
+            font-size: 11px;
+            opacity: 0.8;
+        }
+        
+        .refresh-indicator.updating {
+            background: #3498db;
+        }
+        
+        .error-message {
+            background: #e74c3c;
+            color: white;
+            padding: 15px;
+            border-radius: 8px;
+            margin: 20px 0;
+            display: none;
+        }
+        
+        @media (max-width: 768px) {
+            .agent-grid {
+                grid-template-columns: 1fr;
+            }
+            
+            .system-status {
+                grid-template-columns: 1fr 1fr;
+            }
+        }
+    </style>
+</head>
+<body>
+    <div class="classification">
+        RESTRICTED ACCESS - AUTHORIZED PERSONNEL ONLY - RIOT LABS INTERNAL
+    </div>
+    
+    <div class="header">
+        <h1>RIOT LABS</h1>
+        <div class="subtitle">OPERATIONS CENTER - LIVE AGENT MONITORING</div>
+    </div>
+    
+    <div class="refresh-indicator" id="refreshIndicator">
+        Last updated: <span id="lastUpdate">--:--</span>
+    </div>
+    
+    <div class="error-message" id="errorMessage">
+        Unable to load agent status data. Check network connection.
+    </div>
+    
+    <div class="system-status">
+        <div class="status-tile">
+            <div class="status-title">System Status</div>
+            <div class="status-value" id="systemStatus">LOADING...</div>
+        </div>
+        <div class="status-tile">
+            <div class="status-title">Security Clearance</div>
+            <div class="status-value" id="securityClearance">CHECKING...</div>
+        </div>
+        <div class="status-tile">
+            <div class="status-title">Active Agents</div>
+            <div class="status-value" id="activeAgents">--</div>
+        </div>
+        <div class="status-tile">
+            <div class="status-title">Pending Approvals</div>
+            <div class="status-value" id="pendingApprovals">--</div>
+        </div>
+    </div>
+    
+    <div class="agent-grid">
+        <!-- Mailman Agent Card -->
+        <div class="agent-card mailman">
+            <div class="agent-header">
+                <div class="agent-name">📧 MAILMAN</div>
+                <div class="agent-status status-active" id="mailmanStatus">ACTIVE</div>
+            </div>
+            <div class="agent-metrics">
+                <div class="metric">
+                    <div class="metric-value" id="mailmanEmails">--</div>
+                    <div class="metric-label">Emails 24h</div>
+                </div>
+                <div class="metric">
+                    <div class="metric-value" id="mailmanUrgent">--</div>
+                    <div class="metric-label">Urgent</div>
+                </div>
+            </div>
+            <div class="agent-last-activity" id="mailmanActivity">
+                Last scan: Loading...
+            </div>
+        </div>
+        
+        <!-- Castra Praetoria Agent Card -->
+        <div class="agent-card castra">
+            <div class="agent-header">
+                <div class="agent-name">🛡️ CASTRA PRAETORIA</div>
+                <div class="agent-status status-operational" id="castraStatus">OPERATIONAL</div>
+            </div>
+            <div class="agent-metrics">
+                <div class="metric">
+                    <div class="metric-value" id="castraThreats">--</div>
+                    <div class="metric-label">Threats</div>
+                </div>
+                <div class="metric">
+                    <div class="metric-value" id="castraCritical">--</div>
+                    <div class="metric-label">Critical</div>
+                </div>
+            </div>
+            <div class="agent-last-activity" id="castraActivity">
+                Last scan: Loading...
+            </div>
+        </div>
+        
+        <!-- ClosedRiot Agent Card -->
+        <div class="agent-card closedriot">
+            <div class="agent-header">
+                <div class="agent-name">🤖 CLOSEDRIOT</div>
+                <div class="agent-status status-operational" id="closedRiotStatus">OPERATIONAL</div>
+            </div>
+            <div class="agent-metrics">
+                <div class="metric">
+                    <div class="metric-value" id="closedRiotSessions">--</div>
+                    <div class="metric-label">Sessions</div>
+                </div>
+                <div class="metric">
+                    <div class="metric-value" id="closedRiotUptime">--</div>
+                    <div class="metric-label">Uptime</div>
+                </div>
+            </div>
+            <div class="agent-last-activity" id="closedRiotActivity">
+                Orchestrating agent operations...
+            </div>
+        </div>
+    </div>
+    
+    <div class="activity-feed">
+        <div class="feed-header">RECENT ACTIVITY LOG</div>
+        <div id="activityFeed">
+            <div class="activity-item">
+                <div class="activity-time">--:--</div>
+                <div class="activity-text">Loading activity feed...</div>
+            </div>
+        </div>
+    </div>
+
+    <script>
+        let updateInterval;
+        let lastUpdateTime = 0;
+        
+        async function fetchAgentStatus() {
+            const refreshIndicator = document.getElementById('refreshIndicator');
+            refreshIndicator.classList.add('updating');
+            
+            try {
+                // Fetch status files
+                const [mailmanData, castraData, systemData] = await Promise.all([
+                    fetch('riot-labs/status/mailman.json').then(r => r.ok ? r.json() : null),
+                    fetch('riot-labs/status/castra.json').then(r => r.ok ? r.json() : null),
+                    fetch('riot-labs/status/system.json').then(r => r.ok ? r.json() : null)
+                ]);
+                
+                updateDashboard(mailmanData, castraData, systemData);
+                document.getElementById('errorMessage').style.display = 'none';
+                
+            } catch (error) {
+                console.error('Error fetching agent status:', error);
+                document.getElementById('errorMessage').style.display = 'block';
+            }
+            
+            refreshIndicator.classList.remove('updating');
+            document.getElementById('lastUpdate').textContent = new Date().toLocaleTimeString();
+        }
+        
+        function updateDashboard(mailmanData, castraData, systemData) {
+            // Update system status
+            if (systemData) {
+                document.getElementById('systemStatus').textContent = systemData.overall_status || 'UNKNOWN';
+                document.getElementById('securityClearance').textContent = systemData.security_clearance || 'UNKNOWN';
+                document.getElementById('activeAgents').textContent = systemData.active_agents || '--';
+                document.getElementById('pendingApprovals').textContent = systemData.pending_approvals || '--';
+            }
+            
+            // Update Mailman
+            if (mailmanData) {
+                document.getElementById('mailmanEmails').textContent = mailmanData.emails_24h || '--';
+                document.getElementById('mailmanUrgent').textContent = mailmanData.urgent_count || '0';
+                document.getElementById('mailmanActivity').textContent = 
+                    `Last scan: ${mailmanData.last_scan || 'Unknown'}`;
+                
+                const mailmanStatus = document.getElementById('mailmanStatus');
+                mailmanStatus.textContent = mailmanData.status || 'UNKNOWN';
+                mailmanStatus.className = `agent-status status-${mailmanData.status.toLowerCase()}`;
+            }
+            
+            // Update Castra Praetoria
+            if (castraData) {
+                document.getElementById('castraThreats').textContent = castraData.total_findings || '--';
+                document.getElementById('castraCritical').textContent = castraData.critical_threats || '0';
+                document.getElementById('castraActivity').textContent = 
+                    `Last scan: ${castraData.last_scan || 'Unknown'}`;
+                
+                const castraStatus = document.getElementById('castraStatus');
+                const status = castraData.critical_threats > 0 ? 'ALERT' : 'OPERATIONAL';
+                castraStatus.textContent = status;
+                castraStatus.className = `agent-status status-${status.toLowerCase()}`;
+            }
+            
+            // Update activity feed
+            updateActivityFeed(mailmanData, castraData, systemData);
+        }
+        
+        function updateActivityFeed(mailmanData, castraData, systemData) {
+            const feedElement = document.getElementById('activityFeed');
+            const activities = [];
+            
+            // Collect recent activities
+            if (mailmanData && mailmanData.last_scan) {
+                activities.push({
+                    time: mailmanData.last_scan.split(' ')[1] || '--:--',
+                    text: `Mailman processed ${mailmanData.emails_24h || 0} emails`
+                });
+            }
+            
+            if (castraData && castraData.last_scan) {
+                activities.push({
+                    time: castraData.last_scan.split(' ')[1] || '--:--',
+                    text: `Castra Praetoria completed security scan - ${castraData.total_findings || 0} findings`
+                });
+            }
+            
+            // Sort by time (newest first)
+            activities.sort((a, b) => b.time.localeCompare(a.time));
+            
+            // Update feed
+            if (activities.length > 0) {
+                feedElement.innerHTML = activities.map(activity => `
+                    <div class="activity-item">
+                        <div class="activity-time">${activity.time}</div>
+                        <div class="activity-text">${activity.text}</div>
+                    </div>
+                `).join('');
+            }
+        }
+        
+        // Initialize dashboard
+        document.addEventListener('DOMContentLoaded', function() {
+            fetchAgentStatus();
+            updateInterval = setInterval(fetchAgentStatus, 30000); // Update every 30 seconds
+        });
+        
+        // Clean up on page unload
+        window.addEventListener('beforeunload', function() {
+            if (updateInterval) {
+                clearInterval(updateInterval);
+            }
+        });
+    </script>
+</body>
+</html>

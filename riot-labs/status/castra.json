@@ -1,0 +1,12 @@
+{
+  "agent": "castra-praetoria",
+  "status": "OPERATIONAL",
+  "last_scan": "2026-04-01 14:25",
+  "critical_threats": 0,
+  "high_threats": 0,
+  "medium_findings": 2,
+  "low_findings": 3,
+  "total_findings": 5,
+  "security_clearance": "GRANTED",
+  "last_updated": "2026-04-01T14:42:34.277420"
+}
