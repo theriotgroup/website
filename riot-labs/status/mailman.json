@@ -1,10 +1,10 @@
 {
   "agent": "mailman",
   "status": "ACTIVE",
-  "last_scan": "2026-04-01 14:14",
-  "emails_24h": 18,
+  "last_scan": "2026-04-01 14:42",
+  "emails_24h": 17,
   "urgent_count": 0,
-  "business_emails": 6,
+  "business_emails": 5,
   "suspicious_count": 0,
-  "last_updated": "2026-04-01T14:42:34.276775"
+  "last_updated": "2026-04-01T14:42:48.173928"
 }
