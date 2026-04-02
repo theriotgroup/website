@@ -1,0 +1,488 @@
+{
+  "date": "2026-04-01",
+  "timestamp": "2026-04-01T18:15:33.902868",
+  "stats": {
+    "total": 21,
+    "needs_response": 15,
+    "high_urgency": 8,
+    "with_actions": 0,
+    "business_entities": {
+      "drone_institute": 4,
+      "external": 12,
+      "dorset_llc": 5
+    }
+  },
+  "summaries": [
+    {
+      "sender": "George Femmer <george.femmer@droneinstitute.ai>",
+      "subject": "Re: Reporting International Search Report and Written Opinion for International Patent Application No. PCT/US2025/057386; TKD Ref. No. 93646-001WO(10)",
+      "date": "2026-04-01 17:47",
+      "business_entity": "drone_institute",
+      "urgency": "high",
+      "key_points": [
+        "This slipped from our plate",
+        "I know the date for response has lapsed, but Rachel I\u2019d love to get a call planned next week for the team so we can understand tentative timelines, and expected office actions as we continue through the patent process"
+      ],
+      "action_items": [],
+      "thread_summary": "Thread with 2 messages. Participants: Dacia Hernandez <dhernandez@tarterkrinsky.com>, George Femmer <george.femmer@droneinstitute.ai>. Started 04/01, latest 04/01.",
+      "response_required": true,
+      "attachments": [
+        {
+          "filename": "image631415.png",
+          "mime_type": "image/png",
+          "size": 8754
+        }
+      ],
+      "full_body_preview": "Apologies team!\r\n\r\nThis slipped from our plate. I know the date for response has lapsed, but Rachel I\u2019d love to get a call planned next week for the team so we can understand tentative timelines, and expected office actions as we continue through the patent process.\r\n\r\nWe\u2019d love to support your team through this process and provide the technical basis for questions, interrogatories, and more that you or team may receive from the patent office as we continue. Thank you for your continued support!..."
+    },
+    {
+      "sender": "Aiden Harris <harrisacctadv@gmail.com>",
+      "subject": "Riot Labs ACH",
+      "date": "2026-04-01 17:43",
+      "business_entity": "external",
+      "urgency": "normal",
+      "key_points": [
+        "Hi Cindy, I need to schedule an ACH out from the Riot Labs account",
+        "Do I\r\nneed to call that in",
+        "Thank you\r\nHi Cindy, I need to schedule an ACH out from the Riot Labs account"
+      ],
+      "action_items": [],
+      "thread_summary": "Single email, no thread context.",
+      "response_required": true,
+      "attachments": [],
+      "full_body_preview": "Hi Cindy, I need to schedule an ACH out from the Riot Labs account. Do I\r\nneed to call that in?\r\n\r\nThank you\r\nHi Cindy, I need to schedule an ACH out from the Riot Labs account. Do I need\nto call that in?  \n\n  \n\nThank you"
+    },
+    {
+      "sender": "Dacia Hernandez <dhernandez@tarterkrinsky.com>",
+      "subject": "FW: Reporting International Search Report and Written Opinion for International Patent Application No. PCT/US2025/057386; TKD Ref. No. 93646-001WO(10)",
+      "date": "2026-04-01 17:32",
+      "business_entity": "external",
+      "urgency": "high",
+      "key_points": [
+        "Dear George and team,\r\n\r\nFurther to Rachel's email below, today we filed an Information Disclosure Statement (IDS) in the corresponding U",
+        "patent application, serial no"
+      ],
+      "action_items": [],
+      "thread_summary": "Thread with 2 messages. Participants: Dacia Hernandez <dhernandez@tarterkrinsky.com>, George Femmer <george.femmer@droneinstitute.ai>. Started 04/01, latest 04/01.",
+      "response_required": true,
+      "attachments": [
+        {
+          "filename": "image631415.png",
+          "mime_type": "image/png",
+          "size": 8754
+        },
+        {
+          "filename": "2026-04-01 93646-001USNP(11) Information Disclosure Statement, as Filed(180450198.1).pdf",
+          "mime_type": "application/pdf",
+          "size": 297898
+        }
+      ],
+      "full_body_preview": "Dear George and team,\r\n\r\nFurther to Rachel's email below, today we filed an Information Disclosure Statement (IDS) in the corresponding U.S. patent application, serial no. 19/402,948, to disclose the International Search Report and cited references. A copy of the IDS is attached for your records.\r\n\r\nWe will notify you of new developments as they occur, but in the meantime, please don't hesitate to contact us if you have questions.\r\n\r\nKind regards,\r\n\r\nDacia\r\n\r\n\r\nDacia Hernandez|Paralegal\r\nT: 212-..."
+    },
+    {
+      "sender": "Aiden Harris <harrisacctadv@gmail.com>",
+      "subject": "Re: Update",
+      "date": "2026-04-01 17:22",
+      "business_entity": "dorset_llc",
+      "urgency": "high",
+      "key_points": [
+        "Please see the attached",
+        "Will provide Q1 2026 941 when it is ready",
+        "On Wed, Apr 1, 2026 at 3:42\u202fPM Leda Fan <ledafan@gmail"
+      ],
+      "action_items": [],
+      "thread_summary": "Thread with 4 messages. Participants: Aiden Harris <harrisacctadv@gmail.com>, Leda Fan <ledafan@gmail.com>, Chris Sharplin <chris.sharplin@droneinstitute.ai>. Started 04/01, latest 04/01.",
+      "response_required": true,
+      "attachments": [
+        {
+          "filename": "Drone Institute 2025 P&L.pdf",
+          "mime_type": "application/pdf",
+          "size": 34467
+        },
+        {
+          "filename": "Drone Institute 2025 Balance Sheet.pdf",
+          "mime_type": "application/pdf",
+          "size": 40689
+        },
+        {
+          "filename": "2025 Q4 941.pdf",
+          "mime_type": "application/pdf",
+          "size": 290879
+        }
+      ],
+      "full_body_preview": "Please see the attached. Will provide Q1 2026 941 when it is ready.\r\n\r\nOn Wed, Apr 1, 2026 at 3:42\u202fPM Leda Fan <ledafan@gmail.com> wrote:\r\n\r\n> Thanks!\r\n>\r\n> Best,\r\n> Leda G. Fan\r\n> Attorney at Law\r\n> Law Offices of Fan and Brinson, LLC\r\n> Phone: 504-324-2280\r\n> Email: Ledafan@gmail.com\r\n> WeChat: FanYiminLaw\r\n>\r\n> 4437 Jefferson Hwy\r\n> Jefferson, LA 70121\r\n>\r\n> On Apr 1, 2026, at 1:39\u202fPM, Nan Shang <nan.shang@droneinstitute.ai> wrote:\r\n>\r\n> Leda,\r\n>\r\n> I have drafted the updated letter from Geor..."
+    },
+    {
+      "sender": "\"Butcher Air Conditioning Co, LLC\" <notify@mobiletechtool.com>",
+      "subject": "105 DORSET LLC, LAFAYETTE - Invoice (1711493)",
+      "date": "2026-04-01 15:34",
+      "business_entity": "dorset_llc",
+      "urgency": "normal",
+      "key_points": [
+        "<p style=\"text-align:start\"><span style=\"font-size:small\"><span style=\"color:#222222\"><span style=\"font-family:Arial,Helvetica,sans-serif\"><span style=\"background-color:#ffffff\">Please find your invoice from Butcher Air Conditioning attached",
+        "</span></span></span></span><br />\r\n<span style=\"font-size:small\"><span style=\"color:#222222\"><span style=\"font-family:Arial,Helvetica,sans-serif\"><span style=\"background-color:#ffffff\">If you have any questions regarding this invoice or would like to book future services, please give our office a call 337-837-2000",
+        "</span></span></span></span><br />\r\n<span style=\"font-size:small\"><span style=\"color:#222222\"><span style=\"font-family:Arial,Helvetica,sans-serif\"><span style=\"background-color:#ffffff\">Bill Pay online available&nbsp;<a href=\"http://www"
+      ],
+      "action_items": [],
+      "thread_summary": "Single email, no thread context.",
+      "response_required": false,
+      "attachments": [
+        {
+          "filename": "1711493 - Invoice.pdf",
+          "mime_type": "application/pdf",
+          "size": 52915
+        }
+      ],
+      "full_body_preview": "<p style=\"text-align:start\"><span style=\"font-size:small\"><span style=\"color:#222222\"><span style=\"font-family:Arial,Helvetica,sans-serif\"><span style=\"background-color:#ffffff\">Please find your invoice from Butcher Air Conditioning attached!</span></span></span></span><br />\r\n<span style=\"font-size:small\"><span style=\"color:#222222\"><span style=\"font-family:Arial,Helvetica,sans-serif\"><span style=\"background-color:#ffffff\">If you have any questions regarding this invoice or would like to book f..."
+    },
+    {
+      "sender": "\"Anthropic, PBC\" <invoice+statements@mail.anthropic.com>",
+      "subject": "Your receipt from Anthropic, PBC #2577-1517-8068",
+      "date": "2026-04-01 15:20",
+      "business_entity": "external",
+      "urgency": "normal",
+      "key_points": [
+        "Anthropic, PBC  (https://www",
+        "com/)\r\n\r\nAnthropic, PBC\r\n\r\nReceipt from Anthropic, PBC $54"
+      ],
+      "action_items": [],
+      "thread_summary": "Single email, no thread context.",
+      "response_required": true,
+      "attachments": [
+        {
+          "filename": "Invoice-M5EQ81GP-0004.pdf",
+          "mime_type": "application/pdf",
+          "size": 32073
+        },
+        {
+          "filename": "Receipt-2577-1517-8068.pdf",
+          "mime_type": "application/pdf",
+          "size": 32817
+        }
+      ],
+      "full_body_preview": "Anthropic, PBC  (https://www.anthropic.com/)\r\n\r\nAnthropic, PBC\r\n\r\nReceipt from Anthropic, PBC $54.50 Paid April 1, 2026 (invoice illustration [https://stripe-images.s3.amazonaws.com/emails/invoices_invoice_illustration.png]) Download invoice (https://pay.stripe.com/invoice/acct_1MExQ9BjIQrRQnux/live_YWNjdF8xTUV4UTlCaklRclJRbnV4LF9VRzNEdVpaeUF3NFRJempYQ0hwUEt0S0c1bTA4eUE0LDE2NTYyMjgyOQ0200KIzCJUgv/pdf?s=em) Download receipt (https://dashboard.stripe.com/receipts/invoices/CAcQARoXChVhY2N0XzFNRXhRO..."
+    },
+    {
+      "sender": "\"Christophe L. Pilut\" <clpilut@lafayettela.gov>",
+      "subject": "Following up on your exchange with Mayor-President Monique Boulet and George Marks",
+      "date": "2026-04-01 15:19",
+      "business_entity": "dorset_llc",
+      "urgency": "high",
+      "key_points": [
+        "Dear Lyle,\r\n\r\nI am writing to you on behalf of George Marks and the Lafayette International Center (LIC), following your recent exchange with him and Mayor-President Monique Boulet",
+        "George asked me to follow up with you to arrange a time for us to meet",
+        "As the LIC focuses on supporting Lafayette-based businesses with international trade and commerce, we would be delighted to visit your facility and learn more about DMR Technologies' operations"
+      ],
+      "action_items": [],
+      "thread_summary": "Single email, no thread context.",
+      "response_required": true,
+      "attachments": [],
+      "full_body_preview": "Dear Lyle,\r\n\r\nI am writing to you on behalf of George Marks and the Lafayette International Center (LIC), following your recent exchange with him and Mayor-President Monique Boulet.\r\n\r\nGeorge asked me to follow up with you to arrange a time for us to meet. As the LIC focuses on supporting Lafayette-based businesses with international trade and commerce, we would be delighted to visit your facility and learn more about DMR Technologies' operations.\r\n\r\nPlease let us know what days and times might ..."
+    },
+    {
+      "sender": "Anthropic <no-reply-WBD9dRgqeWlSlOujWWRHiQ@mail.anthropic.com>",
+      "subject": "[action needed] Your Claude API access is turned off",
+      "date": "2026-04-01 14:55",
+      "business_entity": "external",
+      "urgency": "normal",
+      "key_points": [
+        "[Claude](https://claude",
+        "ai/images/claude_logo_full"
+      ],
+      "action_items": [],
+      "thread_summary": "Single email, no thread context.",
+      "response_required": true,
+      "attachments": [],
+      "full_body_preview": "|  \n---  \n  \n| | ![Claude](https://claude.ai/images/claude_logo_full.png)  \n---  \nHello,Your access to the Claude API has been disabled because your\norganization \u2018Riot1\u2018s Individual Org' is out of usage credits.Go to the\n[Billing](https://url8792.mail.anthropic.com/ls/click?upn=u001.rFcAmKXLOm9u6wLRWHIUYSyi8Ot2-2FnNyQVY4hpmDkiqK52B-2F-2FQKLV8ha1nDXJfosgFnZUIx0478iqL5qrUeT7Q-3D-3DbC8H_iEfELdH1S4exckwXdoZq7oqmKaRtyvbmf1nhoUzck5HRQ87iN5XdcCHABWVgOYXiIRSQrkLqhrxqJIjvlOkRe9iZEF-2BVuCBJgNk8qPnC0IlX07J..."
+    },
+    {
+      "sender": "Mandi Mitchell <mandi@lafayette.org>",
+      "subject": "Trappey site development/redevelopment",
+      "date": "2026-04-01 14:26",
+      "business_entity": "dorset_llc",
+      "urgency": "high",
+      "key_points": [
+        "It was so great seeing you guys last week when I arranged for a tour with DMR for the mayor",
+        "I am excited about the possibility of you all taking over Trappey from the current/prospective buyers"
+      ],
+      "action_items": [],
+      "thread_summary": "Single email, no thread context.",
+      "response_required": true,
+      "attachments": [
+        {
+          "filename": "img-207cf460-b9b9-4cbe-a105-70d6c7a7ab2c",
+          "mime_type": "application/octet-stream",
+          "size": 4411
+        },
+        {
+          "filename": "img-24408e02-aa34-4745-9ec1-5c07ac41f1b9",
+          "mime_type": "application/octet-stream",
+          "size": 18052
+        },
+        {
+          "filename": "img-d9cdd8ae-bac6-4691-ace8-67d929b34f5f",
+          "mime_type": "application/octet-stream",
+          "size": 1000
+        },
+        {
+          "filename": "img-cfa23362-2c98-4aa9-b913-4b6248faf56f",
+          "mime_type": "application/octet-stream",
+          "size": 1188
+        }
+      ],
+      "full_body_preview": "Hi RJ and Lyle!\r\n\r\nIt was so great seeing you guys last week when I arranged for a tour with DMR for the mayor.\r\n\r\nI am excited about the possibility of you all taking over Trappey from the current/prospective buyers. I haven\u2019t heard a thing (since November \u201825) from the group out of North Carolina that was going to buy the land from Stephen and Marcel. It was a gentleman named Raghunadha Kotha. Ravi was somehow engaged. I\u2019m unsure where that stands.\r\n\r\nI\u2019m following up with you to reiterate tha..."
+    },
+    {
+      "sender": "Leda Fan <ledafan@gmail.com>",
+      "subject": "Re: Update",
+      "date": "2026-04-01 12:42",
+      "business_entity": "dorset_llc",
+      "urgency": "high",
+      "key_points": [
+        "Fan\r\nAttorney at Law\r\nLaw Offices of Fan and Brinson, LLC\r\nPhone: 504-324-2280\r\nEmail: Ledafan@gmail"
+      ],
+      "action_items": [],
+      "thread_summary": "Thread with 4 messages. Participants: Aiden Harris <harrisacctadv@gmail.com>, Leda Fan <ledafan@gmail.com>, Chris Sharplin <chris.sharplin@droneinstitute.ai>. Started 04/01, latest 04/01.",
+      "response_required": true,
+      "attachments": [],
+      "full_body_preview": "Thanks!\r\n\r\nBest,\r\nLeda G. Fan\r\nAttorney at Law\r\nLaw Offices of Fan and Brinson, LLC\r\nPhone: 504-324-2280\r\nEmail: Ledafan@gmail.com\r\nWeChat: FanYiminLaw\r\n\r\n4437 Jefferson Hwy\r\nJefferson, LA 70121\r\n\r\n> On Apr 1, 2026, at 1:39\u202fPM, Nan Shang <nan.shang@droneinstitute.ai> wrote:\r\n> \r\n> Leda,\r\n> \r\n> I have drafted the updated letter from George, waiting for a few details to be finalized. Once I get Dan's letter, I will send you the draft along with other supporting evidence documents I have. \r\n> \r\n> B..."
+    },
+    {
+      "sender": "<marc.landry2018@att.net>",
+      "subject": "March15 & April 1 Invoices",
+      "date": "2026-04-01 12:21",
+      "business_entity": "external",
+      "urgency": "normal",
+      "key_points": [],
+      "action_items": [],
+      "thread_summary": "Single email, no thread context.",
+      "response_required": false,
+      "attachments": [
+        {
+          "filename": "Consulting Invoice 03152026-2.pdf",
+          "mime_type": "application/pdf",
+          "size": 124965
+        },
+        {
+          "filename": "Consulting Invoice 04012026-1.pdf",
+          "mime_type": "application/pdf",
+          "size": 124761
+        }
+      ],
+      "full_body_preview": ""
+    },
+    {
+      "sender": "Darrio Guzman <darrio.guzman@gusto.com>",
+      "subject": "Want to pay less to offer great health insurance?",
+      "date": "2026-04-01 12:15",
+      "business_entity": "external",
+      "urgency": "medium",
+      "key_points": [
+        "Hi Lyle,\r\n\r\nI'm Darrio, your dedicated health insurance advisor at Gusto",
+        "I\u2019m reaching out to let you know about some upcoming health insurance price\r\nincreases that will take effect if you submit your benefit application\r\nafter *April 31st, 2025*",
+        "Starting with a 6/1 effective date, we typically see rates increase 2-3% on\r\na quarterly schedule"
+      ],
+      "action_items": [],
+      "thread_summary": "Single email, no thread context.",
+      "response_required": true,
+      "attachments": [],
+      "full_body_preview": "Hi Lyle,\r\n\r\nI'm Darrio, your dedicated health insurance advisor at Gusto.\r\n\r\nI\u2019m reaching out to let you know about some upcoming health insurance price\r\nincreases that will take effect if you submit your benefit application\r\nafter *April 31st, 2025*.\r\n\r\nStarting with a 6/1 effective date, we typically see rates increase 2-3% on\r\na quarterly schedule. I\u2019d love to offer you a chance to lock in current\r\nrates with a 12-month policy with plans beginning on* 5/1/26 or 6/1/26.*\r\n\r\nI know that offerin..."
+    },
+    {
+      "sender": "Nan Shang <nan.shang@droneinstitute.ai>",
+      "subject": "Re: Update",
+      "date": "2026-04-01 11:39",
+      "business_entity": "drone_institute",
+      "urgency": "high",
+      "key_points": [
+        "Leda,\r\n\r\nI have drafted the updated letter from George, waiting for a few details to be finalized",
+        "Once I get Dan's letter, I will send you the draft along with other supporting evidence documents I have",
+        "Best,\r\nNan Shang\r\n________________________________\r\nFrom: Chris Sharplin <chris"
+      ],
+      "action_items": [],
+      "thread_summary": "Thread with 4 messages. Participants: Aiden Harris <harrisacctadv@gmail.com>, Leda Fan <ledafan@gmail.com>, Chris Sharplin <chris.sharplin@droneinstitute.ai>. Started 04/01, latest 04/01.",
+      "response_required": true,
+      "attachments": [
+        {
+          "filename": "Outlook-wbe3o4fg.gif",
+          "mime_type": "image/gif",
+          "size": 571784
+        }
+      ],
+      "full_body_preview": "Leda,\r\n\r\nI have drafted the updated letter from George, waiting for a few details to be finalized. Once I get Dan's letter, I will send you the draft along with other supporting evidence documents I have.\r\n\r\nBest,\r\nNan Shang\r\n________________________________\r\nFrom: Chris Sharplin <chris.sharplin@droneinstitute.ai>\r\nSent: Wednesday, April 1, 2026 1:33 PM\r\nTo: Leda Fan <ledafan@gmail.com>; Aiden Harris <harrisacctadv@gmail.com>\r\nCc: Nan Shang <nan.shang@droneinstitute.ai>; lyle <lyle@theriotgroup...."
+    },
+    {
+      "sender": "Chris Sharplin <chris.sharplin@droneinstitute.ai>",
+      "subject": "Re: Update",
+      "date": "2026-04-01 11:33",
+      "business_entity": "drone_institute",
+      "urgency": "high",
+      "key_points": [
+        "Leda,\r\n\r\nI will need help from the CFO for P&L information",
+        "I am copying him in this email now for that",
+        "No tax return has been filed so far"
+      ],
+      "action_items": [],
+      "thread_summary": "Thread with 4 messages. Participants: Aiden Harris <harrisacctadv@gmail.com>, Leda Fan <ledafan@gmail.com>, Chris Sharplin <chris.sharplin@droneinstitute.ai>. Started 04/01, latest 04/01.",
+      "response_required": false,
+      "attachments": [
+        {
+          "filename": "Outlook-wbe3o4fg.gif",
+          "mime_type": "image/gif",
+          "size": 571784
+        }
+      ],
+      "full_body_preview": "Leda,\r\n\r\nI will need help from the CFO for P&L information..... I am copying him in this email now for that.\r\n\r\nNo tax return has been filed so far.\r\n\r\nWe got letter executed by the gentleman with the experience in GIS as well, that was done today.  Nan should be sending you that shortly.  I will let Nan fill you in on remaining items.\r\n\r\n[cid:9e98c8c7-d862-4497-aeee-78f9d54e98e4]\r\n\r\n| Christopher Sharplin | COO |  Drone Institute |\r\n| 337.591.2975 | chris.sharplin@droneinstitute.ai\r\n| 105 Dorse..."
+    },
+    {
+      "sender": "Josh Barker <josh.barker@droneinstitute.ai>",
+      "subject": "FW: DRAFT Agenda for Lafayette at Drone Institute",
+      "date": "2026-04-01 10:22",
+      "business_entity": "drone_institute",
+      "urgency": "normal",
+      "key_points": [
+        "Gents,\r\n\r\nSee the agenda below",
+        "Rather than sending to me directly, he sent to the group",
+        "We have a good plan of attack on our end, but thought you\u2019d like to see how next Friday morning is slated to roll"
+      ],
+      "action_items": [],
+      "thread_summary": "Single email, no thread context.",
+      "response_required": true,
+      "attachments": [
+        {
+          "filename": "image002.png",
+          "mime_type": "image/png",
+          "size": 14827
+        },
+        {
+          "filename": "image003.jpg",
+          "mime_type": "image/jpeg",
+          "size": 10178
+        },
+        {
+          "filename": "image004.png",
+          "mime_type": "image/png",
+          "size": 39336
+        }
+      ],
+      "full_body_preview": "Gents,\r\n\r\nSee the agenda below. Rather than sending to me directly, he sent to the group. We have a good plan of attack on our end, but thought you\u2019d like to see how next Friday morning is slated to roll.\r\n\r\nCheers,\r\n\r\nJosh Barker\r\nFrom: Marisol A Masferrer <Marisol.Masferrer@sherwin.com>\r\nDate: Wednesday, April 1, 2026 at 10:51\u202fAM\r\nTo: Mark MacDonald <mark.macdonald@eagleview.com>, Josh Barker <josh.barker@droneinstitute.ai>\r\nCc: Simon Cope <simon.cope@eagleview.com>, Dylan Kesler <dylan.kesler..."
+    },
+    {
+      "sender": "stmt@dougashy.com",
+      "subject": "Statement from Doug Ashy Building Materials - Breaux Bridge, LLC",
+      "date": "2026-04-01 09:57",
+      "business_entity": "external",
+      "urgency": "normal",
+      "key_points": [
+        "Please find your statement attached",
+        "THIS IS AN AUTOMATED EMAIL FROM DOUG ASHY BUILDING MATERIALS\u00a0 *** PLEASE DO NOT REPLY TO THIS EMAIL",
+        "THIS MAILBOX IS NOT MONITORED AND YOU WILL NOT RECEIVE A RESPONSE***"
+      ],
+      "action_items": [],
+      "thread_summary": "Single email, no thread context.",
+      "response_required": false,
+      "attachments": [
+        {
+          "filename": "Customer Statement.pdf",
+          "mime_type": "application/octet-stream",
+          "size": 194079
+        },
+        {
+          "filename": "DeWalt Sale.pdf",
+          "mime_type": "application/octet-stream",
+          "size": 2730604
+        }
+      ],
+      "full_body_preview": "Please find your statement attached.\r\n\u00a0\r\nTHIS IS AN AUTOMATED EMAIL FROM DOUG ASHY BUILDING MATERIALS\u00a0 *** PLEASE DO NOT REPLY TO THIS EMAIL. THIS MAILBOX IS NOT MONITORED AND YOU WILL NOT RECEIVE A RESPONSE*** .\r\nIF YOU HAVE ANY QUESTIONS ON YOUR ACCOUNT PLEASE CONTACT THE FOLLOWING CREDIT MANAGERS;\r\n\r\nMARIE BOUDREAUX\u00a0\u00a0\u00a0\u00a0\u00a0\u00a0\u00a0\r\n\u00a0\u00a0\u00a0\u00a0\u00a0\u00a0\u00a0\u00a0\u00a0\u00a0\u00a0\u00a0\u00a0\u00a0\u00a0 MARIE.BOUDREAUX@DOUGASHY.COM\r\n\u00a0\u00a0\u00a0\u00a0\u00a0\u00a0\u00a0\u00a0\u00a0\u00a0\u00a0\u00a0\u00a0\u00a0\u00a0 337-984-2110\u00a0\u00a0 EXT# 2229\r\n\r\nDEIDRA FONTENOT\r\n\u00a0\u00a0\u00a0\u00a0\u00a0\u00a0\u00a0\u00a0\u00a0\u00a0\u00a0\u00a0\u00a0\u00a0\u00a0 DEIDRA.FONTENOT@DOUGASHY.COM\r\n\u00a0\u00a0\u00a0\u00a0\u00a0\u00a0\u00a0\u00a0\u00a0\u00a0\u00a0\u00a0\u00a0\u00a0 337..."
+    },
+    {
+      "sender": "Kathryn Arsement <Kathryn@dumpsterpro.net>",
+      "subject": "Invoice 9915",
+      "date": "2026-04-01 09:12",
+      "business_entity": "external",
+      "urgency": "normal",
+      "key_points": [
+        "Attached is the invoice for container dump on 4/1",
+        "Thanks,\r\nKathryn Arsement\r\nDumpster Pro\r\n337-257-6188 Cell\r\n\r\nAttached is the invoice for container dump on 4/1",
+        "Thanks,\n\nKathryn Arsement\n\nDumpster Pro\n\n337-257-6188 Cell"
+      ],
+      "action_items": [],
+      "thread_summary": "Single email, no thread context.",
+      "response_required": false,
+      "attachments": [
+        {
+          "filename": "Invoice 9915 Lyle Theriot.pdf",
+          "mime_type": "application/pdf",
+          "size": 330116
+        }
+      ],
+      "full_body_preview": "Attached is the invoice for container dump on 4/1.\r\n\r\nThanks,\r\nKathryn Arsement\r\nDumpster Pro\r\n337-257-6188 Cell\r\n\r\nAttached is the invoice for container dump on 4/1.\n\n\n\nThanks,\n\nKathryn Arsement\n\nDumpster Pro\n\n337-257-6188 Cell"
+    },
+    {
+      "sender": "Home Depot Pro Xtra <homedepotpro@mg.homedepot.com>",
+      "subject": "Last Chance to Save on Professional Tax Help",
+      "date": "2026-04-01 08:05",
+      "business_entity": "external",
+      "urgency": "medium",
+      "key_points": [],
+      "action_items": [],
+      "thread_summary": "Single email, no thread context.",
+      "response_required": true,
+      "attachments": [],
+      "full_body_preview": "![](https://trk.mg.homedepot.com/o/4/eyJhaSI6MjY2NzI0NDQsImUiOiJtZy1lbmM6bmVMMTVZb2orN3ZEZmszcHlEV3dqNVE0am51M0RDb2EiLCJyaSI6IjU2NTc5NTAzMyIsInJxIjoiMDItYjI2MDkxLTU3NTg4NDE2NTdhOTQyNTg4NDVmYzMyYzM2YTliYjRmIn0/JPWl8y_mhKpeu82-N6yrYw)  \n---  \n![](https://pixel.app.returnpath.net/pixel.gif?r=87020b867aa6f251a968355a634191651507e328)\n![](http://homedepot.demdex.net/event?d_dpid=3038&d_dpuuid=565795033&d_sid=1785407)\n\nGet up to $50 off. \u034f \u200c   \u034f \u200c   \u034f \u200c   \u034f \u200c   \u034f \u200c   \u034f \u200c   \u034f \u200c   \u034f \u200c   \u034f \u200c   \u034f \u200c\n\u034f \u200c   ..."
+    },
+    {
+      "sender": "The Google Workspace Team <workspace-noreply@google.com>",
+      "subject": "[Product Update] Google Meet default download settings change",
+      "date": "2026-04-01 08:03",
+      "business_entity": "external",
+      "urgency": "normal",
+      "key_points": [
+        "Google Workspace logo\r\n\r\n\r\n\r\nNew Google Meet video recordings will allow downloading and copying by  \r\ndefault",
+        "Dear administrator,\r\n\r\nCurrently, Google Meet video recordings do not allow viewers to download or  \r\ncopy them by default unless the recording owner explicitly allows it",
+        "Starting April 30, 2026, we will change this default for future recordings"
+      ],
+      "action_items": [],
+      "thread_summary": "Single email, no thread context.",
+      "response_required": true,
+      "attachments": [],
+      "full_body_preview": "Google Workspace logo\r\n\r\n\r\n\r\nNew Google Meet video recordings will allow downloading and copying by  \r\ndefault.\r\n\r\n\r\n\r\nDear administrator,\r\n\r\nCurrently, Google Meet video recordings do not allow viewers to download or  \r\ncopy them by default unless the recording owner explicitly allows it.  \r\nStarting April 30, 2026, we will change this default for future recordings.  \r\nMoving forward, recording owners will need to manually restrict this  \r\nsetting for individual recordings if they do not want v..."
+    },
+    {
+      "sender": "The Home Depot <HomeDepotCustomerCare@mg.homedepot.com>",
+      "subject": "You recently bought Amerimax Home Products FLEX Drain Pro 4 in. x 10 ft. Black Copolymer Perforated Drain Pipe. Tell us about it!",
+      "date": "2026-04-01 06:20",
+      "business_entity": "external",
+      "urgency": "normal",
+      "key_points": [],
+      "action_items": [],
+      "thread_summary": "Single email, no thread context.",
+      "response_required": true,
+      "attachments": [],
+      "full_body_preview": "![](http://open.homedepot.com/background.jpeg?am9iX2lkLzQwOTYwODUvZW1haWxfaWQvMjU0Nzc5NTA2L2VtYWlsL2phbWFydGhvbXBzb240QGdtYWlsLmNvbS9iaWQvMTAxODM4OTQv) |  |   \n---  \nHow many stars would you give your recent in-store purchase?  |  [View as web page](https://trk.mg.homedepot.com/c/7/eyJhaSI6MjY2NzI0NDQsImUiOiJtZy1lbmM6bmVMMTVZb2orN3ZEZmszcHlEV3dqNVE0am51M0RDb2EiLCJyaSI6IjU2NTc5NTAzMyIsInJxIjoiMDItYjI2MDkxLWI4NjhmMDZhYTQxNDRlZmZiZjZmNDZkYTIxZGQ1YWExIiwibSI6ZmFsc2UsInVpIjoiMCIsInVuIjoiIiwidSI6Imh0d..."
+    },
+    {
+      "sender": "\"R.J. Fonseca, Jr.\" <rjf@standard-law.com>",
+      "subject": "Prospect List.",
+      "date": "2026-04-01 02:46",
+      "business_entity": "external",
+      "urgency": "normal",
+      "key_points": [
+        "Good morning,\r\n\r\nI set up the model to generate a NDTDS prospect list every 7 to 10 days and to open a database for storage",
+        "I'd like to lean into this a bit more and assist where I can for a while",
+        "Not sure where we are in setting up structure to the NDT sales efforts, but we seem to have amazing tech supporting us now in every way imaginable"
+      ],
+      "action_items": [],
+      "thread_summary": "Single email, no thread context.",
+      "response_required": false,
+      "attachments": [
+        {
+          "filename": "DI_NDTDS_Prospect_Contact_Database_April_2026.docx",
+          "mime_type": "application/vnd.openxmlformats-officedocument.wordprocessingml.document",
+          "size": 55513
+        }
+      ],
+      "full_body_preview": "Good morning,\r\n\r\nI set up the model to generate a NDTDS prospect list every 7 to 10 days and to open a database for storage.\r\n\r\nI'd like to lean into this a bit more and assist where I can for a while.\r\n\r\nNot sure where we are in setting up structure to the NDT sales efforts, but we seem to have amazing tech supporting us now in every way imaginable.\r\n\r\n.\r\n\r\nR. J. Fonseca, Jr.\r\nGood morning,\n\n  \n\nI set up the model to generate a NDTDS prospect list every 7 to 10 days and to\nopen a database for s..."
+    }
+  ]
+}

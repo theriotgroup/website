@@ -343,71 +343,39 @@
             }, 2000);
         }
         
-        function fetchEmailSummaries() {
-            // In a real implementation, this would fetch from the Gmail reader API
-            // For demo purposes, using sample data
-            
-            emailSummaries = [
-                {
-                    sender: "Josh Barker <josh.barker@droneinstitute.ai>",
-                    subject: "FW: DRAFT Agenda for Lafayette at Drone Institute",
-                    date: "2026-04-01 15:44",
-                    business_entity: "drone_institute",
-                    urgency: "high",
-                    response_required: true,
-                    key_points: [
-                        "Meeting agenda for Lafayette requires your input by Thursday",
-                        "Budget items and strategic planning section need review",
-                        "Quarterly goals and resource allocation to be discussed"
-                    ],
-                    action_items: [
-                        "Review attached agenda items",
-                        "DEADLINE: Provide feedback by Thursday",
-                        "Confirm availability for meeting"
-                    ],
-                    thread_summary: "Thread with 3 messages. Participants: Josh Barker, Strategy Team. Started 03/28, latest 04/01.",
-                    attachments: ["Lafayette_Meeting_Agenda_Q2.pdf"],
-                    gmail_link: "https://mail.google.com/mail/u/0/#inbox/msg123"
-                },
-                {
-                    sender: "Chris Sharplin <chris.sharplin@droneinstitute.ai>",
-                    subject: "Demo Results - Grinder Bristle Blaster Success",
-                    date: "2026-04-01 13:45",
-                    business_entity: "drone_institute",
-                    urgency: "medium",
-                    response_required: true,
-                    key_points: [
-                        "Demo exceeded expectations with 95% precision coating removal",
-                        "Operator feedback extremely positive, integration seamless",
-                        "Technical specifications met all requirements"
-                    ],
-                    action_items: [
-                        "Schedule follow-up meeting to discuss next steps",
-                        "Review detailed technical report (coming end of day)",
-                        "Decide on production timeline"
-                    ],
-                    thread_summary: "Single email, no thread context.",
-                    attachments: [],
-                    gmail_link: "https://mail.google.com/mail/u/0/#inbox/msg124"
-                },
-                {
-                    sender: "Nan Shang <nan.shang@droneinstitute.ai>",
-                    subject: "Project Update - Phase 1 Completion",
-                    date: "2026-04-01 12:30",
-                    business_entity: "drone_institute",
+        async function fetchEmailSummaries() {
+            try {
+                // Try to fetch real email data from the latest summary file
+                const today = new Date().toISOString().split('T')[0]; // YYYY-MM-DD format
+                const response = await fetch('./email_summaries_latest.json');
+                
+                if (response.ok) {
+                    const data = await response.json();
+                    emailSummaries = data.summaries.map(email => ({
+                        ...email,
+                        attachments: email.attachments?.map(att => att.filename) || [],
+                        gmail_link: `https://mail.google.com/mail/u/0/#inbox`
+                    }));
+                } else {
+                    throw new Error('Failed to fetch email data');
+                }
+            } catch (error) {
+                console.log('Failed to fetch real email data, using fallback');
+                // Fallback message
+                emailSummaries = [{
+                    sender: "Mailman System",
+                    subject: "No email summaries available",
+                    date: new Date().toISOString().split('T')[0] + " " + new Date().toTimeString().split(' ')[0],
+                    business_entity: "external",
                     urgency: "normal",
                     response_required: false,
-                    key_points: [
-                        "Phase 1 successfully completed ahead of schedule",
-                        "Moving into implementation phase with full team approval",
-                        "Budget remains on track, no overruns detected"
-                    ],
+                    key_points: ["Run 'mailman summary' to generate email analysis"],
                     action_items: [],
-                    thread_summary: "Thread with 5 messages. Participants: Nan Shang, Project Team, Lyle. Started 03/15, latest 04/01.",
-                    attachments: ["Phase1_Completion_Report.xlsx"],
-                    gmail_link: "https://mail.google.com/mail/u/0/#inbox/msg125"
-                }
-            ];
+                    thread_summary: "System message",
+                    attachments: [],
+                    gmail_link: "#"
+                }];
+            }
             
             displayEmailSummaries();
             updateStats();
