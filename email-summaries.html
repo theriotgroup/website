@@ -569,7 +569,19 @@
         }
         
         function startAttachmentServer() {
-            alert(`To view attachments, start the attachment server by running:\\n\\ncd /Users/21e8/.openclaw/workspace/memory/subagents/mailman\\npython3 attachment_server.py\\n\\nThen refresh this page and click on attachment links.`);
+            const isMobile = /Android|iPhone|iPad|iPod|BlackBerry|IEMobile|Opera Mini/i.test(navigator.userAgent);
+            
+            if (isMobile) {
+                const currentIP = localStorage.getItem('computerIP') || 'YOUR_COMPUTER_IP';
+                const newIP = prompt(`Enter your computer's IP address for mobile access:\\n(Current: ${currentIP})`, currentIP);
+                
+                if (newIP && newIP !== 'YOUR_COMPUTER_IP') {
+                    localStorage.setItem('computerIP', newIP);
+                    alert(`IP saved: ${newIP}\\n\\nMake sure attachment server is running on your computer:\\n\\ncd /Users/21e8/.openclaw/workspace/memory/subagents/mailman\\npython3 attachment_server.py\\n\\nThen refresh this page.`);
+                }
+            } else {
+                alert(`Start attachment server:\\n\\ncd /Users/21e8/.openclaw/workspace/memory/subagents/mailman\\npython3 attachment_server.py\\n\\nServer will be accessible at http://localhost:8080 (desktop) or http://YOUR_IP:8080 (mobile)`);
+            }
         }
         
         function openInGmail(gmailLink) {
@@ -632,9 +644,20 @@
         
         function getAttachmentUrl(localPath) {
             // Convert local path to attachment server URL
-            // Assuming attachment server runs on localhost:8080
             const filename = localPath.split('/').pop();
-            return `http://localhost:8080/${filename}`;
+            
+            // Try to detect if we're on mobile vs desktop
+            const isMobile = /Android|iPhone|iPad|iPod|BlackBerry|IEMobile|Opera Mini/i.test(navigator.userAgent);
+            
+            if (isMobile) {
+                // On mobile, need to use computer's IP address
+                // User will need to replace this with their computer's actual IP
+                const computerIP = localStorage.getItem('computerIP') || '192.168.1.100';
+                return `http://${computerIP}:8080/${filename}`;
+            } else {
+                // On desktop, localhost works
+                return `http://localhost:8080/${filename}`;
+            }
         }
         
         // Load email summaries on page load
