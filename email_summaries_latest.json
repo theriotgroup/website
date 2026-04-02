@@ -12,6 +12,25 @@
       "dorset_llc": 5
     }
   },
+  "calendar_events": [
+    {
+      "title": "Weekly Team Meeting",
+      "time_until": "In 2 hours",
+      "start_time": "2026-04-01T21:00:00",
+      "location": "Conference Room A",
+      "all_day": false,
+      "attendees": ["team@droneinstitute.ai"]
+    },
+    {
+      "title": "Quarterly Review",
+      "time_until": "Tomorrow at 2pm",
+      "start_time": "2026-04-02T14:00:00",
+      "location": "Riot Labs Office",
+      "all_day": false,
+      "attendees": ["finance@riotlabs.com", "lyle@theriotgroup.org"]
+    }
+  ],
+  "meeting_requests": [],
   "summaries": [
     {
       "sender": "George Femmer <george.femmer@droneinstitute.ai>",
