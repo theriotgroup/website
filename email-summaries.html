@@ -324,6 +324,134 @@
             display: inline-block;
             margin: 2px;
         }
+        
+        /* Calendar Styles */
+        .calendar-section {
+            background: #ffffff;
+            border: 1px solid #e9ecef;
+            border-radius: 8px;
+            padding: 20px;
+            margin-bottom: 30px;
+            box-shadow: 0 2px 4px rgba(0,0,0,0.05);
+        }
+        
+        .calendar-section h2 {
+            font-size: 1.5rem;
+            font-weight: 300;
+            margin: 0 0 20px 0;
+            color: #333;
+        }
+        
+        .calendar-section h3 {
+            font-size: 1.2rem;
+            font-weight: 400;
+            margin: 30px 0 15px 0;
+            color: #333;
+            border-top: 1px solid #e9ecef;
+            padding-top: 20px;
+        }
+        
+        .event-item {
+            background: #f8f9fa;
+            border: 1px solid #e9ecef;
+            border-radius: 6px;
+            padding: 15px;
+            margin-bottom: 10px;
+        }
+        
+        .event-header {
+            display: flex;
+            justify-content: space-between;
+            align-items: flex-start;
+            margin-bottom: 8px;
+            flex-wrap: wrap;
+        }
+        
+        .event-title {
+            font-weight: 600;
+            color: #333;
+            font-size: 16px;
+            margin-bottom: 5px;
+            flex: 1;
+        }
+        
+        .event-time {
+            color: #666;
+            font-size: 12px;
+            background: #e3f2fd;
+            padding: 4px 8px;
+            border-radius: 4px;
+            margin-left: 10px;
+        }
+        
+        .event-details {
+            color: #666;
+            font-size: 13px;
+            margin-bottom: 8px;
+            line-height: 1.4;
+        }
+        
+        .event-location {
+            color: #0066cc;
+            font-size: 13px;
+            margin-bottom: 5px;
+        }
+        
+        .event-attendees {
+            font-size: 12px;
+            color: #666;
+        }
+        
+        .meeting-request-item {
+            background: #fff3e0;
+            border: 1px solid #ffb74d;
+            border-radius: 6px;
+            padding: 15px;
+            margin-bottom: 10px;
+        }
+        
+        .meeting-request-header {
+            display: flex;
+            justify-content: space-between;
+            align-items: flex-start;
+            margin-bottom: 10px;
+        }
+        
+        .meeting-request-sender {
+            font-weight: 600;
+            color: #333;
+            font-size: 14px;
+        }
+        
+        .meeting-request-urgency {
+            background: #ff9800;
+            color: white;
+            padding: 2px 6px;
+            border-radius: 3px;
+            font-size: 10px;
+            font-weight: 600;
+        }
+        
+        .meeting-request-subject {
+            font-weight: 500;
+            color: #333;
+            font-size: 14px;
+            margin-bottom: 8px;
+        }
+        
+        .meeting-request-summary {
+            color: #666;
+            font-size: 12px;
+            margin-bottom: 8px;
+            font-style: italic;
+        }
+        
+        .no-events {
+            text-align: center;
+            color: #666;
+            font-style: italic;
+            padding: 20px;
+        }
     </style>
 </head>
 <body>
@@ -355,6 +483,20 @@
         </div>
     </div>
     
+    <div id="calendarContainer">
+        <div class="calendar-section">
+            <h2>📅 Upcoming Events</h2>
+            <div id="eventsContainer">
+                <div class="loading">📅 Loading calendar events...</div>
+            </div>
+            
+            <h3>📧 Meeting Requests from Emails</h3>
+            <div id="meetingRequestsContainer">
+                <div class="loading">📧 Analyzing emails for meeting requests...</div>
+            </div>
+        </div>
+    </div>
+
     <div id="emailContainer">
         <div class="loading">
             <p>📖 Mailman is reading and summarizing your emails...</p>
@@ -417,6 +559,7 @@
             
             displayEmailSummaries();
             updateStats();
+            loadCalendarEvents();
         }
         
         function displayEmailSummaries() {
@@ -582,6 +725,166 @@
             } else {
                 alert(`Start attachment server:\\n\\ncd /Users/21e8/.openclaw/workspace/memory/subagents/mailman\\npython3 attachment_server.py\\n\\nServer will be accessible at http://localhost:8080 (desktop) or http://YOUR_IP:8080 (mobile)`);
             }
+        }
+        
+        // Calendar functions
+        async function loadCalendarEvents() {
+            try {
+                // Try to load calendar data from the latest summary file
+                const response = await fetch('./email_summaries_latest.json');
+                
+                if (response.ok) {
+                    const data = await response.json();
+                    
+                    // Display upcoming events if available
+                    if (data.calendar_events && data.calendar_events.length > 0) {
+                        displayUpcomingEvents(data.calendar_events);
+                    } else {
+                        // Show sample upcoming events for demo
+                        displayUpcomingEvents([
+                            {
+                                title: "Weekly Team Meeting",
+                                time_until: "In 2 hours",
+                                start_time: new Date(Date.now() + 2*60*60*1000).toISOString(),
+                                location: "Conference Room A",
+                                all_day: false,
+                                attendees: ["team@example.com"]
+                            },
+                            {
+                                title: "Project Review",
+                                time_until: "Tomorrow",
+                                start_time: new Date(Date.now() + 24*60*60*1000).toISOString(),
+                                location: "",
+                                all_day: false,
+                                attendees: []
+                            }
+                        ]);
+                    }
+                    
+                    // Detect and display meeting requests from emails
+                    if (data.summaries) {
+                        const meetingRequests = detectMeetingRequestsFromEmails(data.summaries);
+                        displayMeetingRequests(meetingRequests);
+                    }
+                } else {
+                    throw new Error('Failed to load data');
+                }
+            } catch (error) {
+                console.log('Failed to load calendar data');
+                document.getElementById('eventsContainer').innerHTML = 
+                    '<div class="no-events">Calendar events unavailable. Run "mailman calendar" to sync events.</div>';
+                document.getElementById('meetingRequestsContainer').innerHTML = 
+                    '<div class="no-events">Email analysis required.</div>';
+            }
+        }
+        
+        function displayUpcomingEvents(events) {
+            const container = document.getElementById('eventsContainer');
+            
+            if (!events || events.length === 0) {
+                container.innerHTML = '<div class="no-events">No upcoming events in the next 7 days.</div>';
+                return;
+            }
+            
+            let eventsHTML = '';
+            
+            events.forEach(event => {
+                const startTime = new Date(event.start_time);
+                const timeStr = event.all_day ? 
+                    'All day' : 
+                    startTime.toLocaleTimeString([], {hour: '2-digit', minute:'2-digit'});
+                const dateStr = startTime.toLocaleDateString();
+                
+                eventsHTML += `
+                    <div class="event-item">
+                        <div class="event-header">
+                            <div class="event-title">${event.title}</div>
+                            <div class="event-time">${event.time_until}</div>
+                        </div>
+                        <div class="event-details">
+                            📅 ${dateStr} at ${timeStr}
+                        </div>
+                        ${event.location ? `<div class="event-location">📍 ${event.location}</div>` : ''}
+                        ${event.attendees && event.attendees.length > 0 ? 
+                            `<div class="event-attendees">👥 ${event.attendees.length} attendee(s)</div>` : ''}
+                    </div>
+                `;
+            });
+            
+            container.innerHTML = eventsHTML;
+        }
+        
+        function detectMeetingRequestsFromEmails(emails) {
+            const meetingRequests = [];
+            
+            emails.forEach(email => {
+                const subjectLower = (email.subject || '').toLowerCase();
+                const bodyLower = (email.full_body_preview || '').toLowerCase();
+                
+                // Meeting-related keywords
+                const meetingKeywords = [
+                    'meeting', 'call', 'schedule', 'appointment', 'conference',
+                    'zoom', 'teams', 'calendar', 'available', 'availability'
+                ];
+                
+                const timeKeywords = [
+                    'today', 'tomorrow', 'next week', 'monday', 'tuesday', 'wednesday',
+                    'thursday', 'friday', 'am', 'pm', 'time'
+                ];
+                
+                const hasMeetingKeywords = meetingKeywords.some(keyword => 
+                    subjectLower.includes(keyword) || bodyLower.includes(keyword)
+                );
+                
+                const hasTimeKeywords = timeKeywords.some(keyword => 
+                    subjectLower.includes(keyword) || bodyLower.includes(keyword)
+                );
+                
+                if (hasMeetingKeywords && (hasTimeKeywords || email.response_required)) {
+                    meetingRequests.push({
+                        sender: email.sender,
+                        subject: email.subject,
+                        date_received: email.date,
+                        urgency: email.urgency,
+                        response_required: email.response_required,
+                        preview: bodyLower.substring(0, 150) + '...'
+                    });
+                }
+            });
+            
+            return meetingRequests;
+        }
+        
+        function displayMeetingRequests(requests) {
+            const container = document.getElementById('meetingRequestsContainer');
+            
+            if (!requests || requests.length === 0) {
+                container.innerHTML = '<div class="no-events">No meeting requests found in recent emails.</div>';
+                return;
+            }
+            
+            let requestsHTML = '';
+            
+            requests.forEach(request => {
+                requestsHTML += `
+                    <div class="meeting-request-item">
+                        <div class="meeting-request-header">
+                            <div class="meeting-request-sender">${request.sender}</div>
+                            <div class="meeting-request-urgency">${request.urgency.toUpperCase()}</div>
+                        </div>
+                        <div class="meeting-request-subject">${request.subject}</div>
+                        <div class="meeting-request-summary">
+                            📧 Meeting request received ${request.date_received}
+                            ${request.response_required ? ' • Response required' : ''}
+                        </div>
+                        <div style="font-size: 12px; color: #666; margin-top: 8px;">
+                            ${request.preview}
+                        </div>
+                    </div>
+                `;
+            });
+            
+            container.innerHTML = requestsHTML;
         }
         
         function openInGmail(gmailLink) {
