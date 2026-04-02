@@ -289,6 +289,41 @@
                 text-align: center;
             }
         }
+        
+        /* Attachment Styles */
+        .attachments-list {
+            margin-top: 5px;
+        }
+        
+        .attachment-link {
+            color: #0066cc;
+            text-decoration: none;
+            font-weight: 500;
+            padding: 4px 8px;
+            border-radius: 4px;
+            border: 1px solid #e9ecef;
+            background: #f8f9fa;
+            display: inline-block;
+            margin: 2px;
+            transition: all 0.2s;
+        }
+        
+        .attachment-link:hover {
+            background: #0066cc;
+            color: white;
+            text-decoration: none;
+        }
+        
+        .attachment-item {
+            color: #666;
+            font-style: italic;
+            padding: 4px 8px;
+            border-radius: 4px;
+            border: 1px solid #e9ecef;
+            background: #f8f9fa;
+            display: inline-block;
+            margin: 2px;
+        }
     </style>
 </head>
 <body>
@@ -299,6 +334,7 @@
     
     <button class="refresh-btn" onclick="loadEmailSummaries()">🔄 Refresh Summaries</button>
     <button class="refresh-btn" style="background: #dc3545;" onclick="clearReadStatus()">🗑️ Clear Read Status</button>
+    <button class="refresh-btn" style="background: #6c757d;" onclick="startAttachmentServer()">📎 Start Attachment Server</button>
     
     <div class="summary-stats" id="summaryStats">
         <div class="stat-item">
@@ -355,7 +391,7 @@
                     const data = await response.json();
                     emailSummaries = data.summaries.map(email => ({
                         ...email,
-                        attachments: email.attachments?.map(att => att.filename) || [],
+                        attachments: email.attachments || [],
                         gmail_link: `https://mail.google.com/mail/u/0/#inbox`
                     }));
                 } else {
@@ -473,7 +509,25 @@
                         ${email.attachments.length > 0 ? `
                             <div class="content-section">
                                 <div class="section-title">📎 Attachments</div>
-                                <p>${email.attachments.join(', ')}</p>
+                                <div class="attachments-list">
+                                    ${email.attachments.map(att => {
+                                        if (typeof att === 'string') {
+                                            // Legacy format - just filename
+                                            return `<span class="attachment-item">${att}</span>`;
+                                        } else {
+                                            // New format with download capability
+                                            const filename = att.filename || 'Unknown file';
+                                            const size = att.size ? ` (${formatFileSize(att.size)})` : '';
+                                            
+                                            if (att.local_path) {
+                                                const attachmentUrl = getAttachmentUrl(att.local_path);
+                                                return `<a href="${attachmentUrl}" target="_blank" class="attachment-link">${filename}${size}</a>`;
+                                            } else {
+                                                return `<span class="attachment-item">${filename}${size} (Download failed)</span>`;
+                                            }
+                                        }
+                                    }).join('<br>')}
+                                </div>
                             </div>
                         ` : ''}
                     </div>
@@ -512,6 +566,10 @@
         function clearReadStatus() {
             localStorage.removeItem('readEmails');
             location.reload();
+        }
+        
+        function startAttachmentServer() {
+            alert(`To view attachments, start the attachment server by running:\\n\\ncd /Users/21e8/.openclaw/workspace/memory/subagents/mailman\\npython3 attachment_server.py\\n\\nThen refresh this page and click on attachment links.`);
         }
         
         function openInGmail(gmailLink) {
@@ -562,6 +620,21 @@
         function draftReply(index) {
             const email = emailSummaries[index];
             alert(`Drafting reply to: ${email.sender}\\n\\nThis would open the reply composer with context from the email summary.`);
+        }
+        
+        function formatFileSize(bytes) {
+            if (bytes === 0) return '0 Bytes';
+            const k = 1024;
+            const sizes = ['Bytes', 'KB', 'MB', 'GB'];
+            const i = Math.floor(Math.log(bytes) / Math.log(k));
+            return parseFloat((bytes / Math.pow(k, i)).toFixed(1)) + ' ' + sizes[i];
+        }
+        
+        function getAttachmentUrl(localPath) {
+            // Convert local path to attachment server URL
+            // Assuming attachment server runs on localhost:8080
+            const filename = localPath.split('/').pop();
+            return `http://localhost:8080/${filename}`;
         }
         
         // Load email summaries on page load
