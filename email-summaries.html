@@ -1,0 +1,565 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Email Summaries - Mailman AI</title>
+    <style>
+        body {
+            font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Helvetica, Arial, sans-serif;
+            background: #ffffff;
+            color: #333;
+            margin: 0;
+            padding: 20px;
+            line-height: 1.6;
+            max-width: 1000px;
+            margin: 0 auto;
+        }
+        
+        .header {
+            text-align: center;
+            border-bottom: 1px solid #ddd;
+            padding-bottom: 20px;
+            margin-bottom: 30px;
+        }
+        
+        .header h1 {
+            font-size: 2rem;
+            font-weight: 300;
+            margin: 0;
+            color: #333;
+        }
+        
+        .header .subtitle {
+            font-size: 14px;
+            color: #666;
+            margin-top: 10px;
+        }
+        
+        .summary-stats {
+            background: #f8f9fa;
+            border: 1px solid #e9ecef;
+            border-radius: 8px;
+            padding: 15px;
+            margin-bottom: 30px;
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(150px, 1fr));
+            gap: 15px;
+        }
+        
+        .stat-item {
+            text-align: center;
+        }
+        
+        .stat-value {
+            font-size: 24px;
+            font-weight: 600;
+            color: #333;
+            margin-bottom: 5px;
+        }
+        
+        .stat-label {
+            font-size: 12px;
+            color: #666;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+        }
+        
+        .email-summary {
+            background: #ffffff;
+            border: 1px solid #e9ecef;
+            border-radius: 8px;
+            padding: 20px;
+            margin-bottom: 20px;
+            box-shadow: 0 2px 4px rgba(0,0,0,0.05);
+        }
+        
+        .email-header {
+            display: flex;
+            justify-content: space-between;
+            align-items: flex-start;
+            margin-bottom: 15px;
+            flex-wrap: wrap;
+            gap: 10px;
+        }
+        
+        .email-meta {
+            flex: 1;
+        }
+        
+        .email-sender {
+            font-weight: 600;
+            color: #333;
+            font-size: 16px;
+            margin-bottom: 5px;
+        }
+        
+        .email-subject {
+            font-size: 14px;
+            color: #0066cc;
+            margin-bottom: 5px;
+        }
+        
+        .email-date {
+            font-size: 12px;
+            color: #666;
+        }
+        
+        .email-badges {
+            display: flex;
+            gap: 8px;
+            align-items: center;
+            flex-wrap: wrap;
+        }
+        
+        .badge {
+            padding: 4px 8px;
+            border-radius: 4px;
+            font-size: 10px;
+            font-weight: 600;
+            text-transform: uppercase;
+            letter-spacing: 0.5px;
+        }
+        
+        .badge.entity {
+            background: #e3f2fd;
+            color: #1976d2;
+        }
+        
+        .badge.urgency-high {
+            background: #ffebee;
+            color: #c62828;
+        }
+        
+        .badge.urgency-medium {
+            background: #fff3e0;
+            color: #ef6c00;
+        }
+        
+        .badge.urgency-normal {
+            background: #e8f5e8;
+            color: #2e7d32;
+        }
+        
+        .badge.response-required {
+            background: #f3e5f5;
+            color: #7b1fa2;
+        }
+        
+        .email-content {
+            margin-bottom: 15px;
+        }
+        
+        .content-section {
+            margin-bottom: 15px;
+        }
+        
+        .section-title {
+            font-weight: 600;
+            color: #333;
+            font-size: 13px;
+            margin-bottom: 8px;
+            text-transform: uppercase;
+            letter-spacing: 0.5px;
+        }
+        
+        .key-points {
+            list-style: none;
+            padding: 0;
+            margin: 0;
+        }
+        
+        .key-points li {
+            padding: 5px 0;
+            border-left: 3px solid #0066cc;
+            padding-left: 12px;
+            margin-bottom: 5px;
+            color: #333;
+            font-size: 14px;
+        }
+        
+        .action-items {
+            list-style: none;
+            padding: 0;
+            margin: 0;
+        }
+        
+        .action-items li {
+            padding: 5px 0;
+            border-left: 3px solid #dc3545;
+            padding-left: 12px;
+            margin-bottom: 5px;
+            color: #333;
+            font-size: 14px;
+            font-weight: 500;
+        }
+        
+        .thread-context {
+            background: #f8f9fa;
+            border: 1px solid #e9ecef;
+            border-radius: 4px;
+            padding: 10px;
+            font-size: 13px;
+            color: #666;
+            margin-bottom: 10px;
+        }
+        
+        .email-actions {
+            display: flex;
+            gap: 10px;
+            flex-wrap: wrap;
+        }
+        
+        .action-btn {
+            background: #0066cc;
+            color: white;
+            border: none;
+            padding: 8px 16px;
+            border-radius: 4px;
+            font-size: 13px;
+            cursor: pointer;
+            text-decoration: none;
+            display: inline-block;
+            transition: background 0.2s;
+        }
+        
+        .action-btn:hover {
+            background: #0056b3;
+            color: white;
+            text-decoration: none;
+        }
+        
+        .action-btn.secondary {
+            background: #6c757d;
+        }
+        
+        .action-btn.secondary:hover {
+            background: #5a6268;
+        }
+        
+        .loading {
+            text-align: center;
+            padding: 40px;
+            color: #666;
+        }
+        
+        .error {
+            background: #f8d7da;
+            border: 1px solid #f5c6cb;
+            color: #721c24;
+            padding: 15px;
+            border-radius: 8px;
+            margin: 20px 0;
+        }
+        
+        .refresh-btn {
+            background: #28a745;
+            color: white;
+            border: none;
+            padding: 10px 20px;
+            border-radius: 4px;
+            cursor: pointer;
+            font-size: 14px;
+            margin-bottom: 20px;
+        }
+        
+        .refresh-btn:hover {
+            background: #218838;
+        }
+        
+        @media (max-width: 768px) {
+            .email-header {
+                flex-direction: column;
+            }
+            
+            .email-badges {
+                margin-top: 10px;
+            }
+            
+            .summary-stats {
+                grid-template-columns: 1fr 1fr;
+            }
+            
+            .email-actions {
+                flex-direction: column;
+            }
+            
+            .action-btn {
+                text-align: center;
+            }
+        }
+    </style>
+</head>
+<body>
+    <div class="header">
+        <h1>📧 Email Summaries</h1>
+        <div class="subtitle">Mailman AI - Full Email Reading & Summarization</div>
+    </div>
+    
+    <button class="refresh-btn" onclick="loadEmailSummaries()">🔄 Refresh Summaries</button>
+    
+    <div class="summary-stats" id="summaryStats">
+        <div class="stat-item">
+            <div class="stat-value" id="totalEmails">--</div>
+            <div class="stat-label">Total Emails</div>
+        </div>
+        <div class="stat-item">
+            <div class="stat-value" id="needsResponse">--</div>
+            <div class="stat-label">Need Response</div>
+        </div>
+        <div class="stat-item">
+            <div class="stat-value" id="highUrgency">--</div>
+            <div class="stat-label">High Priority</div>
+        </div>
+        <div class="stat-item">
+            <div class="stat-value" id="withActions">--</div>
+            <div class="stat-label">Action Items</div>
+        </div>
+    </div>
+    
+    <div id="emailContainer">
+        <div class="loading">
+            <p>📖 Mailman is reading and summarizing your emails...</p>
+            <p>This may take a moment for full content analysis.</p>
+        </div>
+    </div>
+
+    <script>
+        // Email summary data (would normally come from API)
+        let emailSummaries = [];
+        
+        function loadEmailSummaries() {
+            // Show loading
+            document.getElementById('emailContainer').innerHTML = `
+                <div class="loading">
+                    <p>📖 Mailman is reading and summarizing your emails...</p>
+                    <p>This may take a moment for full content analysis.</p>
+                </div>
+            `;
+            
+            // Simulate loading delay and fetch summaries
+            setTimeout(() => {
+                fetchEmailSummaries();
+            }, 2000);
+        }
+        
+        function fetchEmailSummaries() {
+            // In a real implementation, this would fetch from the Gmail reader API
+            // For demo purposes, using sample data
+            
+            emailSummaries = [
+                {
+                    sender: "Josh Barker <josh.barker@droneinstitute.ai>",
+                    subject: "FW: DRAFT Agenda for Lafayette at Drone Institute",
+                    date: "2026-04-01 15:44",
+                    business_entity: "drone_institute",
+                    urgency: "high",
+                    response_required: true,
+                    key_points: [
+                        "Meeting agenda for Lafayette requires your input by Thursday",
+                        "Budget items and strategic planning section need review",
+                        "Quarterly goals and resource allocation to be discussed"
+                    ],
+                    action_items: [
+                        "Review attached agenda items",
+                        "DEADLINE: Provide feedback by Thursday",
+                        "Confirm availability for meeting"
+                    ],
+                    thread_summary: "Thread with 3 messages. Participants: Josh Barker, Strategy Team. Started 03/28, latest 04/01.",
+                    attachments: ["Lafayette_Meeting_Agenda_Q2.pdf"],
+                    gmail_link: "https://mail.google.com/mail/u/0/#inbox/msg123"
+                },
+                {
+                    sender: "Chris Sharplin <chris.sharplin@droneinstitute.ai>",
+                    subject: "Demo Results - Grinder Bristle Blaster Success",
+                    date: "2026-04-01 13:45",
+                    business_entity: "drone_institute",
+                    urgency: "medium",
+                    response_required: true,
+                    key_points: [
+                        "Demo exceeded expectations with 95% precision coating removal",
+                        "Operator feedback extremely positive, integration seamless",
+                        "Technical specifications met all requirements"
+                    ],
+                    action_items: [
+                        "Schedule follow-up meeting to discuss next steps",
+                        "Review detailed technical report (coming end of day)",
+                        "Decide on production timeline"
+                    ],
+                    thread_summary: "Single email, no thread context.",
+                    attachments: [],
+                    gmail_link: "https://mail.google.com/mail/u/0/#inbox/msg124"
+                },
+                {
+                    sender: "Nan Shang <nan.shang@droneinstitute.ai>",
+                    subject: "Project Update - Phase 1 Completion",
+                    date: "2026-04-01 12:30",
+                    business_entity: "drone_institute",
+                    urgency: "normal",
+                    response_required: false,
+                    key_points: [
+                        "Phase 1 successfully completed ahead of schedule",
+                        "Moving into implementation phase with full team approval",
+                        "Budget remains on track, no overruns detected"
+                    ],
+                    action_items: [],
+                    thread_summary: "Thread with 5 messages. Participants: Nan Shang, Project Team, Lyle. Started 03/15, latest 04/01.",
+                    attachments: ["Phase1_Completion_Report.xlsx"],
+                    gmail_link: "https://mail.google.com/mail/u/0/#inbox/msg125"
+                }
+            ];
+            
+            displayEmailSummaries();
+            updateStats();
+        }
+        
+        function displayEmailSummaries() {
+            const container = document.getElementById('emailContainer');
+            
+            if (emailSummaries.length === 0) {
+                container.innerHTML = `
+                    <div class="error">
+                        No emails found. Check your Gmail connection or try refreshing.
+                    </div>
+                `;
+                return;
+            }
+            
+            let summariesHTML = '';
+            
+            emailSummaries.forEach((email, index) => {
+                summariesHTML += generateEmailSummaryHTML(email, index);
+            });
+            
+            container.innerHTML = summariesHTML;
+        }
+        
+        function generateEmailSummaryHTML(email, index) {
+            const entityLabels = {
+                'drone_institute': 'Drone Institute',
+                'riot_labs': 'Riot Labs',
+                'dmr': 'DMR',
+                'dorset_llc': 'Dorset LLC',
+                'panta_rhei': 'Panta Rhei',
+                'portfolio_company': 'Portfolio',
+                'external': 'External'
+            };
+            
+            const entityLabel = entityLabels[email.business_entity] || 'Business';
+            
+            return `
+                <div class="email-summary">
+                    <div class="email-header">
+                        <div class="email-meta">
+                            <div class="email-sender">${email.sender}</div>
+                            <div class="email-subject">${email.subject}</div>
+                            <div class="email-date">${email.date}</div>
+                        </div>
+                        <div class="email-badges">
+                            <span class="badge entity">${entityLabel}</span>
+                            <span class="badge urgency-${email.urgency}">${email.urgency}</span>
+                            ${email.response_required ? '<span class="badge response-required">Response Required</span>' : ''}
+                        </div>
+                    </div>
+                    
+                    <div class="email-content">
+                        ${email.thread_summary !== "Single email, no thread context." ? 
+                            `<div class="thread-context">📧 ${email.thread_summary}</div>` : ''}
+                        
+                        ${email.key_points.length > 0 ? `
+                            <div class="content-section">
+                                <div class="section-title">📋 Key Points</div>
+                                <ul class="key-points">
+                                    ${email.key_points.map(point => `<li>${point}</li>`).join('')}
+                                </ul>
+                            </div>
+                        ` : ''}
+                        
+                        ${email.action_items.length > 0 ? `
+                            <div class="content-section">
+                                <div class="section-title">⚡ Action Items</div>
+                                <ul class="action-items">
+                                    ${email.action_items.map(item => `<li>${item}</li>`).join('')}
+                                </ul>
+                            </div>
+                        ` : ''}
+                        
+                        ${email.attachments.length > 0 ? `
+                            <div class="content-section">
+                                <div class="section-title">📎 Attachments</div>
+                                <p>${email.attachments.join(', ')}</p>
+                            </div>
+                        ` : ''}
+                    </div>
+                    
+                    <div class="email-actions">
+                        <a href="${email.gmail_link}" class="action-btn" onclick="openInGmail('${email.gmail_link}')">📧 Open in Gmail</a>
+                        <button class="action-btn secondary" onclick="markAsRead(${index})">✅ Mark Read</button>
+                        ${email.response_required ? 
+                            '<button class="action-btn" onclick="draftReply(' + index + ')">✍️ Draft Reply</button>' : ''}
+                    </div>
+                </div>
+            `;
+        }
+        
+        function updateStats() {
+            const total = emailSummaries.length;
+            const needsResponse = emailSummaries.filter(e => e.response_required).length;
+            const highUrgency = emailSummaries.filter(e => e.urgency === 'high').length;
+            const withActions = emailSummaries.filter(e => e.action_items.length > 0).length;
+            
+            document.getElementById('totalEmails').textContent = total;
+            document.getElementById('needsResponse').textContent = needsResponse;
+            document.getElementById('highUrgency').textContent = highUrgency;
+            document.getElementById('withActions').textContent = withActions;
+        }
+        
+        function openInGmail(gmailLink) {
+            // Mobile Gmail app integration
+            const isIOS = /iPad|iPhone|iPod/.test(navigator.userAgent);
+            const isAndroid = /Android/.test(navigator.userAgent);
+            
+            if (isIOS) {
+                // Try Gmail app on iOS
+                window.location = 'googlegmail://';
+                setTimeout(() => {
+                    window.open(gmailLink, '_blank');
+                }, 1000);
+            } else if (isAndroid) {
+                // Use Android intent
+                const intentUrl = `intent://mail.google.com/mail/#Intent;scheme=https;package=com.google.android.gm;S.browser_fallback_url=${encodeURIComponent(gmailLink)};end`;
+                window.location = intentUrl;
+            } else {
+                // Desktop - open web Gmail
+                window.open(gmailLink, '_blank');
+            }
+        }
+        
+        function markAsRead(index) {
+            // Visually mark email as read
+            const emailElement = document.querySelectorAll('.email-summary')[index];
+            emailElement.style.opacity = '0.6';
+            emailElement.style.borderColor = '#28a745';
+            
+            // Add read indicator
+            const header = emailElement.querySelector('.email-badges');
+            const readBadge = document.createElement('span');
+            readBadge.className = 'badge urgency-normal';
+            readBadge.textContent = 'Read';
+            header.appendChild(readBadge);
+            
+            console.log(`Marked email ${index} as read`);
+        }
+        
+        function draftReply(index) {
+            const email = emailSummaries[index];
+            alert(`Drafting reply to: ${email.sender}\\n\\nThis would open the reply composer with context from the email summary.`);
+        }
+        
+        // Load email summaries on page load
+        document.addEventListener('DOMContentLoaded', () => {
+            loadEmailSummaries();
+        });
+    </script>
+</body>
+</html>
