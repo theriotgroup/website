@@ -14,25 +14,25 @@
         "type": "PYTHON_PACKAGE",
         "severity": "LOW",
         "details": "Monitor urllib3 for security updates",
-        "timestamp": "16:03"
+        "timestamp": "17:44"
       },
       {
         "type": "PYTHON_PACKAGE",
         "severity": "LOW",
         "details": "Monitor requests for security updates",
-        "timestamp": "16:03"
+        "timestamp": "17:44"
       },
       {
         "type": "PYTHON_PACKAGE",
         "severity": "LOW",
         "details": "Monitor cryptography for security updates",
-        "timestamp": "16:03"
+        "timestamp": "17:44"
       },
       {
         "type": "BACKUP_STATUS",
         "severity": "INFO",
         "details": "Time Machine appears active",
-        "timestamp": "16:03"
+        "timestamp": "17:44"
       }
     ],
     "system_health": [
@@ -40,13 +40,13 @@
         "type": "OUTDATED_PACKAGES",
         "severity": "MEDIUM",
         "details": "28 brew packages need updates",
-        "timestamp": "16:03"
+        "timestamp": "17:44"
       },
       {
         "type": "UNCOMMITTED_CHANGES",
         "severity": "MEDIUM",
         "details": "8 uncommitted files in workspace",
-        "timestamp": "16:03"
+        "timestamp": "17:44"
       }
     ],
     "network": [],
@@ -63,5 +63,5 @@
       }
     ]
   },
-  "last_updated": "2026-04-01T16:03:44.958305"
+  "last_updated": "2026-04-01T17:44:03.564652"
 }

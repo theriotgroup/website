@@ -504,6 +504,14 @@
             border-left-color: #f39c12;
         }
         
+        .intelligence-section.meeting {
+            border-left-color: #9b59b6;
+        }
+        
+        .intelligence-section.entity {
+            border-left-color: #95a5a6;
+        }
+        
         .section-header {
             font-size: 12px;
             font-weight: 600;
@@ -644,6 +652,53 @@
         .stat-value {
             color: #fff;
             font-weight: 600;
+        }
+        
+        /* Business Entity and Triggers Styling */
+        .intel-entity {
+            font-size: 10px;
+            color: #3498db;
+            font-weight: 600;
+            margin-bottom: 6px;
+            text-transform: uppercase;
+            letter-spacing: 0.5px;
+        }
+        
+        .intel-triggers {
+            margin-bottom: 8px;
+        }
+        
+        .trigger-tag {
+            display: inline-block;
+            background: #333;
+            color: #fff;
+            padding: 2px 6px;
+            border-radius: 3px;
+            font-size: 9px;
+            font-weight: 600;
+            margin-right: 4px;
+            margin-bottom: 2px;
+        }
+        
+        .trigger-direct_mention {
+            background: #e74c3c;
+        }
+        
+        .trigger-calendar_related {
+            background: #9b59b6;
+        }
+        
+        .trigger-agenda_review {
+            background: #9b59b6;
+        }
+        
+        .trigger-decision_required {
+            background: #e67e22;
+        }
+        
+        .trigger-time_sensitive {
+            background: #f1c40f;
+            color: #000;
         }
         
 
@@ -1004,34 +1059,42 @@
                 return;
             }
             
-            // Categorize emails by importance
+            // Categorize emails by sophisticated business intelligence
             const urgentEmails = emails.filter(email => 
                 email.urgent || 
-                email.subject.toLowerCase().includes('urgent') ||
-                email.subject.toLowerCase().includes('asap') ||
-                email.sender.includes('urgent') ||
-                email.category === 'urgent'
+                email.category === 'urgent' ||
+                (email.triggers && (email.triggers.includes('direct_mention') || 
+                 email.triggers.includes('time_sensitive') || 
+                 email.triggers.includes('decision_required')))
+            );
+            
+            const meetingEmails = emails.filter(email => 
+                !urgentEmails.includes(email) && 
+                (email.category === 'meeting' ||
+                 (email.triggers && (email.triggers.includes('calendar_related') || 
+                  email.triggers.includes('agenda_review'))))
             );
             
             const businessEmails = emails.filter(email => 
                 !urgentEmails.includes(email) && 
-                (email.category === 'business' || email.sender.includes('drone'))
+                !meetingEmails.includes(email) &&
+                (email.category === 'business' ||
+                 (email.business_entity && ['riot_labs', 'drone_institute', 'portfolio_company'].includes(email.business_entity)))
             );
             
-            const upcomingEmails = emails.filter(email => 
+            const entityEmails = emails.filter(email => 
                 !urgentEmails.includes(email) && 
+                !meetingEmails.includes(email) &&
                 !businessEmails.includes(email) &&
-                (email.subject.toLowerCase().includes('agenda') ||
-                 email.subject.toLowerCase().includes('meeting') ||
-                 email.subject.toLowerCase().includes('deadline'))
+                (email.business_entity && ['dmr', 'dorset_llc', 'panta_rhei'].includes(email.business_entity))
             );
             
             let intelligenceHTML = '<div class="intelligence-header">🤖 Mailman Email Intelligence Feed</div>';
             
-            // Urgent Section
+            // Urgent Section - Direct mentions, time-sensitive, decision required
             if (urgentEmails.length > 0) {
                 intelligenceHTML += `<div class="intelligence-section urgent">
-                    <div class="section-header">🚨 URGENT - Action Required</div>`;
+                    <div class="section-header">🚨 URGENT - Immediate Attention Required</div>`;
                 
                 urgentEmails.forEach(email => {
                     intelligenceHTML += generateIntelligenceItem(email, 'critical');
@@ -1040,10 +1103,22 @@
                 intelligenceHTML += `</div>`;
             }
             
-            // Business Section  
+            // Meeting Section - Calendar, agendas, meeting coordination
+            if (meetingEmails.length > 0) {
+                intelligenceHTML += `<div class="intelligence-section meeting">
+                    <div class="section-header">📅 MEETINGS - Calendar & Agenda Coordination</div>`;
+                
+                meetingEmails.forEach(email => {
+                    intelligenceHTML += generateIntelligenceItem(email, 'important');
+                });
+                
+                intelligenceHTML += `</div>`;
+            }
+            
+            // Business Section - Riot Labs, Drone Institute, Portfolio  
             if (businessEmails.length > 0) {
                 intelligenceHTML += `<div class="intelligence-section business">
-                    <div class="section-header">📋 BUSINESS - Today's Focus</div>`;
+                    <div class="section-header">🏢 CORE BUSINESS - Riot Labs & Strategic Operations</div>`;
                 
                 businessEmails.forEach(email => {
                     intelligenceHTML += generateIntelligenceItem(email, 'important');
@@ -1052,12 +1127,12 @@
                 intelligenceHTML += `</div>`;
             }
             
-            // Upcoming Section
-            if (upcomingEmails.length > 0) {
-                intelligenceHTML += `<div class="intelligence-section upcoming">
-                    <div class="section-header">⏰ UPCOMING - Review Required</div>`;
+            // Entity Section - DMR, Dorset LLC, Panta Rhei
+            if (entityEmails.length > 0) {
+                intelligenceHTML += `<div class="intelligence-section entity">
+                    <div class="section-header">🏛️ ENTITIES - DMR, Dorset LLC, Panta Rhei</div>`;
                 
-                upcomingEmails.forEach(email => {
+                entityEmails.forEach(email => {
                     intelligenceHTML += generateIntelligenceItem(email, 'moderate');
                 });
                 
@@ -1066,7 +1141,7 @@
             
             // Intelligence Stats
             const totalEmails = mailmanData.total_emails || emails.length;
-            const filteredEmails = urgentEmails.length + businessEmails.length + upcomingEmails.length;
+            const filteredEmails = urgentEmails.length + meetingEmails.length + businessEmails.length + entityEmails.length;
             const noiseFiltered = totalEmails - filteredEmails;
             
             intelligenceHTML += `
@@ -1076,8 +1151,16 @@
                         <span class="stat-value">${totalEmails} emails</span>
                     </div>
                     <div class="stat-item">
-                        <span class="stat-label">Requiring Action:</span>
+                        <span class="stat-label">Business Intelligence:</span>
                         <span class="stat-value">${filteredEmails} emails</span>
+                    </div>
+                    <div class="stat-item">
+                        <span class="stat-label">Urgent/Personal:</span>
+                        <span class="stat-value">${urgentEmails.length} emails</span>
+                    </div>
+                    <div class="stat-item">
+                        <span class="stat-label">Meetings/Calendar:</span>
+                        <span class="stat-value">${meetingEmails.length} emails</span>
                     </div>
                     <div class="stat-item">
                         <span class="stat-label">Noise Filtered:</span>
@@ -1094,6 +1177,12 @@
             const context = generateIntelligenceContext(email);
             const emailId = email.subject.replace(/[^a-zA-Z0-9]/g, '_').toLowerCase();
             
+            // Generate business entity display
+            const entityDisplay = generateEntityDisplay(email.business_entity);
+            
+            // Generate triggers display
+            const triggersDisplay = generateTriggersDisplay(email.triggers);
+            
             return `
                 <div class="intelligence-item ${level}">
                     <div class="intel-header">
@@ -1101,7 +1190,9 @@
                         <span class="intel-time">${email.time || 'Today'}</span>
                         <span class="intel-priority ${priorityLevel}">${priorityLevel}</span>
                     </div>
+                    ${entityDisplay}
                     <div class="intel-subject">${email.subject}</div>
+                    ${triggersDisplay}
                     <div class="intel-context">${context}</div>
                     <div class="intel-actions">
                         <button class="intel-action primary" onclick="openInGmail('${emailId}')">📧 Open in Gmail</button>
@@ -1110,6 +1201,43 @@
                     </div>
                 </div>
             `;
+        }
+        
+        function generateEntityDisplay(businessEntity) {
+            if (!businessEntity) return '';
+            
+            const entityLabels = {
+                'riot_labs': '🔥 Riot Labs',
+                'drone_institute': '🚁 Drone Institute', 
+                'dmr': '💼 DMR',
+                'dorset_llc': '🏢 Dorset LLC (Lafayette)',
+                'panta_rhei': '🎬 Panta Rhei Productions',
+                'portfolio_company': '💰 Portfolio Company',
+                'external': '🌐 External'
+            };
+            
+            const label = entityLabels[businessEntity] || '📧 Business';
+            
+            return `<div class="intel-entity">${label}</div>`;
+        }
+        
+        function generateTriggersDisplay(triggers) {
+            if (!triggers || triggers.length === 0) return '';
+            
+            const triggerLabels = {
+                'direct_mention': '👤 Personal Attention',
+                'calendar_related': '📅 Calendar/Meeting',
+                'agenda_review': '📋 Agenda Review', 
+                'decision_required': '⚡ Decision Required',
+                'time_sensitive': '⏰ Time Sensitive'
+            };
+            
+            const triggerTags = triggers.map(trigger => {
+                const label = triggerLabels[trigger] || trigger;
+                return `<span class="trigger-tag trigger-${trigger}">${label}</span>`;
+            }).join(' ');
+            
+            return `<div class="intel-triggers">${triggerTags}</div>`;
         }
         
         function generateIntelligenceContext(email) {
