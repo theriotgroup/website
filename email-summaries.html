@@ -261,6 +261,7 @@
             cursor: pointer;
             font-size: 14px;
             margin-bottom: 20px;
+            margin-right: 10px;
         }
         
         .refresh-btn:hover {
@@ -297,11 +298,12 @@
     </div>
     
     <button class="refresh-btn" onclick="loadEmailSummaries()">🔄 Refresh Summaries</button>
+    <button class="refresh-btn" style="background: #dc3545;" onclick="clearReadStatus()">🗑️ Clear Read Status</button>
     
     <div class="summary-stats" id="summaryStats">
         <div class="stat-item">
             <div class="stat-value" id="totalEmails">--</div>
-            <div class="stat-label">Total Emails</div>
+            <div class="stat-label">Unread/Total</div>
         </div>
         <div class="stat-item">
             <div class="stat-value" id="needsResponse">--</div>
@@ -379,6 +381,7 @@
             
             displayEmailSummaries();
             updateStats();
+            loadReadStates();
         }
         
         function displayEmailSummaries() {
@@ -476,10 +479,22 @@
             const highUrgency = emailSummaries.filter(e => e.urgency === 'high').length;
             const withActions = emailSummaries.filter(e => e.action_items.length > 0).length;
             
-            document.getElementById('totalEmails').textContent = total;
+            // Count unread emails
+            const readEmails = JSON.parse(localStorage.getItem('readEmails') || '[]');
+            const unread = emailSummaries.filter(email => {
+                const emailId = `${email.sender}_${email.subject}`.replace(/[^a-zA-Z0-9]/g, '_');
+                return !readEmails.includes(emailId);
+            }).length;
+            
+            document.getElementById('totalEmails').textContent = `${unread}/${total}`;
             document.getElementById('needsResponse').textContent = needsResponse;
             document.getElementById('highUrgency').textContent = highUrgency;
             document.getElementById('withActions').textContent = withActions;
+        }
+        
+        function clearReadStatus() {
+            localStorage.removeItem('readEmails');
+            location.reload();
         }
         
         function openInGmail(gmailLink) {
@@ -504,19 +519,47 @@
         }
         
         function markAsRead(index) {
-            // Visually mark email as read
+            const email = emailSummaries[index];
+            const emailId = `${email.sender}_${email.subject}`.replace(/[^a-zA-Z0-9]/g, '_');
+            
+            // Save to localStorage
+            const readEmails = JSON.parse(localStorage.getItem('readEmails') || '[]');
+            if (!readEmails.includes(emailId)) {
+                readEmails.push(emailId);
+                localStorage.setItem('readEmails', JSON.stringify(readEmails));
+            }
+            
+            // Update visual state
+            applyReadState(index, true);
+        }
+        
+        function applyReadState(index, isRead) {
             const emailElement = document.querySelectorAll('.email-summary')[index];
-            emailElement.style.opacity = '0.6';
-            emailElement.style.borderColor = '#28a745';
             
-            // Add read indicator
-            const header = emailElement.querySelector('.email-badges');
-            const readBadge = document.createElement('span');
-            readBadge.className = 'badge urgency-normal';
-            readBadge.textContent = 'Read';
-            header.appendChild(readBadge);
+            if (isRead) {
+                emailElement.style.opacity = '0.6';
+                emailElement.style.borderColor = '#28a745';
+                
+                // Add read badge if not exists
+                const header = emailElement.querySelector('.email-badges');
+                if (!header.querySelector('.read-badge')) {
+                    const readBadge = document.createElement('span');
+                    readBadge.className = 'badge urgency-normal read-badge';
+                    readBadge.textContent = 'Read';
+                    header.appendChild(readBadge);
+                }
+            }
+        }
+        
+        function loadReadStates() {
+            const readEmails = JSON.parse(localStorage.getItem('readEmails') || '[]');
             
-            console.log(`Marked email ${index} as read`);
+            emailSummaries.forEach((email, index) => {
+                const emailId = `${email.sender}_${email.subject}`.replace(/[^a-zA-Z0-9]/g, '_');
+                if (readEmails.includes(emailId)) {
+                    setTimeout(() => applyReadState(index, true), 100);
+                }
+            });
         }
         
         function draftReply(index) {
