@@ -6,47 +6,46 @@
     <title>Riot Labs - Enhanced Operations Center</title>
     <style>
         body {
-            font-family: 'Helvetica Neue', Arial, sans-serif;
-            background: #0a0a0a;
-            color: #e0e0e0;
+            font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Helvetica, Arial, sans-serif;
+            background: #ffffff;
+            color: #333;
             margin: 0;
             padding: 20px;
-            line-height: 1.4;
+            line-height: 1.6;
             overflow-x: hidden;
         }
         
         .header {
             text-align: center;
-            border-bottom: 2px solid #333;
+            border-bottom: 1px solid #ddd;
             padding-bottom: 20px;
             margin-bottom: 30px;
         }
         
         .header h1 {
-            font-size: 32px;
+            font-size: 2rem;
             font-weight: 300;
-            letter-spacing: 4px;
             margin: 0;
-            color: #fff;
+            color: #333;
         }
         
         .header .subtitle {
             font-size: 14px;
-            color: #888;
-            letter-spacing: 2px;
+            color: #666;
             margin-top: 10px;
         }
         
         .classification {
-            background: #1a1a1a;
-            border: 1px solid #333;
+            background: #f8f9fa;
+            border: 1px solid #e9ecef;
             padding: 8px;
             text-align: center;
             font-size: 11px;
-            letter-spacing: 3px;
-            color: #ff6b6b;
+            letter-spacing: 2px;
+            color: #dc3545;
             margin-bottom: 30px;
-            font-weight: bold;
+            font-weight: 600;
+            border-radius: 4px;
         }
         
         .operations-floor {
@@ -58,20 +57,21 @@
         }
         
         .agent-workstation {
-            background: #1a1a1a;
-            border: 1px solid #333;
+            background: #ffffff;
+            border: 1px solid #e9ecef;
             border-radius: 8px;
             padding: 20px;
             position: relative;
             cursor: pointer;
             transition: all 0.3s ease;
             overflow: hidden;
+            box-shadow: 0 2px 4px rgba(0,0,0,0.1);
         }
         
         .agent-workstation:hover {
             transform: translateY(-2px);
-            box-shadow: 0 8px 25px rgba(0,0,0,0.3);
-            border-color: #555;
+            box-shadow: 0 4px 12px rgba(0,0,0,0.15);
+            border-color: #dee2e6;
         }
         
         .agent-workstation.mailman {
@@ -101,13 +101,13 @@
         .agent-name {
             font-size: 20px;
             font-weight: 600;
-            color: #fff;
+            color: #333;
             margin-bottom: 5px;
         }
         
         .agent-role {
             font-size: 12px;
-            color: #888;
+            color: #666;
             text-transform: uppercase;
             letter-spacing: 1px;
         }
@@ -136,27 +136,27 @@
         }
         
         .workstation-screen {
-            background: #0f0f0f;
-            border: 2px solid #333;
+            background: #f8f9fa;
+            border: 1px solid #e9ecef;
             border-radius: 4px;
             padding: 15px;
             margin-bottom: 15px;
-            font-family: 'Courier New', monospace;
+            font-family: 'SF Mono', 'Monaco', 'Inconsolata', 'Roboto Mono', monospace;
             font-size: 12px;
             min-height: 150px;
         }
         
         .screen-line {
             margin-bottom: 5px;
-            color: #00ff00;
+            color: #28a745;
         }
         
         .screen-prompt {
-            color: #ffff00;
+            color: #0066cc;
         }
         
         .screen-error {
-            color: #ff6666;
+            color: #dc3545;
         }
         
         .activity-indicator {
@@ -189,19 +189,20 @@
         .metric {
             text-align: center;
             padding: 8px;
-            background: #0f0f0f;
+            background: #f8f9fa;
+            border: 1px solid #e9ecef;
             border-radius: 4px;
         }
         
         .metric-value {
             font-size: 16px;
-            font-weight: bold;
-            color: #fff;
+            font-weight: 600;
+            color: #333;
         }
         
         .metric-label {
             font-size: 10px;
-            color: #888;
+            color: #666;
             text-transform: uppercase;
         }
         
@@ -219,11 +220,12 @@
         }
         
         .modal-content {
-            background: #1a1a1a;
+            background: #ffffff;
             margin: 5% auto;
             padding: 0;
-            border: 1px solid #333;
+            border: 1px solid #e9ecef;
             border-radius: 8px;
+            box-shadow: 0 4px 20px rgba(0,0,0,0.15);
             width: 90%;
             max-width: 1000px;
             max-height: 80vh;
@@ -233,9 +235,9 @@
         }
         
         .modal-header {
-            background: #0f0f0f;
+            background: #f8f9fa;
             padding: 20px;
-            border-bottom: 1px solid #333;
+            border-bottom: 1px solid #e9ecef;
             display: flex;
             justify-content: space-between;
             align-items: center;
@@ -244,11 +246,11 @@
         .modal-title {
             font-size: 20px;
             font-weight: 600;
-            color: #fff;
+            color: #333;
         }
         
         .close {
-            color: #888;
+            color: #666;
             font-size: 28px;
             font-weight: bold;
             cursor: pointer;
@@ -256,7 +258,7 @@
         }
         
         .close:hover {
-            color: #fff;
+            color: #333;
         }
         
         .modal-body {
@@ -447,16 +449,17 @@
             position: fixed;
             top: 20px;
             right: 20px;
-            background: #333;
+            background: #6c757d;
             color: #fff;
             padding: 8px 15px;
             border-radius: 4px;
             font-size: 11px;
             opacity: 0.8;
+            border: 1px solid #e9ecef;
         }
         
         .refresh-indicator.updating {
-            background: #3498db;
+            background: #0066cc;
         }
         
         /* Intelligence Feed Styles */
@@ -522,7 +525,8 @@
         }
         
         .intelligence-item {
-            background: #0f0f0f;
+            background: #f8f9fa;
+            border: 1px solid #e9ecef;
             border-radius: 6px;
             padding: 12px;
             margin-bottom: 10px;
@@ -549,17 +553,17 @@
         
         .intel-sender {
             font-weight: 600;
-            color: #fff;
+            color: #333;
             font-size: 13px;
         }
         
         .intel-time {
-            color: #888;
+            color: #666;
             font-size: 11px;
         }
         
         .intel-priority {
-            background: #333;
+            background: #6c757d;
             color: #fff;
             padding: 2px 6px;
             border-radius: 3px;
@@ -581,20 +585,20 @@
         
         .intel-subject {
             font-weight: 600;
-            color: #fff;
+            color: #333;
             font-size: 13px;
             margin-bottom: 8px;
         }
         
         .intel-context {
-            color: #ccc;
+            color: #666;
             font-size: 11px;
             line-height: 1.4;
             margin-bottom: 10px;
         }
         
         .intel-context strong {
-            color: #fff;
+            color: #333;
         }
         
         .intel-actions {
@@ -604,7 +608,7 @@
         }
         
         .intel-action {
-            background: #333;
+            background: #6c757d;
             color: #fff;
             border: none;
             padding: 8px 12px;
@@ -619,23 +623,23 @@
         }
         
         .intel-action:hover {
-            background: #444;
+            background: #5a6268;
         }
         
         .intel-action.primary {
-            background: #3498db;
+            background: #0066cc;
         }
         
         .intel-action.primary:hover {
-            background: #2980b9;
+            background: #0056b3;
         }
         
         .intelligence-stats {
-            background: #0f0f0f;
+            background: #f8f9fa;
+            border: 1px solid #e9ecef;
             border-radius: 6px;
             padding: 12px;
             margin-top: 15px;
-            border-top: 1px solid #333;
         }
         
         .stat-item {
@@ -646,11 +650,11 @@
         }
         
         .stat-label {
-            color: #888;
+            color: #666;
         }
         
         .stat-value {
-            color: #fff;
+            color: #333;
             font-weight: 600;
         }
         
