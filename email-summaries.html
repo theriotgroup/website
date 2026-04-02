@@ -381,7 +381,6 @@
             
             displayEmailSummaries();
             updateStats();
-            loadReadStates();
         }
         
         function displayEmailSummaries() {
@@ -396,9 +395,25 @@
                 return;
             }
             
-            let summariesHTML = '';
+            // Filter out read emails
+            const readEmails = JSON.parse(localStorage.getItem('readEmails') || '[]');
+            const unreadEmails = emailSummaries.filter((email, index) => {
+                const emailId = `${email.sender}_${email.subject}`.replace(/[^a-zA-Z0-9]/g, '_');
+                return !readEmails.includes(emailId);
+            });
             
-            emailSummaries.forEach((email, index) => {
+            if (unreadEmails.length === 0) {
+                container.innerHTML = `
+                    <div class="loading">
+                        <p>✅ All emails have been read!</p>
+                        <p>Run 'mailman summary' for new emails, or click "Clear Read Status" to see all emails again.</p>
+                    </div>
+                `;
+                return;
+            }
+            
+            let summariesHTML = '';
+            unreadEmails.forEach((email, index) => {
                 summariesHTML += generateEmailSummaryHTML(email, index);
             });
             
@@ -475,16 +490,18 @@
         
         function updateStats() {
             const total = emailSummaries.length;
-            const needsResponse = emailSummaries.filter(e => e.response_required).length;
-            const highUrgency = emailSummaries.filter(e => e.urgency === 'high').length;
-            const withActions = emailSummaries.filter(e => e.action_items.length > 0).length;
             
-            // Count unread emails
+            // Filter to unread emails only
             const readEmails = JSON.parse(localStorage.getItem('readEmails') || '[]');
-            const unread = emailSummaries.filter(email => {
+            const unreadEmails = emailSummaries.filter(email => {
                 const emailId = `${email.sender}_${email.subject}`.replace(/[^a-zA-Z0-9]/g, '_');
                 return !readEmails.includes(emailId);
-            }).length;
+            });
+            
+            const unread = unreadEmails.length;
+            const needsResponse = unreadEmails.filter(e => e.response_required).length;
+            const highUrgency = unreadEmails.filter(e => e.urgency === 'high').length;
+            const withActions = unreadEmails.filter(e => e.action_items.length > 0).length;
             
             document.getElementById('totalEmails').textContent = `${unread}/${total}`;
             document.getElementById('needsResponse').textContent = needsResponse;
@@ -519,48 +536,28 @@
         }
         
         function markAsRead(index) {
-            const email = emailSummaries[index];
+            // Get the actual email from the unread list
+            const readEmails = JSON.parse(localStorage.getItem('readEmails') || '[]');
+            const unreadEmails = emailSummaries.filter((email) => {
+                const emailId = `${email.sender}_${email.subject}`.replace(/[^a-zA-Z0-9]/g, '_');
+                return !readEmails.includes(emailId);
+            });
+            
+            const email = unreadEmails[index];
             const emailId = `${email.sender}_${email.subject}`.replace(/[^a-zA-Z0-9]/g, '_');
             
             // Save to localStorage
-            const readEmails = JSON.parse(localStorage.getItem('readEmails') || '[]');
             if (!readEmails.includes(emailId)) {
                 readEmails.push(emailId);
                 localStorage.setItem('readEmails', JSON.stringify(readEmails));
             }
             
-            // Update visual state
-            applyReadState(index, true);
+            // Refresh display and stats
+            displayEmailSummaries();
+            updateStats();
         }
         
-        function applyReadState(index, isRead) {
-            const emailElement = document.querySelectorAll('.email-summary')[index];
-            
-            if (isRead) {
-                emailElement.style.opacity = '0.6';
-                emailElement.style.borderColor = '#28a745';
-                
-                // Add read badge if not exists
-                const header = emailElement.querySelector('.email-badges');
-                if (!header.querySelector('.read-badge')) {
-                    const readBadge = document.createElement('span');
-                    readBadge.className = 'badge urgency-normal read-badge';
-                    readBadge.textContent = 'Read';
-                    header.appendChild(readBadge);
-                }
-            }
-        }
-        
-        function loadReadStates() {
-            const readEmails = JSON.parse(localStorage.getItem('readEmails') || '[]');
-            
-            emailSummaries.forEach((email, index) => {
-                const emailId = `${email.sender}_${email.subject}`.replace(/[^a-zA-Z0-9]/g, '_');
-                if (readEmails.includes(emailId)) {
-                    setTimeout(() => applyReadState(index, true), 100);
-                }
-            });
-        }
+
         
         function draftReply(index) {
             const email = emailSummaries[index];
