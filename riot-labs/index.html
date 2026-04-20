@@ -8,21 +8,167 @@
         body {
             font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Helvetica, Arial, sans-serif;
             line-height: 1.6;
-            max-width: 800px;
+            max-width: 1000px;
             margin: 0 auto;
             padding: 2rem 1rem;
             color: #333;
+            background: white;
         }
         
         h1 {
             font-size: 2rem;
             margin-bottom: 0.5rem;
             font-weight: 300;
+            text-align: center;
         }
         
         .subtitle {
             color: #666;
-            margin-bottom: 2rem;
+            margin-bottom: 3rem;
+            text-align: center;
+            font-size: 1.1rem;
+        }
+        
+        /* Org Chart Styles */
+        .org-chart {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            gap: 2rem;
+            margin: 2rem 0;
+        }
+        
+        .parent-company {
+            background: #f8f9fa;
+            border: 2px solid #0066cc;
+            border-radius: 8px;
+            padding: 1.5rem 2rem;
+            text-align: center;
+            margin-bottom: 1rem;
+        }
+        
+        .parent-company h2 {
+            margin: 0;
+            color: #0066cc;
+            font-weight: 400;
+            font-size: 1.5rem;
+        }
+        
+        .parent-company p {
+            margin: 0.5rem 0 0 0;
+            color: #666;
+            font-size: 0.95rem;
+        }
+        
+        /* Connection Lines */
+        .connection {
+            width: 2px;
+            height: 40px;
+            background: #ddd;
+        }
+        
+        .portfolio-section {
+            width: 100%;
+        }
+        
+        .section-title {
+            text-align: center;
+            font-size: 1.2rem;
+            color: #333;
+            margin-bottom: 1.5rem;
+            font-weight: 500;
+        }
+        
+        .companies-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+            gap: 1.5rem;
+            margin-bottom: 3rem;
+        }
+        
+        .company-card {
+            background: white;
+            border: 1px solid #e9ecef;
+            border-radius: 6px;
+            padding: 1.5rem;
+            text-align: center;
+            transition: all 0.2s ease;
+            box-shadow: 0 2px 4px rgba(0,0,0,0.05);
+        }
+        
+        .company-card:hover {
+            border-color: #0066cc;
+            box-shadow: 0 4px 8px rgba(0,0,0,0.1);
+            transform: translateY(-2px);
+        }
+        
+        .company-card h3 {
+            margin: 0 0 0.5rem 0;
+            color: #333;
+            font-size: 1.1rem;
+            font-weight: 600;
+        }
+        
+        .company-card p {
+            margin: 0 0 1rem 0;
+            color: #666;
+            font-size: 0.9rem;
+            line-height: 1.4;
+        }
+        
+        .company-card a {
+            color: #0066cc;
+            text-decoration: none;
+            font-size: 0.85rem;
+            border: 1px solid #0066cc;
+            padding: 0.4rem 1rem;
+            border-radius: 4px;
+            display: inline-block;
+            transition: all 0.2s ease;
+        }
+        
+        .company-card a:hover {
+            background: #0066cc;
+            color: white;
+        }
+        
+        .main-companies {
+            border-left: 3px solid #0066cc;
+            padding-left: 2rem;
+            margin-left: 1rem;
+        }
+        
+        .other-companies {
+            border-left: 3px solid #666;
+            padding-left: 2rem;
+            margin-left: 1rem;
+        }
+        
+        .back-link {
+            text-align: center;
+            margin-top: 3rem;
+        }
+        
+        .back-link a {
+            color: #666;
+            text-decoration: none;
+            font-size: 0.9rem;
+        }
+        
+        .back-link a:hover {
+            color: #0066cc;
+        }
+        
+        @media (max-width: 768px) {
+            .companies-grid {
+                grid-template-columns: 1fr;
+            }
+            
+            .main-companies, .other-companies {
+                border-left: none;
+                padding-left: 0;
+                margin-left: 0;
+            }
         }
     </style>
 </head>
@@ -32,9 +178,67 @@
 <h1>Riot Labs</h1>
 <p class="subtitle">Louisiana Technology Incubator</p>
 
-<p>Coming soon...</p>
+<div class="org-chart">
+    <!-- Parent Company -->
+    <div class="parent-company">
+        <h2>Riot Labs</h2>
+        <p>Technology incubator fostering innovation across Louisiana</p>
+    </div>
+    
+    <div class="connection"></div>
+    
+    <!-- Main Portfolio Companies -->
+    <div class="portfolio-section main-companies">
+        <div class="section-title">Primary Portfolio Companies</div>
+        <div class="companies-grid">
+            <div class="company-card">
+                <h3>Drone Institute</h3>
+                <p>Comprehensive drone training, certification, and consulting services</p>
+                <a href="https://droneinstitute.ai" target="_blank">Visit Site →</a>
+            </div>
+            
+            <div class="company-card">
+                <h3>DMR</h3>
+                <p>Drone Manufacturing and Research - Custom drone solutions and R&D</p>
+                <a href="https://dmrdrones.com" target="_blank">Visit Site →</a>
+            </div>
+            
+            <div class="company-card">
+                <h3>Panta Rhei Productions</h3>
+                <p>Creative media production and content development</p>
+                <a href="https://pantarheiproductions.com" target="_blank">Visit Site →</a>
+            </div>
+        </div>
+    </div>
+    
+    <!-- Other Portfolio Companies -->
+    <div class="portfolio-section other-companies">
+        <div class="section-title">Additional Portfolio Companies</div>
+        <div class="companies-grid">
+            <div class="company-card">
+                <h3>Paiv Inc</h3>
+                <p>AI-powered solutions and intelligent automation</p>
+                <a href="https://www.paiv.ai" target="_blank">Visit Site →</a>
+            </div>
+            
+            <div class="company-card">
+                <h3>US Drones</h3>
+                <p>Commercial drone services and operations</p>
+                <a href="https://usdrones.com" target="_blank">Visit Site →</a>
+            </div>
+            
+            <div class="company-card">
+                <h3>Dorset</h3>
+                <p>Specialized consulting and strategic services</p>
+                <span style="color: #999; font-size: 0.85rem; font-style: italic;">Coming Soon</span>
+            </div>
+        </div>
+    </div>
+</div>
 
-<p><a href="../index.html">← Back to Home</a></p>
+<div class="back-link">
+    <a href="../index.html">← Back to Home</a>
+</div>
 
 </body>
 </html>
