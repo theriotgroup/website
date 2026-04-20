@@ -45,6 +45,24 @@
             padding: 1.5rem 2rem;
             text-align: center;
             margin-bottom: 1rem;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+        }
+        
+        .riot-labs-logo {
+            width: 100px;
+            height: 100px;
+            border-radius: 50%;
+            background: linear-gradient(135deg, #0066cc, #4a90e2);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 2.2rem;
+            font-weight: 700;
+            color: white;
+            margin-bottom: 1rem;
+            box-shadow: 0 4px 8px rgba(0,0,0,0.15);
         }
         
         .parent-company h2 {
@@ -94,7 +112,32 @@
             text-align: center;
             transition: all 0.2s ease;
             box-shadow: 0 2px 4px rgba(0,0,0,0.05);
+            display: flex;
+            flex-direction: column;
+            align-items: center;
         }
+        
+        .company-logo {
+            width: 80px;
+            height: 80px;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 1.8rem;
+            font-weight: 600;
+            color: white;
+            margin-bottom: 1rem;
+            position: relative;
+        }
+        
+        /* Company-specific colors */
+        .logo-drone-institute { background: linear-gradient(135deg, #1e40af, #3b82f6); }
+        .logo-dmr { background: linear-gradient(135deg, #dc2626, #f87171); font-size: 1.4rem; }
+        .logo-panta-rhei { background: linear-gradient(135deg, #7c3aed, #a78bfa); font-size: 1.4rem; }
+        .logo-paiv { background: linear-gradient(135deg, #059669, #34d399); }
+        .logo-us-drones { background: linear-gradient(135deg, #ea580c, #fb923c); font-size: 1.4rem; }
+        .logo-dorset { background: linear-gradient(135deg, #6b7280, #9ca3af); }
         
         .company-card:hover {
             border-color: #0066cc;
@@ -181,6 +224,7 @@
 <div class="org-chart">
     <!-- Parent Company -->
     <div class="parent-company">
+        <div class="riot-labs-logo">RL</div>
         <h2>Riot Labs</h2>
         <p>Technology incubator fostering innovation across Louisiana</p>
     </div>
@@ -192,18 +236,21 @@
         <div class="section-title">Primary Portfolio Companies</div>
         <div class="companies-grid">
             <div class="company-card">
+                <div class="company-logo logo-drone-institute">DI</div>
                 <h3>Drone Institute</h3>
                 <p>Comprehensive drone training, certification, and consulting services</p>
                 <a href="https://droneinstitute.ai" target="_blank">Visit Site →</a>
             </div>
             
             <div class="company-card">
+                <div class="company-logo logo-dmr">DMR</div>
                 <h3>DMR</h3>
                 <p>Drone Manufacturing and Research - Custom drone solutions and R&D</p>
                 <a href="https://dmrdrones.com" target="_blank">Visit Site →</a>
             </div>
             
             <div class="company-card">
+                <div class="company-logo logo-panta-rhei">PRP</div>
                 <h3>Panta Rhei Productions</h3>
                 <p>Creative media production and content development</p>
                 <a href="https://pantarheiproductions.com" target="_blank">Visit Site →</a>
@@ -216,18 +263,21 @@
         <div class="section-title">Additional Portfolio Companies</div>
         <div class="companies-grid">
             <div class="company-card">
+                <div class="company-logo logo-paiv">AI</div>
                 <h3>Paiv Inc</h3>
                 <p>AI-powered solutions and intelligent automation</p>
                 <a href="https://www.paiv.ai" target="_blank">Visit Site →</a>
             </div>
             
             <div class="company-card">
+                <div class="company-logo logo-us-drones">USD</div>
                 <h3>US Drones</h3>
                 <p>Commercial drone services and operations</p>
                 <a href="https://usdrones.com" target="_blank">Visit Site →</a>
             </div>
             
             <div class="company-card">
+                <div class="company-logo logo-dorset">D</div>
                 <h3>Dorset</h3>
                 <p>Real estate development and property investment</p>
                 <span style="color: #999; font-size: 0.85rem; font-style: italic;">Coming Soon</span>
